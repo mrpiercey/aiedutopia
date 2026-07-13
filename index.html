@@ -110,10 +110,7 @@ body{
 .btn-sm{font-size:14px;padding:8px 18px;}
 
 /* ---------- Title screen ---------- */
-#screen-title{background:
-  radial-gradient(1200px 600px at 85% -10%, rgba(79,210,255,.16), transparent 60%),
-  radial-gradient(900px 500px at -10% 110%, rgba(255,188,13,.14), transparent 60%),
-  var(--cream);}
+#screen-title{background:var(--cream);}
 #screen-title .screen-inner{display:flex;flex-direction:column;align-items:center;text-align:center;padding-top:34px;}
 .title-kicker{
   font-weight:700;font-size:15px;letter-spacing:.22em;text-transform:uppercase;color:var(--space-blue);
@@ -318,6 +315,23 @@ h1.game-title .ai{color:var(--orange);}
 mark.tell{background:linear-gradient(transparent 55%, rgba(255,188,13,.75) 55%);padding:0 2px;border-radius:3px;}
 .reveal-recap{font-family:var(--font-slab);font-weight:600;font-size:clamp(19px,2vw,25px);color:var(--space-blue);margin-bottom:24px;max-width:900px;line-height:1.35;}
 .reveal-thumb{max-height:240px;max-width:100%;border-radius:12px;margin-bottom:24px;box-shadow:var(--shadow-card);display:block;}
+/* ---- line-icon system ---- */
+.ico{width:1.1em;height:1.1em;display:inline-block;vertical-align:-.18em;flex:0 0 auto;}
+.bar-btn .ico{margin-right:4px;}
+.clue-emoji{line-height:0;color:var(--teal);margin-bottom:10px;}
+.clue-card.img-clue .clue-emoji{color:var(--pacific);}
+.clue-card.txt-clue .clue-emoji{color:var(--purple);}
+.clue-emoji .ico{width:30px;height:30px;stroke-width:1.6;}
+.write-panel h3 .ico{width:.8em;height:.8em;vertical-align:0;margin-right:.14em;color:var(--tangerine);}
+.vote-panel h3 .ico{width:.8em;height:.8em;vertical-align:0;margin-right:.14em;color:var(--space-blue);}
+.exit-ticket h3 .ico{width:.85em;height:.85em;vertical-align:-.08em;margin-right:.16em;color:var(--tangerine);}
+.verdict .ico{width:.78em;height:.78em;stroke-width:2.3;}
+.reveal-discuss .demoji{line-height:0;}
+.reveal-discuss .demoji .ico{width:25px;height:25px;stroke-width:1.7;}
+.src .ico{width:1.05em;height:1.05em;vertical-align:-.16em;margin-right:2px;}
+.src-links a .ico{width:.9em;height:.9em;vertical-align:-.06em;stroke-width:2;margin-left:3px;}
+.wrap-medal{line-height:0;margin-bottom:6px;color:var(--orange);}
+.poster-title .ico{width:26px;height:26px;vertical-align:-5px;margin-right:5px;}
 .article-excerpt{font-family:Georgia,'Times New Roman',serif;font-size:clamp(18px,1.9vw,24px);line-height:1.6;color:var(--dark-grey);max-width:920px;margin-top:26px;padding-top:22px;border-top:1.5px solid #e5ddce;}
 .article-excerpt p+p{margin-top:.75em;}
 .src-links{margin-top:14px;display:flex;flex-wrap:wrap;gap:8px;align-items:center;}
@@ -349,7 +363,7 @@ mark.tell{background:linear-gradient(transparent 55%, rgba(255,188,13,.75) 55%);
 #drawer h4{font-size:13px;font-weight:800;letter-spacing:.14em;text-transform:uppercase;color:var(--sunshine);margin:22px 0 10px;}
 #drawer ul{list-style:none;}
 #drawer li{padding:7px 0 7px 30px;position:relative;font-size:15.5px;line-height:1.45;color:#e8ecf4;}
-#drawer li::before{content:"🔍";position:absolute;left:0;font-size:14px;}
+#drawer li::before{content:"";position:absolute;left:2px;top:16px;width:11px;height:2px;background:var(--tech-blue);border-radius:2px;}
 #drawer .close-drawer{position:absolute;top:18px;right:18px;background:rgba(255,255,255,.12);border:none;color:var(--white);width:36px;height:36px;border-radius:50%;font-size:18px;cursor:pointer;}
 
 /* ---------- Overlay ---------- */
@@ -444,8 +458,8 @@ mark.tell{background:linear-gradient(transparent 55%, rgba(255,188,13,.75) 55%);
   <div id="progressdots" title="Cards completed"></div>
   <div id="scorestrip"></div>
   <button class="bar-btn hidden" id="btn-grid">Card Grid</button>
-  <button class="bar-btn" id="btn-checklist">🔍 Detective Checklist <span style="opacity:.5;font-weight:600">C</span></button>
-  <button class="bar-btn" id="btn-print">🖨 Print Materials</button>
+  <button class="bar-btn" id="btn-checklist"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="M20.5 20.5 16.8 16.8"/></svg> Detective Checklist <span style="opacity:.5;font-weight:600">C</span></button>
+  <button class="bar-btn" id="btn-print"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 9V3h10v6"/><rect x="3" y="9" width="18" height="8" rx="2"/><rect x="7" y="14" width="10" height="6" rx="1"/><path d="M17 12.3h.01"/></svg> Print Materials</button>
 </header>
 
 <!-- ================= PRINT MENU ================= -->
@@ -461,7 +475,7 @@ mark.tell{background:linear-gradient(transparent 55%, rgba(255,188,13,.75) 55%);
 <div id="overlay"></div>
 <aside id="drawer" aria-label="Detective checklist">
   <button class="close-drawer" id="btn-close-drawer" aria-label="Close">✕</button>
-  <h3>🔍 Detective Checklist</h3>
+  <h3><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="M20.5 20.5 16.8 16.8"/></svg> Detective Checklist</h3>
   <div class="dsub">Keep this open while you investigate</div>
   <h4>If it's an image, look for…</h4>
   <ul>
@@ -520,7 +534,7 @@ mark.tell{background:linear-gradient(transparent 55%, rgba(255,188,13,.75) 55%);
       <button class="btn btn-primary" id="btn-start-training">Start Detective Training →</button>
       <button class="btn btn-ghost" id="btn-skip-to-cards">Skip to the Cards</button>
     </div>
-    <p class="title-foot">Teacher tip: print the <b>Student Evidence Sheet</b> first (🖨 top right) so students can write as you play.
+    <p class="title-foot">Teacher tip: print the <b>Student Evidence Sheet</b> first (use Print Materials, top right) so students can write as you play.
       Keyboard: <span class="kbd">→</span> advance · <span class="kbd">C</span> checklist</p>
   </div>
 </section>
@@ -570,12 +584,12 @@ mark.tell{background:linear-gradient(transparent 55%, rgba(255,188,13,.75) 55%);
 <!-- ================= WRAP-UP ================= -->
 <section class="screen" id="screen-wrapup">
   <div class="screen-inner">
-    <div style="font-size:64px">🏅</div>
+    <div class="wrap-medal"><svg class="ico" style="width:68px;height:68px;stroke-width:1.35" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="8.5" r="5.5"/><path d="M8.4 13 7 22l5-2.7L17 22l-1.4-9"/></svg></div>
     <h2>Case Closed, Detectives!</h2>
     <p class="lede" style="font-size:21px;color:var(--dark-grey)">You examined the evidence, explained your clues, and checked your sources. That is exactly what great media detectives do every day.</p>
     <div class="final-scores" id="final-scores"></div>
     <div class="exit-ticket">
-      <h3>✏️ Exit Ticket</h3>
+      <h3><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 20h4L19 9l-4-4L4 16Z"/><path d="M14 6l4 4"/></svg> Exit Ticket</h3>
       <p><b>Which clue from today will you use most in real life, and why?</b> Write 3–5 sentences. Include one example of something you might double-check this week (a post, a photo, a headline) and which SIFT move you'd use on it.</p>
     </div>
     <div class="title-actions" style="margin-top:30px">
@@ -615,6 +629,8 @@ const CARDS = []; /* populated below in CONTENT section */
    ============================================================ */
 const $=s=>document.querySelector(s), $$=s=>[...document.querySelectorAll(s)];
 const TEAM_COLORS=['#0094C7','#532681','#00AFAB','#E75CAE'];
+const IP={"search": "<circle cx=\"11\" cy=\"11\" r=\"7\"/><path d=\"M20.5 20.5 16.8 16.8\"/>", "printer": "<path d=\"M7 9V3h10v6\"/><rect x=\"3\" y=\"9\" width=\"18\" height=\"8\" rx=\"2\"/><rect x=\"7\" y=\"14\" width=\"10\" height=\"6\" rx=\"1\"/><path d=\"M17 12.3h.01\"/>", "award": "<circle cx=\"12\" cy=\"8.5\" r=\"5.5\"/><path d=\"M8.4 13 7 22l5-2.7L17 22l-1.4-9\"/>", "edit": "<path d=\"M4 20h4L19 9l-4-4L4 16Z\"/><path d=\"M14 6l4 4\"/>", "ballot": "<rect x=\"3\" y=\"8\" width=\"18\" height=\"12\" rx=\"1.5\"/><path d=\"M8 8V5a1 1 0 0 1 1-1h6a1 1 0 0 1 1 1v3\"/><path d=\"M9 13.6l2 2 4-4.6\"/>", "cpu": "<rect x=\"6.5\" y=\"6.5\" width=\"11\" height=\"11\" rx=\"2\"/><rect x=\"10\" y=\"10\" width=\"4\" height=\"4\" rx=\"0.6\"/><path d=\"M9 2.5V5M15 2.5V5M9 19v2.5M15 19v2.5M2.5 9H5M2.5 15H5M19 9h2.5M19 15h2.5\"/>", "check": "<path d=\"M4.5 12.5 9.5 17.5 20 6.5\"/>", "chat": "<path d=\"M20 4H4a1 1 0 0 0-1 1v11a1 1 0 0 0 1 1h3v4l5-4h8a1 1 0 0 0 1-1V5a1 1 0 0 0-1-1Z\"/>", "bookmark": "<path d=\"M6 3.5h12a.5.5 0 0 1 .5.5v16.4l-6.5-4.3-6.5 4.3V4a.5.5 0 0 1 .5-.5Z\"/>", "scale": "<path d=\"M12 4v16M7 20h10M5 7h14M5 7l-2.5 6a2.8 2.8 0 0 0 5 0ZM19 7l2.5 6a2.8 2.8 0 0 1-5 0Z\"/>", "book": "<path d=\"M12 6C10 4.6 6.6 4.6 4 5.2v13c2.6-.6 6-.6 8 1 2-1.6 5.4-1.6 8-1v-13c-2.6-.6-6-.6-8 .8Z\"/><path d=\"M12 6v12\"/>", "hand": "<path d=\"M8 11V6.5a1.5 1.5 0 0 1 3 0V10M11 10V5a1.5 1.5 0 0 1 3 0v5M14 10.5V6.5a1.5 1.5 0 0 1 3 0V15a6 6 0 0 1-6 6 6 6 0 0 1-5.2-3l-2-3.3a1.5 1.5 0 0 1 2.5-1.6L8 11.5\"/>", "type": "<path d=\"M5 7V5h14v2\"/><path d=\"M12 5v14\"/><path d=\"M9 19h6\"/>", "sun": "<circle cx=\"12\" cy=\"12\" r=\"4\"/><path d=\"M12 2v2.5M12 19.5V22M2 12h2.5M19.5 12H22M4.9 4.9l1.8 1.8M17.3 17.3l1.8 1.8M19.1 4.9l-1.8 1.8M6.7 17.3l-1.8 1.8\"/>", "layers": "<path d=\"M12 3 3 8l9 5 9-5Z\"/><path d=\"M3 13l9 5 9-5\"/>", "sparkle": "<path d=\"M12 3l1.9 5.6 5.6 1.9-5.6 1.9L12 18l-1.9-5.6L4.5 10.5l5.6-1.9Z\"/>", "gem": "<path d=\"M6 3.5h12l3 5.5-9 11.5L3 9Z\"/><path d=\"M3 9h18\"/>", "user": "<circle cx=\"12\" cy=\"8\" r=\"3.8\"/><path d=\"M4.5 20a7.5 7.5 0 0 1 15 0\"/>", "pin": "<path d=\"M12 21s7-6.6 7-11.5a7 7 0 1 0-14 0C5 14.4 12 21 12 21Z\"/><circle cx=\"12\" cy=\"9.5\" r=\"2.5\"/>", "bars": "<rect x=\"4\" y=\"8\" width=\"3.2\" height=\"10\" rx=\"1\"/><rect x=\"10.4\" y=\"8\" width=\"3.2\" height=\"10\" rx=\"1\"/><rect x=\"16.8\" y=\"8\" width=\"3.2\" height=\"10\" rx=\"1\"/>", "ribbon": "<circle cx=\"12\" cy=\"12\" r=\"3\"/><path d=\"M9.7 10.2 4.5 5M14.3 10.2 19.5 5M9.7 13.8 4.5 19M14.3 13.8 19.5 19\"/>", "alert": "<path d=\"M12 3.5 2.5 20.5h19Z\"/><path d=\"M12 9.7v4.6\"/><path d=\"M12 17.8h.01\"/>", "empty": "<circle cx=\"12\" cy=\"12\" r=\"8.5\"/><path d=\"M6.2 6.2 17.8 17.8\"/>", "arrowUR": "<path d=\"M7 17 17 7\"/><path d=\"M8 7h9v9\"/>"};
+function ico(n,cls){return '<svg class="ico'+(cls?' '+cls:'')+'" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">'+IP[n]+'</svg>';}
 
 const state={
   level:0, teamCount:0, teams:[],
@@ -736,7 +752,7 @@ function renderPhase(){
 
   else if(state.phase==='write'){
     stage.innerHTML=`<div class="write-panel">
-      <h3>✏️ Make Your Case</h3>
+      <h3>${ico('edit')} Make Your Case</h3>
       <div class="write-prompts">
         <div class="write-prompt"><span class="wnum">1</span><span><b>Claim:</b> Is this authentic, or AI-generated? Commit to an answer on your evidence sheet.</span></div>
         <div class="write-prompt"><span class="wnum">2</span><span><b>Clues:</b> List 2–3 specific clues from the checklist that support your claim. Point to exact details.</span></div>
@@ -770,7 +786,7 @@ function renderPhase(){
           </div>
         </div>`).join('')}</div>`:'';
     stage.innerHTML=`<div class="vote-panel">
-      <h3>🗳️ Cast Your Votes</h3>
+      <h3>${ico('ballot')} Cast Your Votes</h3>
       <p class="lede">${state.teams.length?'Tap each team’s final answer, then reveal.':'Hands up, whiteboards up, or shout it out. Then reveal.'}</p>
       <div class="vote-btns">
         <button class="vote-big authentic">AUTHENTIC<small>made by humans / really happened</small></button>
@@ -780,7 +796,7 @@ function renderPhase(){
     foot.innerHTML=`
       <button class="btn btn-ghost btn-sm" id="btn-back-write">← Back</button>
       <span class="spacer"></span>
-      <button class="btn btn-primary" id="btn-reveal" style="font-size:19px;padding:13px 36px">Reveal the Truth ✦</button>`;
+      <button class="btn btn-primary" id="btn-reveal" style="font-size:19px;padding:13px 36px">Reveal the Truth</button>`;
     $$('.tv').forEach(b=>b.onclick=()=>{
       const ti=+b.dataset.team, v=b.dataset.v;
       state.voteMarks[ti]=v;
@@ -814,7 +830,7 @@ function renderPhase(){
 
     stage.innerHTML=`<div class="reveal-panel">
       <div class="verdict ${card.answer}">
-        <span class="vicon">${isAuth?'✓':'🤖'}</span>
+        <span class="vicon">${isAuth?ico('check'):ico('cpu')}</span>
         <span>${isAuth?'AUTHENTIC':'AI-GENERATED'}</span>
       </div>
       ${revealBody}
@@ -826,11 +842,11 @@ function renderPhase(){
         <div class="reveal-verify">
           <h4>How you could verify it</h4>
           <p>${card.verify}</p>
-          ${card.source?`<div class="src">📌 ${card.source}</div>`:''}
-          ${card.links&&card.links.length?`<div class="src-links"><span>Check it yourself:</span>${card.links.map(l=>`<a href="${l.url}" target="_blank" rel="noopener">${l.label} ↗</a>`).join('')}</div>`:''}
+          ${card.source?`<div class="src">${ico('bookmark')} ${card.source}</div>`:''}
+          ${card.links&&card.links.length?`<div class="src-links"><span>Check it yourself:</span>${card.links.map(l=>`<a href="${l.url}" target="_blank" rel="noopener">${l.label} ${ico('arrowUR')}</a>`).join('')}</div>`:''}
         </div>
       </div>
-      <div class="reveal-discuss"><span class="demoji">💬</span><span><b>Discuss:</b> ${card.discuss}</span></div>
+      <div class="reveal-discuss"><span class="demoji">${ico('chat')}</span><span><b>Discuss:</b> ${card.discuss}</span></div>
       ${teamAwards}
     </div>`;
 
@@ -1303,9 +1319,9 @@ TRAINING.push(
   <p class="lede">AI can now write essays and news stories, and invent photographs of things that never happened. Some are harmless fun. Some are built to fool you.</p>
   <p class="lede" style="margin-top:14px">In this game you'll see <b>20 case files</b>: headlines, passages, and images. Some are completely authentic. Some were made by AI. Your job is <b>never just to guess</b>. A detective must:</p>
   <div class="clue-grid">
-    <div class="clue-card"><div class="clue-emoji">⚖️</div><h3>Make a claim</h3><p>Authentic or AI? Commit to an answer in writing.</p></div>
-    <div class="clue-card"><div class="clue-emoji">🔍</div><h3>Show your clues</h3><p>Point to the exact details that convinced you. No vibes allowed.</p></div>
-    <div class="clue-card"><div class="clue-emoji">📚</div><h3>Bring evidence</h3><p>Name a reliable source that could prove it, and how you'd check.</p></div>
+    <div class="clue-card"><div class="clue-emoji">${ico('scale')}</div><h3>Make a claim</h3><p>Authentic or AI? Commit to an answer in writing.</p></div>
+    <div class="clue-card"><div class="clue-emoji">${ico('search')}</div><h3>Show your clues</h3><p>Point to the exact details that convinced you. No vibes allowed.</p></div>
+    <div class="clue-card"><div class="clue-emoji">${ico('book')}</div><h3>Bring evidence</h3><p>Name a reliable source that could prove it, and how you'd check.</p></div>
   </div>
   <p class="lede" style="margin-top:24px"><b>Warning:</b> "amazing" doesn't mean fake, and "boring" doesn't mean real. Some of the realest things in this deck look impossible.</p>`},
 
@@ -1314,12 +1330,12 @@ TRAINING.push(
   <h2>Clues in <span style="color:var(--pacific)">Images</span></h2>
   <p class="lede">AI images look great from far away, then fall apart in the details. Zoom in on:</p>
   <div class="clue-grid">
-    <div class="clue-card img-clue"><div class="clue-emoji">✋</div><h3>Hands, fingers &amp; teeth</h3><p>Wrong counts, melted shapes, fingers that merge together.</p></div>
-    <div class="clue-card img-clue"><div class="clue-emoji">🔤</div><h3>Text &amp; signs</h3><p>Letters on signs, shirts, and labels come out garbled or alien.</p></div>
-    <div class="clue-card img-clue"><div class="clue-emoji">💡</div><h3>Light &amp; shadows</h3><p>Shadows pointing different directions; faces lit from nowhere.</p></div>
-    <div class="clue-card img-clue"><div class="clue-emoji">🌫️</div><h3>Backgrounds</h3><p>Crowds with smeared faces; walls and objects that warp or repeat.</p></div>
-    <div class="clue-card img-clue"><div class="clue-emoji">✨</div><h3>Too perfect</h3><p>Poreless skin, plastic fur, surfaces smoother than real life.</p></div>
-    <div class="clue-card img-clue"><div class="clue-emoji">💍</div><h3>Mismatched pairs</h3><p>One earring, uneven glasses, patterns that don't match side to side.</p></div>
+    <div class="clue-card img-clue"><div class="clue-emoji">${ico('hand')}</div><h3>Hands, fingers &amp; teeth</h3><p>Wrong counts, melted shapes, fingers that merge together.</p></div>
+    <div class="clue-card img-clue"><div class="clue-emoji">${ico('type')}</div><h3>Text &amp; signs</h3><p>Letters on signs, shirts, and labels come out garbled or alien.</p></div>
+    <div class="clue-card img-clue"><div class="clue-emoji">${ico('sun')}</div><h3>Light &amp; shadows</h3><p>Shadows pointing different directions; faces lit from nowhere.</p></div>
+    <div class="clue-card img-clue"><div class="clue-emoji">${ico('layers')}</div><h3>Backgrounds</h3><p>Crowds with smeared faces; walls and objects that warp or repeat.</p></div>
+    <div class="clue-card img-clue"><div class="clue-emoji">${ico('sparkle')}</div><h3>Too perfect</h3><p>Poreless skin, plastic fur, surfaces smoother than real life.</p></div>
+    <div class="clue-card img-clue"><div class="clue-emoji">${ico('gem')}</div><h3>Mismatched pairs</h3><p>One earring, uneven glasses, patterns that don't match side to side.</p></div>
   </div>
   <p class="lede" style="margin-top:22px">And the master move: <b>check the corners.</b> The parts nobody looks at are where AI gets lazy.</p>`},
 
@@ -1328,12 +1344,12 @@ TRAINING.push(
   <h2>Clues in <span style="color:var(--purple)">Writing</span></h2>
   <p class="lede">AI writing is smooth, confident… and strangely empty. Listen for:</p>
   <div class="clue-grid">
-    <div class="clue-card txt-clue"><div class="clue-emoji">👤</div><h3>Ghost sources</h3><p>"Experts say," "studies show," but no expert, study, or journal is ever named.</p></div>
-    <div class="clue-card txt-clue"><div class="clue-emoji">📍</div><h3>No specifics</h3><p>No names, dates, or places. Real experiences are full of exact details.</p></div>
-    <div class="clue-card txt-clue"><div class="clue-emoji">🥁</div><h3>Robot rhythm</h3><p>Every sentence the same shape. First… Second… In conclusion…</p></div>
-    <div class="clue-card txt-clue"><div class="clue-emoji">🎀</div><h3>Too tidy</h3><p>A neat little life lesson at the end. Human writing is lumpier.</p></div>
-    <div class="clue-card txt-clue"><div class="clue-emoji">❗</div><h3>Confidently wrong</h3><p>Facts stated smoothly that collapse under one quick check.</p></div>
-    <div class="clue-card txt-clue"><div class="clue-emoji">🫥</div><h3>Says nothing</h3><p>Reads beautifully, but try to summarize it, and there's nothing there.</p></div>
+    <div class="clue-card txt-clue"><div class="clue-emoji">${ico('user')}</div><h3>Ghost sources</h3><p>"Experts say," "studies show," but no expert, study, or journal is ever named.</p></div>
+    <div class="clue-card txt-clue"><div class="clue-emoji">${ico('pin')}</div><h3>No specifics</h3><p>No names, dates, or places. Real experiences are full of exact details.</p></div>
+    <div class="clue-card txt-clue"><div class="clue-emoji">${ico('bars')}</div><h3>Robot rhythm</h3><p>Every sentence the same shape. First… Second… In conclusion…</p></div>
+    <div class="clue-card txt-clue"><div class="clue-emoji">${ico('ribbon')}</div><h3>Too tidy</h3><p>A neat little life lesson at the end. Human writing is lumpier.</p></div>
+    <div class="clue-card txt-clue"><div class="clue-emoji">${ico('alert')}</div><h3>Confidently wrong</h3><p>Facts stated smoothly that collapse under one quick check.</p></div>
+    <div class="clue-card txt-clue"><div class="clue-emoji">${ico('empty')}</div><h3>Says nothing</h3><p>Reads beautifully, but try to summarize it, and there's nothing there.</p></div>
   </div>
   <p class="lede" style="margin-top:22px"><b>But be fair:</b> human writing can be generic too, and AI can fake quirks. Clues raise suspicion. <b>Evidence settles it.</b> That's the next slide.</p>`},
 
@@ -1427,7 +1443,7 @@ function buildPrintables(){
     pHeader('Evidence Detective Sheet')+`<p style="font-size:11px;margin-bottom:10px"><b>Your mission:</b> claim → clues → evidence. Specific details only; no vibes.</p><div class="ev-grid">${blocks}</div>`;
 
   document.getElementById('print-checklist').innerHTML=`
-    <h2 class="poster-title">🔍 The Detective Checklist</h2>
+    <h2 class="poster-title">${ico('search')} The Detective Checklist</h2>
     <p class="poster-sub">Authentic or AI? · An Edutopia Media Literacy Game</p>
     <div class="poster-cols">
       <div class="poster-box"><h3>If it's an IMAGE, zoom in on…</h3><ul>${CHECKS.image.map(c=>`<li>${c}</li>`).join('')}</ul></div>
@@ -1441,7 +1457,7 @@ function buildPrintables(){
   const strip=h=>h.replace(/<[^>]*>/g,'');
   document.getElementById('print-answers').innerHTML=
     `<div class="p-header"><span class="p-title">Teacher Answer Key</span><span class="p-brand">Authentic or AI? · Edutopia</span></div>
-    <p style="font-size:10px;margin-bottom:8px">All 20 verdicts with clues and verification sources. Keep away from detectives. 🙂</p>`+
+    <p style="font-size:10px;margin-bottom:8px">All 20 verdicts with clues and verification sources. Keep away from detectives.</p>`+
     CARDS.map(c=>`<div class="ak-item">
       <div class="ak-head">Card ${c.n} · ${TYPE_LABEL[c.type]} · Level ${c.level}: “${strip(c.type==='image'?(c.alt||''):c.content).slice(0,90)}${strip(c.type==='image'?(c.alt||''):c.content).length>90?'…':''}”
         <span class="ak-verdict">${c.answer==='authentic'?'AUTHENTIC':'AI-GENERATED'}</span></div>
