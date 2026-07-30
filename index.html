@@ -582,7 +582,7 @@ mark.tell{background:linear-gradient(transparent 55%, rgba(255,188,13,.75) 55%);
   <ul>
     <li><b>Stop</b>: don’t share or believe it yet. How does it make you feel?</li>
     <li><b>Investigate</b> the source: who made this? Can you trust them?</li>
-    <li><b>Find</b> better coverage: do other trusted places say it too?</li>
+    <li><b>Find</b> it somewhere else: does another trustworthy place tell the same story?</li>
     <li><b>Trace</b> it back: find the original photo, book, or story</li>
   </ul>
   <h4>If it’s a picture, look for these:</h4>
@@ -1107,7 +1107,7 @@ IMG.mountain="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAASABIAAD/4QBMRXhpZgAATU0
      1 · AI picture   → teaches S (Stop)
      2 · REAL picture → teaches T (Trace to the original)
      3 · AI article   → teaches I (Investigate the source)
-     4 · REAL article → teaches F (Find better coverage)
+     4 · REAL article → teaches F (Find it somewhere else)
    Cards 5-10 are the game.
    ============================================================ */
 const SIFT_COLORS={S:'var(--orange)',I:'var(--pacific)',F:'var(--teal)',T:'var(--purple)'};
@@ -1170,14 +1170,14 @@ CARDS.push(
   url:'washingtonpost.com/lifestyle/2020/11/09/dog-mayor-rabbit-hash-kentucky',
   content:'A French Bulldog Named Wilbur Is Elected Mayor of a Kentucky Town',
   excerpt:'<p>Wilbur Beast, a French bulldog, was elected mayor of Rabbit Hash, Kentucky, with 13,143 votes. The town has picked an animal for mayor in every election since 1998. The silly election raises money to take care of the town.</p>',
-  sift:{letter:'F',move:'Find better coverage',
-    lesson:'Card 3 was fake, but this silly story is <b>true</b>! So how do we tell them apart? <b>Find better coverage:</b> check if other trusted places tell the same story. The chocolate-tree story was only in one place. Wilbur’s story is on NBC News, The Washington Post, and Snopes. When many trusted sources agree, you can believe it.'},
+  sift:{letter:'F',move:'Find it somewhere else',
+    lesson:'Card 3 was fake, but this silly story is <b>true</b>! So how do we tell them apart? <b>Find it somewhere else:</b> look for the same story in another trustworthy place. The chocolate-tree story lived in only ONE place. But Wilbur’s story is also on NBC News, The Washington Post, and Snopes — trustworthy places that check facts before they share them. When you can find a story in other trustworthy places, you can believe it.'},
   clues:[
     'It’s full of real details you can check: the dog’s name (Wilbur Beast), the town’s name (Rabbit Hash, Kentucky), and the exact number of votes (13,143). Fakes stay foggy; real stories get specific.',
     'Lots of trusted news sites told this same story, and the fact-checking site Snopes looked into it and says it is <b>True</b>.',
     'There’s a sensible reason behind the silliness: the pretend election is a fun way to raise money to take care of the town.'
   ],
-  verify:'SIFT move: <b>Find better coverage.</b> Search “Wilbur mayor Rabbit Hash.” NBC News, The Washington Post, and Snopes all tell the same story. That’s how you know.',
+  verify:'SIFT move: <b>Find it somewhere else.</b> Search “Wilbur mayor Rabbit Hash.” The same story shows up in other trustworthy places: NBC News, The Washington Post, and Snopes. That’s how you know.',
   source:'Facts: Wikipedia, “Rabbit Hash, Kentucky” (CC BY-SA 4.0)',
   links:[
     {label:'Wikipedia: Rabbit Hash, KY',url:'https://en.wikipedia.org/wiki/Rabbit_Hash,_Kentucky'},
@@ -1241,7 +1241,7 @@ CARDS.push(
     'A trusted magazine, Smithsonian, reported the story with believable, everyday details.',
     'It’s unusual but not impossible: libraries really do get super-late books back sometimes.'
   ],
-  verify:'SIFT move: <b>Find better coverage.</b> Search “library book returned 105 years.” Smithsonian Magazine and the library itself both talked about it.',
+  verify:'SIFT move: <b>Find it somewhere else.</b> Search “library book returned 105 years.” You’ll find the same story in more than one trustworthy place: Smithsonian Magazine and the library itself both talked about it.',
   source:'Reported by Smithsonian Magazine, April 18, 2024',
   links:[
     {label:'Smithsonian Magazine',url:'https://www.smithsonianmag.com/smart-news/overdue-book-returned-to-colorado-library-after-105-years-180984169/'}
@@ -1258,7 +1258,7 @@ CARDS.push(
     'The super-exact “74%” is a trick. Made-up numbers make fake stories feel scientific.',
     'It tells you exactly what you WISH were true, and “Tag a friend” means it wants shares, not truth.'
   ],
-  verify:'SIFT move: <b>Find better coverage.</b> Search “ice cream breakfast math study.” No trusted site reports it, because the study does not exist.',
+  verify:'SIFT move: <b>Find it somewhere else.</b> Search “ice cream breakfast math study.” You can’t find it in any trustworthy place, because the study does not exist.',
   source:'Written by AI for this game.',
   links:[
     {label:'What breakfast really does for kids (Harvard)',url:'https://nutritionsource.hsph.harvard.edu/breakfast/'}
@@ -1347,7 +1347,7 @@ TRAINING.push(
   <div class="sift-list">
     <div class="sift-item reveal-card concealed"><div class="sift-letter" style="background:var(--orange)">S</div><div class="rv"><h3>Stop</h3><p>Don’t share it yet! Don’t believe it yet! How does it make you feel? Tricky posts try to give you BIG feelings.</p></div></div>
     <div class="sift-item reveal-card concealed"><div class="sift-letter" style="background:var(--pacific)">I</div><div class="rv"><h3>Investigate the source</h3><p>Who made this? Look them up. Are they real? Can you trust them?</p></div></div>
-    <div class="sift-item reveal-card concealed"><div class="sift-letter" style="background:var(--teal)">F</div><div class="rv"><h3>Find better coverage</h3><p>Do other trusted places tell the same story? If a big story is only in ONE place, be careful.</p></div></div>
+    <div class="sift-item reveal-card concealed"><div class="sift-letter" style="background:var(--teal)">F</div><div class="rv"><h3>Find it somewhere else</h3><p>Can you find the same story in another trustworthy place? If it is, you can start to trust it. If a big story is only in ONE place, be careful.</p></div></div>
     <div class="sift-item reveal-card concealed"><div class="sift-letter" style="background:var(--purple)">T</div><div class="rv"><h3>Trace to the original</h3><p>Follow the story back to where it started: the first photo, the real book, the real scientist.</p></div></div>
   </div>
   <p class="lede" style="margin-top:22px">SIFT gets you <b>proof</b>. The next two slides train your detective eyes to spot <b>clues</b>.</p>`},
@@ -1451,7 +1451,7 @@ TRAINING.push(
 const CHECKS={
   image:['Zoom in close: melted hands, smudged faces, scrambled letters','Check the light: do the shadows make sense?','Ask where it came from: a real person, a real place, a real camera?'],
   text:['Look for real names: “experts say” with no names is a ghost source','Use what you know: does it even make sense?','Check another place: does a trusted site tell the same story?'],
-  sift:[['S','Stop','Don’t share or believe it yet. How does it make you feel?'],['I','Investigate','Who made this? Can you trust them?'],['F','Find','Do other trusted places say it too?'],['T','Trace','Follow it back to the original photo or story.']]
+  sift:[['S','Stop','Don’t share or believe it yet. How does it make you feel?'],['I','Investigate','Who made this? Can you trust them?'],['F','Find it somewhere else','Does another trustworthy place tell the same story?'],['T','Trace','Follow it back to the original photo or story.']]
 };
 
 /* One half-sheet Case Card per example: a writing activity students do
@@ -1465,7 +1465,7 @@ function caseCard(card,scaffolded){
     ${scaffolded?'<div class="hs-starter">Starters: “I think this is ______ because…” &nbsp;·&nbsp; “I noticed ______.”</div>':''}
     <div class="hs-line"></div><div class="hs-line"></div><div class="hs-line"></div><div class="hs-line"></div>${scaffolded?'':'<div class="hs-line"></div>'}
     <div class="hs-sift"><b>3 · My SIFT check — circle the move you would use:</b><br>
-      <span class="sbubble">S</span>Stop &nbsp; <span class="sbubble">I</span>Investigate the source &nbsp; <span class="sbubble">F</span>Find better coverage &nbsp; <span class="sbubble">T</span>Trace to the original</div>
+      <span class="sbubble">S</span>Stop &nbsp; <span class="sbubble">I</span>Investigate the source &nbsp; <span class="sbubble">F</span>Find it somewhere else &nbsp; <span class="sbubble">T</span>Trace to the original</div>
     ${scaffolded?'<div class="hs-starter">“To check this, I would ______.”</div>':''}
     <div class="hs-line"></div><div class="hs-line"></div>
     <div class="hs-foot"><b>Detectives talk first, then write.</b> Share your clues with your group, point at the exact spot or words, and convince us! · Authentic or AI? · An Edutopia Media Literacy Game</div>
