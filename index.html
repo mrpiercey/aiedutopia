@@ -245,6 +245,8 @@ img.zoomable{cursor:zoom-in;}
 .af-bar{display:flex;align-items:center;gap:8px;background:var(--midnight);padding:10px 14px;}
 .af-bar .dot{width:11px;height:11px;border-radius:50%;background:rgba(255,255,255,.35);}
 .af-bar .url{flex:1;min-width:0;background:rgba(255,255,255,.14);color:#cfd6e4;font-size:13px;border-radius:99px;padding:4px 14px;font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+.af-bar a.url{text-decoration:none;cursor:pointer;}
+.af-bar a.url:hover{background:rgba(255,255,255,.26);color:#fff;text-decoration:underline;}
 .af-body{padding:26px 34px 30px;}
 .af-kicker{font-size:13px;font-weight:800;letter-spacing:.14em;text-transform:uppercase;color:var(--orange);margin-bottom:10px;}
 .af-headline{font-family:var(--font-slab);font-weight:700;font-size:clamp(26px,3.2vw,44px);line-height:1.15;color:var(--midnight);}
@@ -715,6 +717,11 @@ const IMG = {};
    CARD DATA: edit freely; the game builds itself from this
    type: 'image' | 'article' | 'post'  (cards alternate image / text)
    answer: 'authentic' | 'ai'
+   url: shown in the article's browser bar AND clickable (opens
+   https://<url> in a new tab; optional href overrides the target).
+   Real articles link to the real story. AI articles get a
+   real-looking url that does NOT back the story up — clicking it
+   IS the lesson (check the link!).
    ============================================================ */
 const CARDS = []; /* populated below in CONTENT section */
 
@@ -835,7 +842,9 @@ function contentHTML(card){
   if(card.type==='article'){
     return `<div class="content-kicker">A news story from the internet</div>
       <div class="article-frame">
-        <div class="af-bar"><span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="url">${card.url||'news-site.com/todays-story'}</span></div>
+        <div class="af-bar"><span class="dot"></span><span class="dot"></span><span class="dot"></span>${card.url
+          ?`<a class="url" href="${card.href||'https://'+card.url}" target="_blank" rel="noopener" title="Open this address in a new tab">${card.url}</a>`
+          :`<span class="url">news-site.com/todays-story</span>`}</div>
         <div class="af-body">
           <div class="af-kicker">${card.section||'News'}</div>
           <div class="af-headline">${card.content}</div>
@@ -1189,6 +1198,7 @@ CARDS.push(
 
 { id:'c4', n:4, type:'article', answer:'authentic', teach:true, section:'Animals',
   url:'washingtonpost.com/lifestyle/2020/11/09/dog-mayor-rabbit-hash-kentucky',
+  href:'https://www.washingtonpost.com/lifestyle/2020/11/09/dog-mayor-rabbit-hash-kentucky/',
   content:'A French Bulldog Named Wilbur Is Elected Mayor of a Kentucky Town',
   excerpt:'<p>Wilbur Beast, a French bulldog, was elected mayor of Rabbit Hash, Kentucky, with 13,143 votes. The town has picked an animal for mayor in every election since 1998. The silly election raises money to take care of the town.</p>',
   sift:{letter:'F',move:'Find it somewhere else',
@@ -1255,6 +1265,7 @@ CARDS.push(
 
 { id:'c8', n:8, type:'article', answer:'authentic', section:'Books',
   url:'smithsonianmag.com/smart-news/overdue-book-returned-to-colorado-library-after-105-years-180984169',
+  href:'https://www.smithsonianmag.com/smart-news/overdue-book-returned-to-colorado-library-after-105-years-180984169/',
   content:'Book Returned to a Colorado Library 105 Years Late',
   excerpt:'<p>A book called <i>Ivanhoe</i> was checked out from a library in Fort Collins, Colorado, in 1919, and returned 105 years later! Luckily, the library stopped charging late fees in 2020, so no one had to pay.</p>',
   clues:[
@@ -1288,6 +1299,7 @@ CARDS.push(
 
 { id:'c10', n:10, type:'article', answer:'authentic', section:'Science',
   url:'smithsonianmag.com/smart-news/scientists-revive-46000-year-old-roundworms-from-siberian-permafrost-180982620',
+  href:'https://www.smithsonianmag.com/smart-news/scientists-revive-46000-year-old-roundworms-from-siberian-permafrost-180982620/',
   content:'Scientists Wake Up a Tiny Worm That Was Frozen for 46,000 Years',
   excerpt:'<p>Scientists found a tiny roundworm frozen deep in the icy ground of Siberia. When it warmed up, it wiggled back to life! Tests showed it had been asleep for about 46,000 years, back when woolly mammoths were alive.</p>',
   clues:[
