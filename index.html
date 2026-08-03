@@ -85,6 +85,7 @@ body{
 }
 .bar-btn:hover{background:var(--midnight);color:var(--white);}
 .bar-btn.hidden{display:none;}
+.btn.hidden{display:none;}
 
 /* ---------- Screens ---------- */
 .screen{
@@ -238,12 +239,6 @@ img.zoomable{cursor:zoom-in;}
   padding:20px 26px;font-size:21px;line-height:1.5;min-height:64px;display:flex;align-items:center;gap:14px;
 }
 .hotspot-reveal .num{flex:0 0 auto;width:36px;height:36px;border-radius:50%;background:var(--orange);display:flex;align-items:center;justify-content:center;font-weight:800;}
-.writing-frame{display:grid;grid-template-columns:1fr 1fr 1fr;gap:16px;margin-top:26px;}
-.writing-frame .wf{background:var(--white);border-radius:var(--radius);box-shadow:var(--shadow-card);padding:22px;}
-.writing-frame .wf .step-num{font-family:var(--font-slab);font-weight:700;font-size:40px;color:var(--tangerine);}
-.writing-frame .wf h3{font-size:23px;margin:6px 0 8px;}
-.writing-frame .wf p{font-size:19px;line-height:1.5;color:var(--dark-grey);}
-.writing-frame .wf .starter{margin-top:12px;background:var(--cream);border-left:4px solid var(--sunshine);padding:10px 14px;border-radius:0 10px 10px 0;font-style:italic;font-size:15px;color:var(--midnight);}
 
 /* generic news-article frame (deliberately unbranded) */
 .article-frame{background:var(--white);border-radius:14px;box-shadow:var(--shadow-pop);overflow:hidden;max-width:880px;margin:0 auto;width:100%;}
@@ -341,20 +336,33 @@ img.zoomable{cursor:zoom-in;}
 .timer-display.warn{color:var(--orange);animation:pulse 1s infinite;}
 @keyframes pulse{50%{opacity:.55}}
 
-/* vote phase */
-.vote-panel{text-align:center;}
-.vote-panel h3{font-family:var(--font-slab);font-weight:700;font-size:clamp(30px,3.4vw,44px);margin-bottom:8px;}
-.vote-panel .lede{font-size:19px;color:var(--dark-grey);margin-bottom:30px;}
+/* vote & reveal: the reveal screen opens on the vote moment (verdict hidden).
+   One click / → lights up the true answer and shows the rest of the reveal. */
+.vote-moment{text-align:center;margin-bottom:26px;}
+.vote-moment h3{font-family:var(--font-slab);font-weight:700;font-size:clamp(30px,3.4vw,44px);margin-bottom:8px;}
+.vote-moment .lede{font-size:19px;color:var(--dark-grey);margin-bottom:30px;}
 .vote-btns{display:flex;gap:24px;justify-content:center;flex-wrap:wrap;}
 .vote-big{
-  font-family:var(--font-slab);font-weight:700;font-size:34px;border:none;border-radius:22px;cursor:pointer;
-  padding:34px 60px;color:var(--white);transition:transform .13s, box-shadow .13s;min-width:280px;
+  font-family:var(--font-slab);font-weight:700;font-size:34px;border-radius:22px;
+  padding:34px 60px;color:var(--white);transition:transform .3s, opacity .3s, filter .3s;min-width:280px;
 }
-.vote-big:hover{transform:translateY(-3px) scale(1.02);box-shadow:var(--shadow-pop);}
-.vote-big.picked{outline:5px solid var(--sunshine);outline-offset:3px;}
 .vote-big.authentic{background:var(--space-blue);}
 .vote-big.ai{background:var(--orange);}
 .vote-big small{display:block;font-family:var(--font-ui);font-weight:600;font-size:15px;opacity:.85;margin-top:6px;letter-spacing:.05em;}
+/* while votes are open: the truth below stays hidden, and → / click reveals it */
+.vote-moment.concealed ~ .reveal-rest{display:none;}
+.screen-inner:has(.vote-moment.concealed) #btn-next-card,
+.screen-inner:has(.vote-moment.concealed) #btn-finish{display:none;}
+.vote-moment.concealed::after{
+  content:"Votes in? Click here (or press →) to reveal the truth";display:block;margin-top:24px;
+  font-family:var(--font-ui);font-size:13px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--pacific);
+}
+.vote-moment.concealed:hover::after{color:var(--orange);}
+/* after the reveal: the winner lights up, the loser fades, the row shrinks */
+.vote-moment:not(.concealed) h3,.vote-moment:not(.concealed) .lede{display:none;}
+.vote-moment:not(.concealed) .vote-big{font-size:21px;padding:13px 30px;min-width:200px;border-radius:16px;}
+.vote-moment:not(.concealed) .vote-big.win{outline:4px solid var(--sunshine);outline-offset:3px;}
+.vote-moment:not(.concealed) .vote-big.dim{opacity:.28;filter:grayscale(.7);transform:scale(.93);}
 
 /* teaching cards (cards 1-4): solved together, each spotlights a SIFT move */
 .teach-banner{
@@ -423,7 +431,7 @@ mark.tell{background:linear-gradient(transparent 55%, rgba(255,188,13,.75) 55%);
 .clue-card.txt-clue .clue-emoji{color:var(--purple);}
 .clue-emoji .ico{width:30px;height:30px;stroke-width:1.6;}
 .write-panel h3 .ico{width:.8em;height:.8em;vertical-align:0;margin-right:.14em;color:var(--tangerine);}
-.vote-panel h3 .ico{width:.8em;height:.8em;vertical-align:0;margin-right:.14em;color:var(--space-blue);}
+.vote-moment h3 .ico{width:.8em;height:.8em;vertical-align:0;margin-right:.14em;color:var(--space-blue);}
 .exit-ticket h3 .ico{width:.85em;height:.85em;vertical-align:-.08em;margin-right:.16em;color:var(--tangerine);}
 .verdict .ico{width:.78em;height:.78em;stroke-width:2.3;}
 .reveal-discuss .demoji{line-height:0;}
@@ -607,15 +615,17 @@ mark.tell{background:linear-gradient(transparent 55%, rgba(255,188,13,.75) 55%);
     <p class="title-tag">Ten mystery cards: amazing pictures, news stories, and posts. Some are completely real. Some were made by AI.
       First we <strong>solve four teaching cards together</strong> and learn the SIFT moves. Then your class must <strong>decide, share the clues, and check the source</strong>, because a detective never just guesses!</p>
     <div class="title-actions">
+      <button class="btn btn-primary hidden" id="btn-continue">Continue →</button>
       <button class="btn btn-primary" id="btn-start-training">Start Detective Training →</button>
       <button class="btn btn-ghost" id="btn-skip-to-cards">Skip to the Cards</button>
+      <button class="btn btn-ghost hidden" id="btn-title-restart">Start Over</button>
     </div>
     <details class="teacher-guide">
       <summary>Teacher's Quick Guide <span class="tg-sub">· how to run this in class (1-minute read)</span></summary>
       <div class="tg-body">
         <p><b>What this is:</b> a slideshow you drive from the front of the room. Nothing advances on its own, and hidden clues stay hidden until you reveal them, so you set the pace and the discussion.</p>
-        <p><b>The flow:</b> Detective Training (7 short slides, ≈10 min) teaches the SIFT moves and 3 clues for pictures + 3 clues for writing. Then come 10 case cards. <b>Cards 1-4 are teaching cards</b> you solve together: an AI picture, then a real picture; an AI article, then a real article — and each one spotlights one SIFT move (S, T, I, F). <b>Cards 5-10 are the game.</b> Every card runs <b>Examine → Think &amp; Write → Vote → Reveal</b>.</p>
-        <p><b>Pacing ideas:</b> one class period = training + the 4 teaching cards; the game cards another day. Or make it a routine: one card a day. Completed cards are saved on this device until you press Start Over.</p>
+        <p><b>The flow:</b> Detective Training (6 short slides, ≈10 min) teaches the SIFT moves and 3 clues for pictures + 3 clues for writing. Then come 10 case cards. <b>Cards 1-4 are teaching cards</b> you solve together: an AI picture, then a real picture; an AI article, then a real article — and each one spotlights one SIFT move (S, T, I, F). <b>Cards 5-10 are the game.</b> Every card runs <b>Examine → Think &amp; Write → Vote &amp; Reveal</b>: the last screen opens on the class vote (hands up!), then one press of <span class="kbd">→</span> shows the truth.</p>
+        <p><b>Pacing ideas:</b> one class period = training + the 4 teaching cards; the game cards another day. Or make it a routine: one card a day. Completed cards are saved on this device, and next time you open the game a <b>Continue</b> button jumps straight to where you left off. Press <b>Start Over</b> for a fresh class.</p>
         <p><b>The writing activity:</b> each card has a matching half-sheet <b>Case Card</b> students write on, alone or in groups: claim, clues in complete sentences, and the SIFT move they'd use. Print them under <b>Print Materials</b> (top right) and cut each page in two.</p>
         <p><b>Younger students:</b> skip the writing and just talk it out as a class, vote with thumbs up (real) or thumbs sideways (AI), and let volunteers point at clues on the board.</p>
         <p><b>Before class:</b> print the Student Case Cards (scaffolded or open), plus the Teacher Answer Key for yourself.</p>
@@ -659,8 +669,7 @@ mark.tell{background:linear-gradient(transparent 55%, rgba(255,188,13,.75) 55%);
       <div class="phase-steps">
         <span class="phase-step" data-phase="examine">1 · Examine</span>
         <span class="phase-step" data-phase="write">2 · Think &amp; Write</span>
-        <span class="phase-step" data-phase="vote">3 · Vote</span>
-        <span class="phase-step" data-phase="reveal">4 · Reveal</span>
+        <span class="phase-step" data-phase="reveal">3 · Vote &amp; Reveal</span>
       </div>
     </div>
     <div class="stage" id="stage"></div>
@@ -676,7 +685,7 @@ mark.tell{background:linear-gradient(transparent 55%, rgba(255,188,13,.75) 55%);
     <p class="lede" style="font-size:21px;color:var(--dark-grey)">You examined the evidence, explained your clues, and checked your sources. That is exactly what great media detectives do every day.</p>
     <div class="exit-ticket">
       <h3><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 20h4L19 9l-4-4L4 16Z"/><path d="M14 6l4 4"/></svg> Exit Ticket</h3>
-      <p><b>Which detective clue will you use in real life?</b> Draw or write about one thing you saw online that you want to double-check, then tell which SIFT move you would use on it.</p>
+      <p><b>Which detective clue will you use in real life?</b> On the back of your Case Card, draw or write about one thing you saw online that you want to double-check, then tell which SIFT move you would use on it.</p>
     </div>
     <div class="title-actions" style="margin-top:30px">
       <button class="btn btn-dark" id="btn-play-again">Back to Card Grid</button>
@@ -743,7 +752,23 @@ function show(screenId){
   $$('.screen').forEach(s=>s.classList.remove('active'));
   $('#'+screenId).classList.add('active');
   $('#btn-grid').classList.toggle('hidden', screenId==='screen-title');
+  if(screenId==='screen-title') updateTitleActions();
   window.scrollTo(0,0);
+}
+
+/* title screen adapts to saved progress: mid-deck, "Continue" jumps straight
+   to the next card so part two is one click */
+function nextUncompleted(){ return activeCards().find(c=>!state.completed[c.id]); }
+function updateTitleActions(){
+  const started=Object.keys(state.completed).length>0;
+  const next=nextUncompleted();
+  const mid=started&&!!next;
+  const cont=$('#btn-continue');
+  cont.classList.toggle('hidden',!mid);
+  if(mid) cont.textContent='Continue: Card '+next.n+' →';
+  $('#btn-start-training').classList.toggle('btn-primary',!mid);
+  $('#btn-start-training').classList.toggle('btn-ghost',mid);
+  $('#btn-title-restart').classList.toggle('hidden',!started);
 }
 
 /* ---------- persistence: progress survives a reload / next class period ---------- */
@@ -797,7 +822,7 @@ function openCard(card){
 function cardIndex(){ return activeCards().findIndex(c=>c.id===state.current.id); }
 
 function setPhaseSteps(){
-  const order=['examine','write','vote','reveal'];
+  const order=['examine','write','reveal'];
   const cur=order.indexOf(state.phase);
   $$('.phase-step').forEach(el=>{
     const i=order.indexOf(el.dataset.phase);
@@ -886,27 +911,7 @@ function renderPhase(){
     $$('.timer-set').forEach(b=>b.onclick=()=>startTimer(+b.dataset.min));
     $('#btn-timer-stop').onclick=stopTimer;
     $('#btn-back-examine').onclick=()=>{state.phase='examine';renderPhase();};
-    $('#btn-to-vote').onclick=()=>{stopTimer();state.phase='vote';renderPhase();};
-  }
-
-  else if(state.phase==='vote'){
-    stage.innerHTML=`<div class="vote-panel">
-      <h3>${ico('ballot')} Cast Your Votes</h3>
-      <p class="lede">Hands up, whiteboards up, or shout it out. Then reveal.</p>
-      <div class="vote-btns">
-        <button class="vote-big authentic">AUTHENTIC<small>real: it really happened</small></button>
-        <button class="vote-big ai">AI-MADE<small>made by a computer</small></button>
-      </div></div>`;
-    foot.innerHTML=`
-      <button class="btn btn-ghost btn-sm" id="btn-back-write">← Back</button>
-      <span class="spacer"></span>
-      <button class="btn btn-primary" id="btn-reveal" style="font-size:19px;padding:13px 36px">Reveal the Truth</button>`;
-    $$('.vote-big').forEach(b=>b.onclick=()=>{
-      $$('.vote-big').forEach(x=>x.classList.remove('picked'));
-      b.classList.add('picked');
-    });
-    $('#btn-back-write').onclick=()=>{state.phase='write';renderPhase();};
-    $('#btn-reveal').onclick=()=>{state.phase='reveal';renderPhase();};
+    $('#btn-to-vote').onclick=()=>{stopTimer();state.phase='reveal';renderPhase();};
   }
 
   else if(state.phase==='reveal'){
@@ -923,6 +928,15 @@ function renderPhase(){
       revealBody=`<img class="reveal-thumb" src="${IMG[card.img]}" alt="${card.alt||''}">`;
 
     stage.innerHTML=`<div class="reveal-panel">
+      <div class="vote-moment reveal-card concealed" id="vote-moment" title="Reveal the truth">
+        <h3>${ico('ballot')} Cast Your Votes</h3>
+        <p class="lede">Hands up, whiteboards up, or shout it out!</p>
+        <div class="vote-btns">
+          <div class="vote-big authentic ${isAuth?'win':'dim'}">AUTHENTIC<small>real: it really happened</small></div>
+          <div class="vote-big ai ${isAuth?'dim':'win'}">AI-MADE<small>made by a computer</small></div>
+        </div>
+      </div>
+      <div class="reveal-rest">
       <div class="verdict ${card.answer}">
         <span class="vicon">${isAuth?ico('check'):ico('cpu')}</span>
         <span>${isAuth?'AUTHENTIC':'AI-MADE'}</span>
@@ -945,6 +959,7 @@ function renderPhase(){
         <div><h4>The SIFT move this card teaches: ${card.sift.move}</h4><span class="rv"><p>${card.sift.lesson}</p></span></div>
       </div>`:''}
       <div class="reveal-discuss"><span class="demoji">${ico('chat')}</span><span><b>Discuss:</b> ${card.discuss}</span></div>
+      </div>
     </div>`;
     const rz=stage.querySelector('.reveal-thumb'); if(rz) attachLoupe(rz);
     $('#btn-clues-all').onclick=()=>$$('#stage .reveal-card.concealed').forEach(x=>x.classList.remove('concealed'));
@@ -952,7 +967,7 @@ function renderPhase(){
     const remaining=activeCards().filter(c=>!state.completed[c.id]).length;
     foot.innerHTML=`
       <button class="btn btn-ghost btn-sm" id="btn-back-grid">Card Grid</button>
-      <span class="hint-quiet">Press → to reveal each clue</span>
+      <span class="hint-quiet">Press → to reveal the truth, then each clue</span>
       <span class="spacer"></span>
       ${remaining? `<button class="btn btn-dark" id="btn-next-card">Next Card →</button>`
                  : `<button class="btn btn-primary" id="btn-finish">Finish: Case Closed →</button>`}`;
@@ -1016,6 +1031,8 @@ $('#btn-tnext').onclick=()=>{
 /* ---------- global nav ---------- */
 $('#btn-start-training').onclick=()=>{state.trainingIdx=0;renderTraining();show('screen-training');};
 $('#btn-skip-to-cards').onclick=()=>{renderGrid();show('screen-grid');};
+$('#btn-continue').onclick=()=>{const c=nextUncompleted();if(c)openCard(c);};
+$('#btn-title-restart').onclick=()=>{state.completed={};clearState();renderDots();updateTitleActions();};
 $('#btn-home').onclick=()=>show('screen-title');
 $('#btn-grid').onclick=()=>{renderGrid();show('screen-grid');};
 $('#btn-play-again').onclick=()=>{renderGrid();show('screen-grid');};
@@ -1059,13 +1076,16 @@ document.addEventListener('keydown',e=>{
       const c=$('.training-slide.on .reveal-card.concealed');
       if(c) c.classList.remove('concealed'); else $('#btn-tnext').click();
     }
-    else if(active==='screen-title'&&e.key==='ArrowRight'){$('#btn-start-training').click();}
+    else if(active==='screen-title'&&e.key==='ArrowRight'){
+      const cont=$('#btn-continue');
+      (cont.classList.contains('hidden')?$('#btn-start-training'):cont).click();
+    }
     else if(active==='screen-grid'){e.preventDefault();const first=activeCards().find(c=>!state.completed[c.id]);if(first)openCard(first);else showWrapup();}
     else if(active==='screen-card'){
       e.preventDefault();
-      const order=['examine','write','vote','reveal'];
+      const order=['examine','write','reveal'];
       const i=order.indexOf(state.phase);
-      if(i<3){stopTimer();state.phase=order[i+1];renderPhase();}
+      if(i<2){stopTimer();state.phase=order[i+1];renderPhase();}
       else {
         const c=$('#stage .reveal-card.concealed');
         if(c){c.classList.remove('concealed');return;}
@@ -1075,7 +1095,7 @@ document.addEventListener('keydown',e=>{
   }
   if(e.key==='ArrowLeft'&&active==='screen-training'){$('#btn-tprev').click();}
   if(e.key==='ArrowLeft'&&active==='screen-card'){
-    const order=['examine','write','vote','reveal'];
+    const order=['examine','write','reveal'];
     const i=order.indexOf(state.phase);
     if(i>0&&state.phase!=='reveal'){state.phase=order[i-1];renderPhase();}
   }
@@ -1085,6 +1105,7 @@ document.addEventListener('keydown',e=>{
 function boot(){
   loadState();
   renderDots();
+  updateTitleActions();
   buildPrintables();
 }
 </script>
@@ -1329,7 +1350,7 @@ function mountCallouts(wrapId,revealId,imgKey,spots){
 }
 TRAINING.push(
 { html:`
-  <div class="training-head"><span class="training-step">Detective Training · 1 of 7</span></div>
+  <div class="training-head"><span class="training-step">Detective Training · 1 of 6</span></div>
   <h2>Your Mission, Detectives</h2>
   <p class="lede">Computers called <b>AI</b> can now write stories and make photos of things that never happened. Some are silly fun. Some are made to trick you.</p>
   <p class="lede" style="margin-top:14px">In this game you’ll see <b>10 mystery cards</b>: pictures, news stories, and posts. Some are 100% real. Some were made by AI. We’ll solve the <b>first four together</b> to learn our moves; then the rest are up to you. Detectives never just guess. A detective must:</p>
@@ -1338,10 +1359,11 @@ TRAINING.push(
     <div class="clue-card"><div class="clue-emoji">${ico('search')}</div><h3>Show your clues</h3><p>Point to the exact spots or words that made you think so.</p></div>
     <div class="clue-card"><div class="clue-emoji">${ico('book')}</div><h3>Check it</h3><p>Tell how you would check. That’s your SIFT move!</p></div>
   </div>
-  <p class="lede" style="margin-top:24px"><b>Remember:</b> “amazing” doesn’t mean fake, and “boring” doesn’t mean real. Some of the realest things in this game look impossible!</p>`},
+  <p class="lede" style="margin-top:24px">You’ll write all three on the half-sheet <b>Case Card</b> in front of you: talk with your group first, then write in complete sentences. Anyone can guess, but a detective can <b>convince</b>!</p>
+  <p class="lede" style="margin-top:14px"><b>Remember:</b> “amazing” doesn’t mean fake, and “boring” doesn’t mean real. Some of the realest things in this game look impossible!</p>`},
 
 { html:`
-  <div class="training-head"><span class="training-step">Detective Training · 2 of 7</span></div>
+  <div class="training-head"><span class="training-step">Detective Training · 2 of 6</span></div>
   <h2>The Four Magic Moves: <span style="color:var(--teal)">SIFT</span></h2>
   <p class="lede">Fact-checkers use four moves on everything they see. The first letters spell <b>SIFT</b>. Every card in this game can be solved with one of them. <b>Click each move to reveal it.</b></p>
   <div class="sift-list">
@@ -1353,7 +1375,7 @@ TRAINING.push(
   <p class="lede" style="margin-top:22px">SIFT gets you <b>proof</b>. The next two slides train your detective eyes to spot <b>clues</b>.</p>`},
 
 { html:`
-  <div class="training-head"><span class="training-step">Detective Training · 3 of 7</span></div>
+  <div class="training-head"><span class="training-step">Detective Training · 3 of 6</span></div>
   <h2>3 Clues for <span style="color:var(--pacific)">Pictures</span></h2>
   <p class="lede">AI pictures look great from far away, then fall apart up close. <b>Click each card to reveal what to look for.</b></p>
   <div class="clue-grid">
@@ -1364,7 +1386,7 @@ TRAINING.push(
   <p class="lede" style="margin-top:22px">Detective secret: <b>check the corners!</b> AI gets lazy in the parts nobody looks at.</p>`},
 
 { html:`
-  <div class="training-head"><span class="training-step">Detective Training · 4 of 7</span></div>
+  <div class="training-head"><span class="training-step">Detective Training · 4 of 6</span></div>
   <h2>3 Clues for <span style="color:var(--purple)">Words</span></h2>
   <p class="lede">AI writing sounds smooth and sure of itself, but it’s often empty inside. <b>Click each card to reveal what to listen for.</b></p>
   <div class="clue-grid">
@@ -1375,7 +1397,7 @@ TRAINING.push(
   <p class="lede" style="margin-top:22px"><b>Be fair:</b> clues make you suspicious. Only checking (that’s SIFT!) makes you sure.</p>`},
 
 { html:`
-  <div class="training-head"><span class="training-step">Detective Training · 5 of 7</span></div>
+  <div class="training-head"><span class="training-step">Detective Training · 5 of 6</span></div>
   <h2>Practice Case: The Mountain Photo</h2>
   <p class="lede">This photo is going around online, and lots of people believe it is real. Before anyone says the answer, look at it closely as a class. <b>Hover over the photo to zoom in.</b> What feels off to you? See how many problems your class can find.</p>
   <div class="examine-post">
@@ -1398,7 +1420,7 @@ TRAINING.push(
   mount(){ const im=document.getElementById('practice-img1'); if(im){ im.src=IMG.mountain; attachLoupe(im); } }},
 
 { html:`
-  <div class="training-head"><span class="training-step">Detective Training · 6 of 7</span></div>
+  <div class="training-head"><span class="training-step">Detective Training · 6 of 6</span></div>
   <h2>Practice Case: Check the Clues</h2>
   <p class="lede">Now let’s look together. This photo is <b>completely AI-made</b>. <b>Hover to zoom in</b>, then <b>click the numbered buttons</b> to check three of the spots where the computer slipped up.</p>
   <div class="hotspot-wrap callouts" id="hotspot-wrap2">
@@ -1421,28 +1443,15 @@ TRAINING.push(
     <button class="hotspot" data-h="1">2</button>
     <button class="hotspot" data-h="2">3</button>
   </div>
-  <div class="hotspot-reveal" id="hotspot-reveal2"><span style="opacity:.75">Click a numbered button above to inspect that spot.</span></div>`,
+  <div class="hotspot-reveal" id="hotspot-reveal2"><span style="opacity:.75">Click a numbered button above to inspect that spot.</span></div>
+  <p class="lede" style="margin-top:20px">Press <b>C</b> anytime to open the Detective Checklist. Ready, detectives? Grab your Case Card — let’s open the case files!</p>`,
   mount(){
     mountCallouts('hotspot-wrap2','hotspot-reveal2','mountain',[
       {x:6.5,y:17,side:'left',text:'<b>Clue #1: two suns!</b> This bright sun sits low on the left. Now look at the far right: there’s a <b>second sun</b> in the very same sky. A real photo can only ever have one. <b>SIFT → Stop:</b> when something is impossible in real life, stop and don’t believe it, no matter how amazing it looks.'},
       {x:30,y:83,side:'left',text:'<b>Clue #2: a garbled sign.</b> Try to read the summit sign: “U-MVVVIK-PEAK S,04 / ELN-A’L-ENT”. When letters melt into nonsense, a computer made the picture. <b>SIFT → Trace to the original:</b> look up the real summit. A real sign spells its name and elevation correctly.'},
       {x:55,y:34,side:'top',text:'<b>Clue #3: everyone has the same face.</b> Look from hiker to hiker: all four have almost the exact same face. AI reuses faces like stickers. <b>SIFT → Investigate the source:</b> a real group photo comes from a real, findable account, not a page that only posts “unbelievable” AI shots.'}
     ]);
-  }},
-
-{ html:`
-  <div class="training-head"><span class="training-step">Detective Training · 7 of 7</span></div>
-  <h2>How to Make Your Case</h2>
-  <p class="lede">For every mystery, you’ll get a half-sheet <b>Case Card</b> to write on, by yourself or with your group. Talk first, then write these three things in complete sentences. Anyone can guess, but a detective can <b>convince</b>!</p>
-  <div class="writing-frame">
-    <div class="wf"><div class="step-num">1</div><h3>Claim</h3><p>Pick one: Real, or AI. No fence-sitting!</p>
-      <div class="starter">“I think this is ______ because…”</div></div>
-    <div class="wf"><div class="step-num">2</div><h3>Clues</h3><p>Tell 1-2 clues you noticed. Point right at them.</p>
-      <div class="starter">“I noticed ______.”</div></div>
-    <div class="wf"><div class="step-num">3</div><h3>Check</h3><p>Tell which SIFT move you would use.</p>
-      <div class="starter">“To check, I would ______.”</div></div>
-  </div>
-  <p class="lede" style="margin-top:24px">Press <b>C</b> anytime to open the Detective Checklist. Ready, detectives? Let’s open the case files!</p>`}
+  }}
 );
 
 /* ============================================================
@@ -1519,7 +1528,7 @@ boot();
   const m=h.match(/view=([a-z]+)(?::(\d+))?(?::([a-z]+))?/); if(!m)return;
   if(m[1]==='training'){state.trainingIdx=(+m[2]||1)-1;renderTraining();show('screen-training');}
   else if(m[1]==='grid'){renderGrid();show('screen-grid');}
-  else if(m[1]==='card'){const c=CARDS[(+m[2]||1)-1];openCard(c);if(m[3]){state.phase=m[3];renderPhase();}}
+  else if(m[1]==='card'){const c=CARDS[(+m[2]||1)-1];openCard(c);if(m[3]){state.phase=m[3]==='vote'?'reveal':m[3];renderPhase();}}
   else if(m[1]==='wrapup'){showWrapup();}
 })();
 </script>
