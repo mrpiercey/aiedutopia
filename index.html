@@ -319,9 +319,10 @@ img.zoomable{cursor:zoom-in;}
 .hint-quiet{font-size:14px;color:var(--light-grey);}
 
 /* write phase: the card stays visible (compact) above the prompts */
-.write-context{margin-bottom:28px;padding-bottom:24px;border-bottom:2px dashed #e5ddce;}
+.write-layout{display:grid;grid-template-columns:1.2fr .8fr;gap:38px;align-items:center;}
+@media (max-width:980px){.write-layout{grid-template-columns:1fr;}}
 .write-context .content-kicker{display:none;}
-.write-context .stage-img-wrap img{max-height:34vh;}
+.write-context .stage-img-wrap img{max-height:64vh;}
 .write-context .stage-img-caption{display:none;}
 .write-context .af-body{padding:16px 26px 20px;}
 .write-context .af-headline{font-size:clamp(20px,2.3vw,32px);}
@@ -331,14 +332,14 @@ img.zoomable{cursor:zoom-in;}
 .write-context .sp-actions{display:none;}
 
 /* write phase */
-.write-panel h3{font-family:var(--font-slab);font-weight:700;font-size:clamp(30px,3.4vw,44px);margin-bottom:20px;}
+.write-panel h3{font-family:var(--font-slab);font-weight:700;font-size:clamp(28px,3vw,40px);margin-bottom:20px;}
 .write-prompts{display:grid;gap:14px;max-width:900px;}
-.write-prompt{display:flex;gap:16px;align-items:flex-start;font-size:clamp(18px,1.9vw,23px);line-height:1.5;}
+.write-prompt{display:flex;gap:16px;align-items:flex-start;font-size:clamp(17px,1.8vw,22px);line-height:1.5;}
 .write-prompt .wnum{flex:0 0 auto;width:40px;height:40px;border-radius:50%;background:var(--sunshine);color:var(--midnight);font-weight:800;font-size:20px;display:flex;align-items:center;justify-content:center;}
-.timer-block{margin-top:30px;display:flex;align-items:center;gap:16px;flex-wrap:wrap;}
+.timer-block{margin-top:34px;display:flex;flex-direction:column;align-items:center;gap:16px;}
 .timer-display{
-  font-family:var(--font-slab);font-weight:700;font-size:58px;color:var(--midnight);
-  background:var(--cream);border-radius:16px;padding:2px 26px;min-width:190px;text-align:center;font-variant-numeric:tabular-nums;
+  font-family:var(--font-slab);font-weight:700;font-size:clamp(84px,9vw,138px);line-height:1.1;color:var(--midnight);
+  background:var(--cream);border-radius:24px;padding:6px 48px;min-width:320px;text-align:center;font-variant-numeric:tabular-nums;
 }
 .timer-display.warn{color:var(--orange);animation:pulse 1s infinite;}
 @keyframes pulse{50%{opacity:.55}}
@@ -913,7 +914,8 @@ function renderPhase(){
   }
 
   else if(state.phase==='write'){
-    stage.innerHTML=`<div class="write-context">${contentHTML(card)}</div>
+    stage.innerHTML=`<div class="write-layout">
+    <div class="write-context">${contentHTML(card)}</div>
     <div class="write-panel">
       <h3>${ico('edit')} Make Your Case</h3>
       <div class="write-prompts">
@@ -922,19 +924,19 @@ function renderPhase(){
         <div class="write-prompt"><span class="wnum">3</span><span><b>Check:</b> Which SIFT move would you use to prove it?</span></div>
       </div>
       <div class="timer-block">
-        <div class="timer-display" id="timer-display">--:--</div>
-        <button class="btn btn-ghost btn-sm timer-set" data-min="2">2 min</button>
-        <button class="btn btn-ghost btn-sm timer-set" data-min="5">5 min</button>
-        <button class="btn btn-ghost btn-sm timer-set" data-min="8">8 min</button>
-        <button class="btn btn-ghost btn-sm" id="btn-timer-stop">Stop</button>
-      </div></div>`;
+        <div class="timer-display" id="timer-display">2:00</div>
+        <button class="btn btn-dark" id="btn-timer-start">Start the 2-Minute Timer</button>
+      </div>
+    </div></div>`;
     const wz=stage.querySelector('.write-context img'); if(wz) attachLoupe(wz);
     foot.innerHTML=`
       <button class="btn btn-ghost btn-sm" id="btn-back-examine">← Look Again</button>
       <span class="spacer"></span>
       <button class="btn btn-dark" id="btn-to-vote">Everyone Ready? Vote →</button>`;
-    $$('.timer-set').forEach(b=>b.onclick=()=>startTimer(+b.dataset.min));
-    $('#btn-timer-stop').onclick=stopTimer;
+    $('#btn-timer-start').onclick=()=>{
+      if(state.timer){stopTimer();$('#timer-display').textContent='2:00';}
+      else startTimer(2);
+    };
     $('#btn-back-examine').onclick=()=>{state.phase='examine';renderPhase();};
     $('#btn-to-vote').onclick=()=>{stopTimer();state.phase='reveal';renderPhase();};
   }
@@ -1020,11 +1022,18 @@ function showWrapup(){
 }
 
 /* ---------- timer ---------- */
+function timerBtnSync(){
+  const b=$('#btn-timer-start'); if(!b) return;
+  b.textContent=state.timer?'Stop the Timer':'Start the 2-Minute Timer';
+  b.classList.toggle('btn-ghost',!!state.timer);
+  b.classList.toggle('btn-dark',!state.timer);
+}
 function startTimer(min){
   stopTimer();
   state.timerLeft=min*60;
   tickTimer();
   state.timer=setInterval(tickTimer,1000);
+  timerBtnSync();
 }
 function tickTimer(){
   const d=$('#timer-display'); if(!d){stopTimer();return;}
@@ -1034,7 +1043,7 @@ function tickTimer(){
   if(state.timerLeft<=0){stopTimer();d.textContent='0:00';}
   state.timerLeft--;
 }
-function stopTimer(){ if(state.timer){clearInterval(state.timer);state.timer=null;} const d=$('#timer-display'); if(d){d.classList.remove('warn');} }
+function stopTimer(){ if(state.timer){clearInterval(state.timer);state.timer=null;} const d=$('#timer-display'); if(d){d.classList.remove('warn');} timerBtnSync(); }
 
 /* ---------- training ---------- */
 const TRAINING=[]; /* populated in CONTENT section */
