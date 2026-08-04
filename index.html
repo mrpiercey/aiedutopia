@@ -348,6 +348,25 @@ img.zoomable{cursor:zoom-in;}
 .timer-display.warn{color:var(--orange);animation:pulse 1s infinite;}
 @keyframes pulse{50%{opacity:.55}}
 
+/* full-screen work mode: starting the timer takes over the whole screen —
+   question up top, evidence as big as it gets, countdown in the corner */
+#focusmode{position:fixed;inset:0;z-index:60;background:var(--cream);display:none;flex-direction:column;align-items:center;padding:24px 40px 16px;gap:12px;}
+#focusmode.on{display:flex;}
+#focusmode .card-question{font-size:clamp(36px,4.2vw,60px);margin:0;}
+#focus-content{flex:1;min-height:0;display:flex;align-items:center;justify-content:center;width:100%;}
+#focus-content .content-kicker{display:none;}
+#focus-content .stage-img-wrap img{max-height:calc(100vh - 230px);max-width:94vw;}
+#focus-content .article-frame{width:min(94vw,1100px);}
+#focus-content .af-headline{font-size:clamp(30px,3.6vw,52px);}
+#focus-content .af-excerpt{font-size:clamp(17px,1.9vw,24px);}
+#focus-content .social-post{max-width:760px;}
+#focus-content .sp-text{font-size:clamp(18px,2vw,24px);}
+#focus-timer{position:fixed;top:18px;right:26px;font-family:var(--font-slab);font-weight:700;font-size:clamp(48px,5vw,72px);line-height:1.15;color:var(--midnight);background:var(--white);border-radius:18px;padding:2px 24px;box-shadow:var(--shadow-card);font-variant-numeric:tabular-nums;}
+#focus-timer.warn{color:var(--orange);animation:pulse 1s infinite;}
+#btn-focus-close{position:fixed;top:18px;left:22px;width:44px;height:44px;border-radius:50%;border:2px solid var(--light-grey);background:var(--white);color:var(--dark-grey);font-size:18px;cursor:pointer;}
+#btn-focus-close:hover{border-color:var(--orange);color:var(--orange);}
+.focus-hint{font-size:13px;color:var(--light-grey);}
+
 /* vote & reveal: the reveal screen opens on the vote moment (verdict hidden).
    One click / → lights up the true answer and shows the rest of the reveal. */
 .vote-moment{text-align:center;margin-bottom:26px;}
@@ -639,7 +658,7 @@ mark.tell{background:linear-gradient(transparent 55%, rgba(255,188,13,.75) 55%);
         <p><b>The writing activity:</b> each card has a matching half-sheet <b>Case Card</b> students write on, alone or in groups: claim, clues in complete sentences, and the SIFT move they'd use. Print them under <b>Print Materials</b> (top right) and cut each page in two.</p>
         <p><b>Younger students:</b> skip the writing and just talk it out as a class, vote with thumbs up (real) or thumbs sideways (AI), and let volunteers point at clues on the board.</p>
         <p><b>Before class:</b> print the Student Case Cards (scaffolded or open), plus the Teacher Answer Key for yourself.</p>
-        <p><b>Driving it:</b> press <span class="kbd">→</span> (or a presentation clicker) to reveal each hidden clue, then advance. <span class="kbd">←</span> steps back. <span class="kbd">C</span> opens the Detective Checklist. Hovering any image magnifies it for the class.</p>
+        <p><b>Driving it:</b> press <span class="kbd">→</span> (or a presentation clicker) to reveal each hidden clue, then advance. <span class="kbd">←</span> steps back. <span class="kbd">C</span> opens the Detective Checklist. Hovering any image magnifies it for the class. Starting the 2-minute timer takes the card <b>full screen</b> while the class works; <span class="kbd">→</span> ends it and moves to the vote (<span class="kbd">Esc</span> just goes back).</p>
       </div>
     </details>
     <p class="title-foot">Keyboard: <span class="kbd">→</span> reveal &amp; advance · <span class="kbd">←</span> back · <span class="kbd">C</span> checklist</p>
@@ -687,6 +706,15 @@ mark.tell{background:linear-gradient(transparent 55%, rgba(255,188,13,.75) 55%);
     <div class="stage-foot" id="stage-foot"></div>
   </div>
 </section>
+
+<!-- ============ FULL-SCREEN WORK MODE (timer running) ============ -->
+<div id="focusmode">
+  <button id="btn-focus-close" title="Back to the card (Esc)">✕</button>
+  <h2 class="card-question">Authentic <span class="q-or">or</span> <span class="q-ai">AI?</span></h2>
+  <div id="focus-content"></div>
+  <div id="focus-timer">2:00</div>
+  <div class="focus-hint">Press → when time&rsquo;s up · Esc goes back</div>
+</div>
 
 <!-- ================= WRAP-UP ================= -->
 <section class="screen" id="screen-wrapup">
@@ -896,6 +924,7 @@ function contentHTML(card){
 }
 
 function renderPhase(){
+  closeFocus();
   const card=state.current;
   $('#card-num').textContent='Card '+card.n;
   const tb=$('#card-type-badge');
@@ -933,7 +962,7 @@ function renderPhase(){
       <button class="btn btn-dark" id="btn-to-vote">Everyone Ready? Vote →</button>`;
     $('#btn-timer-start').onclick=()=>{
       if(state.timer){stopTimer();$('#timer-display').textContent='2:00';}
-      else startTimer(2);
+      else{startTimer(2);openFocus();}
     };
     $('#btn-back-examine').onclick=()=>{state.phase='examine';renderPhase();};
     $('#btn-to-vote').onclick=()=>{stopTimer();state.phase='reveal';renderPhase();};
@@ -1019,6 +1048,18 @@ function showWrapup(){
   show('screen-wrapup');
 }
 
+/* ---------- full-screen work mode: opened when the timer starts ---------- */
+function openFocus(){
+  const card=state.current; if(!card) return;
+  $('#focus-content').innerHTML=contentHTML(card);
+  const fi=$('#focus-content .stage-img-wrap img'); if(fi) attachLoupe(fi);
+  const d=$('#timer-display'); $('#focus-timer').textContent=d?d.textContent:'2:00';
+  $('#focus-timer').classList.remove('warn');
+  $('#focusmode').classList.add('on');
+}
+function closeFocus(){ $('#focusmode').classList.remove('on'); }
+$('#btn-focus-close').onclick=closeFocus;
+
 /* ---------- timer ---------- */
 function timerBtnSync(){
   const b=$('#btn-timer-start'); if(!b) return;
@@ -1034,14 +1075,15 @@ function startTimer(min){
   timerBtnSync();
 }
 function tickTimer(){
-  const d=$('#timer-display'); if(!d){stopTimer();return;}
+  const d=$('#timer-display'), f=$('#focusmode').classList.contains('on')?$('#focus-timer'):null;
+  if(!d&&!f){stopTimer();return;}
   const m=Math.floor(state.timerLeft/60), s=state.timerLeft%60;
-  d.textContent=`${m}:${String(s).padStart(2,'0')}`;
-  d.classList.toggle('warn',state.timerLeft<=30);
-  if(state.timerLeft<=0){stopTimer();d.textContent='0:00';}
+  const t=state.timerLeft<=0?'0:00':`${m}:${String(s).padStart(2,'0')}`;
+  [d,f].forEach(el=>{ if(!el) return; el.textContent=t; el.classList.toggle('warn',state.timerLeft<=30&&state.timerLeft>0); });
+  if(state.timerLeft<=0){stopTimer();}
   state.timerLeft--;
 }
-function stopTimer(){ if(state.timer){clearInterval(state.timer);state.timer=null;} const d=$('#timer-display'); if(d){d.classList.remove('warn');} timerBtnSync(); }
+function stopTimer(){ if(state.timer){clearInterval(state.timer);state.timer=null;} [$('#timer-display'),$('#focus-timer')].forEach(el=>{if(el)el.classList.remove('warn');}); timerBtnSync(); }
 
 /* ---------- training ---------- */
 const TRAINING=[]; /* populated in CONTENT section */
@@ -1099,7 +1141,11 @@ window.addEventListener('afterprint',()=>{document.body.className='';});
 /* keyboard */
 document.addEventListener('keydown',e=>{
   if(e.key==='c'||e.key==='C'){toggleDrawer();return;}
-  if(e.key==='Escape'){toggleDrawer(false);$('#printmenu').classList.remove('open');return;}
+  if(e.key==='Escape'){closeFocus();toggleDrawer(false);$('#printmenu').classList.remove('open');return;}
+  /* full-screen work mode: → means "time's up, on to the vote" */
+  if($('#focusmode').classList.contains('on')&&(e.key==='ArrowRight'||e.key===' ')){
+    e.preventDefault();closeFocus();stopTimer();state.phase='reveal';renderPhase();return;
+  }
   const active=$('.screen.active').id;
   if(e.key==='ArrowRight'||e.key===' '){
     // → works like a presentation clicker: reveal the next hidden build, then advance
