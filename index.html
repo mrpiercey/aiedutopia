@@ -308,7 +308,12 @@ img.zoomable{cursor:zoom-in;}
 .stage .passage-label{margin-top:22px;font-size:16px;color:var(--light-grey);font-style:italic;}
 .stage-img-wrap{display:flex;flex-direction:column;align-items:center;gap:12px;}
 .stage-img-wrap img{max-height:56vh;max-width:100%;border-radius:14px;box-shadow:var(--shadow-card);}
-.stage-img-caption{font-size:16px;color:var(--light-grey);font-style:italic;}
+.stage-img-caption{font-size:16px;color:var(--light-grey);font-style:italic;max-width:860px;text-align:center;}
+.stage-img-caption .cap-title{font-family:var(--font-slab);font-weight:700;font-style:normal;font-size:clamp(18px,1.9vw,23px);color:var(--midnight);}
+.stage-img-caption .cap-desc{font-style:normal;font-size:16px;color:var(--dark-grey);margin-top:2px;}
+.stage-img-caption .cap-credit{font-style:normal;font-size:14px;font-weight:600;color:var(--light-grey);margin-top:7px;}
+.stage-img-caption .cap-credit a{color:var(--pacific);text-decoration:underline;text-underline-offset:2px;}
+.stage-img-caption .cap-credit a:hover{color:var(--orange);}
 .stage-foot{display:flex;gap:14px;margin-top:26px;align-items:center;flex-wrap:wrap;}
 .stage-foot .spacer{flex:1;}
 .hint-quiet{font-size:14px;color:var(--light-grey);}
@@ -722,6 +727,10 @@ const IMG = {};
    Real articles link to the real story. AI articles get a
    real-looking url that does NOT back the story up — clicking it
    IS the lesson (check the link!).
+   photo: {title, desc, by, link, url} caption block under image
+   cards, styled like a real online photo credit. Same rule:
+   real photos link to the real source; AI photos get a
+   real-looking credit whose link finds nothing.
    ============================================================ */
 const CARDS = []; /* populated below in CONTENT section */
 
@@ -869,9 +878,16 @@ function contentHTML(card){
       </div>`;
   }
   const src=IMG[card.img];
+  const cap=card.photo
+    ?`<div class="stage-img-caption">
+        <div class="cap-title">${card.photo.title}</div>
+        <div class="cap-desc">${card.photo.desc}</div>
+        <div class="cap-credit">Photo by ${card.photo.by} · <a href="${card.photo.url}" target="_blank" rel="noopener" title="Open the photo source in a new tab">${card.photo.link}</a></div>
+      </div>`
+    :`<div class="stage-img-caption">${card.caption||'Look closely. Real photo, or AI?'}</div>`;
   return `<div class="stage-img-wrap">
       ${src?`<img src="${src}" alt="${card.alt||'Mystery image'}">`:`<div style="padding:80px;text-align:center;color:var(--light-grey)">[ Image asset missing: ${card.img} ]</div>`}
-      <div class="stage-img-caption">${card.caption||'Look closely. Real photo, or AI?'}</div>
+      ${cap}
     </div>`;
 }
 
@@ -1144,7 +1160,10 @@ const SIFT_COLORS={S:'var(--orange)',I:'var(--pacific)',F:'var(--teal)',T:'var(-
 CARDS.push(
 { id:'c1', n:1, type:'image', answer:'ai', teach:true, img:'girlcat',
   alt:'Photorealistic image of a girl sitting at a restaurant counter with a cat',
-  caption:'A girl having lunch with her cat. Is this a real photo, or did AI make it?',
+  photo:{title:'Lunch Date with Peaches',
+    desc:'My niece and her cat waiting for their grilled cheese at the counter downtown.',
+    by:'Marisa Deller', link:'flickr.com/photos/marisadeller',
+    url:'https://www.flickr.com/photos/marisadeller'},
   sift:{letter:'S',move:'Stop',
     lesson:'A cute or amazing picture makes you want to believe it right away. A detective does the opposite: <b>Stop first.</b> Don’t believe it yet. Don’t share it yet. When our class stopped and zoomed in, the melted food and the smudged faces told us a computer made this picture.'},
   clues:[
@@ -1152,7 +1171,7 @@ CARDS.push(
     'Look at the people behind her. Their faces are blurry smudges, and the cat’s whiskers melt right into the window. AI gets sloppy in the spots nobody looks at.',
     'Her eyes are a little too big and shiny, and her skin is perfectly smooth, with no freckles or marks. Real photos of real people are never that perfect.'
   ],
-  verify:'SIFT move: <b>Stop.</b> Before you believe a picture or share it, stop and look closely. This picture was made by an AI program called Midjourney. It was never a real girl, a real cat, or a real restaurant.',
+  verify:'SIFT move: <b>Stop.</b> Before you believe a picture or share it, stop and look closely. This picture was made by an AI program called Midjourney. It was never a real girl, a real cat, or a real restaurant — and try the photo credit: the link goes to a page that doesn’t exist. A made-up photographer for a made-up picture.',
   source:'Generated with Midjourney, April 2023 (CC BY-SA 4.0, via Wikimedia Commons)',
   links:[
     {label:'Wikimedia file page (marked AI)',url:'https://commons.wikimedia.org/wiki/File:Une_fille_et_son_chat_au_restaurant.png'}
@@ -1161,7 +1180,10 @@ CARDS.push(
 
 { id:'c2', n:2, type:'image', answer:'authentic', teach:true, img:'prismatic',
   alt:'Aerial photo of a giant hot spring ringed in rainbow colors',
-  caption:'A giant rainbow-colored lake. Card 1 was AI… what about this one?',
+  photo:{title:'Grand Prismatic Spring, Yellowstone',
+    desc:'America’s largest hot spring glows in rainbow rings of heat-loving microbes.',
+    by:'Jim Peaco, National Park Service', link:'nps.gov/yell',
+    url:'https://www.nps.gov/yell/planyourvisit/grand-prismatic-spring.htm'},
   sift:{letter:'T',move:'Trace to the original',
     lesson:'Card 1 was fake, but this one is <b>real</b>, even though it looks more impossible! That’s the big lesson: <b>“amazing” does not mean “fake.”</b> Instead of guessing, trace a picture back to where it came from. This one traces to a real park, a real photographer, and a real place you could visit someday.'},
   clues:[
@@ -1219,7 +1241,10 @@ CARDS.push(
 
 { id:'c5', n:5, type:'image', answer:'authentic', img:'earthrise',
   alt:'The Earth rising above the gray lunar horizon, photographed from lunar orbit',
-  caption:'Earth floating over the Moon. Real photo, or too perfect?',
+  photo:{title:'Earthrise',
+    desc:'Our whole planet floats above the Moon’s gray horizon, seen from lunar orbit.',
+    by:'Bill Anders, NASA (Apollo 8)', link:'nasa.gov',
+    url:'https://www.nasa.gov/history/earthrise-the-45th-anniversary/'},
   clues:[
     'It comes from a real moment: astronaut Bill Anders took it from the Apollo 8 spaceship on December 24, 1968.',
     'NASA still has the original film, the exact photo number, and even the astronauts’ excited voices on tape.',
@@ -1250,13 +1275,16 @@ CARDS.push(
 
 { id:'c7', n:7, type:'image', answer:'ai', img:'food',
   alt:'A restaurant-style platter of grilled meat, salad, and grilled bread',
-  caption:'A yummy restaurant dinner. Real, or AI?',
+  photo:{title:'Tonight’s Mixed Grill Platter',
+    desc:'Fresh off the grill at our downtown kitchen — come hungry!',
+    by:'The Copper Skillet Bar &amp; Grill', link:'flickr.com/photos/thecopperskillet',
+    url:'https://www.flickr.com/photos/thecopperskillet'},
   clues:[
     'Check the bottom corner: there’s a metal tool that is half tongs, half scissors, and it’s attached to nothing.',
     'The grill marks on the meat curl and loop in impossible ways, like painted-on stripes.',
     'Look at the little green parsley leaves: several are exact copies of each other, pasted around the plate.'
   ],
-  verify:'SIFT move: <b>Stop, then zoom in.</b> This picture came from an AI program. Fake food photos are everywhere in ads!',
+  verify:'SIFT move: <b>Stop, then zoom in.</b> This picture came from an AI program, and clicking the restaurant’s photo link finds… no restaurant. Fake food photos are everywhere in ads!',
   source:'AI-generated by Dennis Sylvester Hurd, 2023 (CC0, via Wikimedia Commons)',
   links:[
     {label:'Wikimedia file page (marked AI)',url:'https://commons.wikimedia.org/wiki/File:Generative_AI_can_be_used_to_create_realistic_images_of_food_dishes.jpg'}
