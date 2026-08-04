@@ -307,7 +307,8 @@ img.zoomable{cursor:zoom-in;}
 .stage .content-passage p+p{margin-top:.8em;}
 .stage .passage-label{margin-top:22px;font-size:16px;color:var(--light-grey);font-style:italic;}
 .stage-img-wrap{display:flex;flex-direction:column;align-items:center;gap:12px;}
-.stage-img-wrap img{max-height:56vh;max-width:100%;border-radius:14px;box-shadow:var(--shadow-card);}
+.stage-img-wrap img{max-height:max(320px,calc(100vh - 440px));max-width:100%;border-radius:14px;box-shadow:var(--shadow-card);}
+#stage.has-teach .stage-img-wrap img{max-height:max(300px,calc(100vh - 505px));}
 .stage-img-caption{font-size:16px;color:var(--light-grey);font-style:italic;max-width:860px;text-align:center;}
 .stage-img-caption .cap-title{font-family:var(--font-slab);font-weight:700;font-style:normal;font-size:clamp(18px,1.9vw,23px);color:var(--midnight);}
 .stage-img-caption .cap-desc{font-style:normal;font-size:16px;color:var(--dark-grey);margin-top:2px;}
@@ -317,12 +318,17 @@ img.zoomable{cursor:zoom-in;}
 .stage-foot{display:flex;gap:14px;margin-top:26px;align-items:center;flex-wrap:wrap;}
 .stage-foot .spacer{flex:1;}
 .hint-quiet{font-size:14px;color:var(--light-grey);}
+/* the one thing students should do on this screen — readable from the back row */
+.stu-task{display:flex;align-items:center;gap:12px;font-size:clamp(17px,1.9vw,23px);color:var(--midnight);line-height:1.35;}
+.stu-task .ico{width:26px;height:26px;color:var(--orange);}
 
 /* write phase: the card stays visible (compact) above the prompts */
-.write-layout{display:grid;grid-template-columns:1.2fr .8fr;gap:38px;align-items:center;}
-@media (max-width:980px){.write-layout{grid-template-columns:1fr;}}
+/* the big question every card page leads with */
+.card-question{font-family:var(--font-slab);font-weight:700;text-align:center;font-size:clamp(28px,3.2vw,44px);color:var(--midnight);margin:0 0 16px;line-height:1.1;}
+.card-question .q-or,.vote-moment h3 .q-or{font-family:var(--font-ui);font-weight:600;font-size:.55em;color:var(--light-grey);vertical-align:.12em;padding:0 .2em;}
+.card-question .q-ai,.vote-moment h3 .q-ai{color:var(--orange);}
 .write-context .content-kicker{display:none;}
-.write-context .stage-img-wrap img{max-height:64vh;}
+.write-context .stage-img-wrap img{max-height:max(320px,calc(100vh - 560px));}
 .write-context .stage-img-caption{display:none;}
 .write-context .af-body{padding:16px 26px 20px;}
 .write-context .af-headline{font-size:clamp(20px,2.3vw,32px);}
@@ -332,14 +338,12 @@ img.zoomable{cursor:zoom-in;}
 .write-context .sp-actions{display:none;}
 
 /* write phase */
-.write-panel h3{font-family:var(--font-slab);font-weight:700;font-size:clamp(28px,3vw,40px);margin-bottom:20px;}
-.write-prompts{display:grid;gap:14px;max-width:900px;}
-.write-prompt{display:flex;gap:16px;align-items:flex-start;font-size:clamp(17px,1.8vw,22px);line-height:1.5;}
-.write-prompt .wnum{flex:0 0 auto;width:40px;height:40px;border-radius:50%;background:var(--sunshine);color:var(--midnight);font-weight:800;font-size:20px;display:flex;align-items:center;justify-content:center;}
-.timer-block{margin-top:34px;display:flex;flex-direction:column;align-items:center;gap:16px;}
+.write-prompts-line{text-align:center;font-size:clamp(17px,1.9vw,23px);color:var(--dark-grey);margin:18px 0 4px;}
+.write-prompts-line .wnum{display:inline-flex;width:30px;height:30px;border-radius:50%;background:var(--sunshine);color:var(--midnight);font-weight:800;font-size:16px;align-items:center;justify-content:center;vertical-align:-.28em;margin:0 2px 0 10px;}
+.timer-block{margin-top:14px;display:flex;flex-direction:column;align-items:center;gap:12px;}
 .timer-display{
-  font-family:var(--font-slab);font-weight:700;font-size:clamp(84px,9vw,138px);line-height:1.1;color:var(--midnight);
-  background:var(--cream);border-radius:24px;padding:6px 48px;min-width:320px;text-align:center;font-variant-numeric:tabular-nums;
+  font-family:var(--font-slab);font-weight:700;font-size:clamp(64px,7.5vw,110px);line-height:1.1;color:var(--midnight);
+  background:var(--cream);border-radius:22px;padding:2px 44px;min-width:280px;text-align:center;font-variant-numeric:tabular-nums;
 }
 .timer-display.warn{color:var(--orange);animation:pulse 1s infinite;}
 @keyframes pulse{50%{opacity:.55}}
@@ -362,7 +366,7 @@ img.zoomable{cursor:zoom-in;}
 .screen-inner:has(.vote-moment.concealed) #btn-next-card,
 .screen-inner:has(.vote-moment.concealed) #btn-finish{display:none;}
 .vote-moment.concealed::after{
-  content:"Votes in? Click here (or press →) to reveal the truth";display:block;margin-top:24px;
+  content:"Votes in? Click to reveal the truth";display:block;margin-top:24px;
   font-family:var(--font-ui);font-size:13px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--pacific);
 }
 .vote-moment.concealed:hover::after{color:var(--orange);}
@@ -438,8 +442,6 @@ mark.tell{background:linear-gradient(transparent 55%, rgba(255,188,13,.75) 55%);
 .clue-card.img-clue .clue-emoji{color:var(--pacific);}
 .clue-card.txt-clue .clue-emoji{color:var(--purple);}
 .clue-emoji .ico{width:30px;height:30px;stroke-width:1.6;}
-.write-panel h3 .ico{width:.8em;height:.8em;vertical-align:0;margin-right:.14em;color:var(--tangerine);}
-.vote-moment h3 .ico{width:.8em;height:.8em;vertical-align:0;margin-right:.14em;color:var(--space-blue);}
 .exit-ticket h3 .ico{width:.85em;height:.85em;vertical-align:-.08em;margin-right:.16em;color:var(--tangerine);}
 .verdict .ico{width:.78em;height:.78em;stroke-width:2.3;}
 .reveal-discuss .demoji{line-height:0;}
@@ -662,7 +664,8 @@ mark.tell{background:linear-gradient(transparent 55%, rgba(255,188,13,.75) 55%);
 <section class="screen" id="screen-grid">
   <div class="screen-inner">
     <h2>Choose Your Case File</h2>
-    <p class="lede">Start with <b>Cards 1-4</b> — those are teaching cards we solve together, and each one teaches a SIFT move. Then Cards 5-10 are the game! Press <b>→</b> to take them in order. Completed cards get a check.</p>
+    <p class="lede">Cards <b>1-4</b> are teaching cards we solve together. Cards <b>5-10</b> are the game!</p>
+    <p class="hint-quiet" style="margin:6px 0 20px">Press → to take the cards in order · finished cards get a check</p>
     <div class="deck-grid" id="deck-grid"></div>
   </div>
 </section>
@@ -901,33 +904,28 @@ function renderPhase(){
   setPhaseSteps();
   const stage=$('#stage'), foot=$('#stage-foot');
   const teachBanner=card.teach?
-    `<div class="teach-banner">${ico('book')}<span><b>Teaching Card ${card.n} of 4.</b> We solve this one together as a class, and it teaches us one of our SIFT moves.</span></div>`:'';
+    `<div class="teach-banner">${ico('book')}<span><b>Teaching Card ${card.n} of 4</b> · We solve this one together!</span></div>`:'';
+  const qHead=`<h2 class="card-question">Authentic <span class="q-or">or</span> <span class="q-ai">AI?</span></h2>`;
+  stage.classList.toggle('has-teach',!!card.teach&&state.phase==='examine');
 
   if(state.phase==='examine'){
-    stage.innerHTML=teachBanner+contentHTML(card);
+    stage.innerHTML=qHead+teachBanner+contentHTML(card);
     const zi=stage.querySelector('.stage-img-wrap img'); if(zi) attachLoupe(zi);
     foot.innerHTML=`
-      <span class="hint-quiet">Look carefully${card.type==='image'?', and hover over the image to magnify it':''}. Talk it out. Don't decide yet.</span>
+      <span class="stu-task">${ico('search')}<span><b>Look closely. Talk it out.</b> Don&rsquo;t decide yet!</span></span>
       <span class="spacer"></span>
       <button class="btn btn-dark" id="btn-to-write">Think &amp; Write →</button>`;
     $('#btn-to-write').onclick=()=>{state.phase='write';renderPhase();};
   }
 
   else if(state.phase==='write'){
-    stage.innerHTML=`<div class="write-layout">
+    stage.innerHTML=`${qHead}
     <div class="write-context">${contentHTML(card)}</div>
-    <div class="write-panel">
-      <h3>${ico('edit')} Make Your Case</h3>
-      <div class="write-prompts">
-        <div class="write-prompt"><span class="wnum">1</span><span><b>Claim:</b> Real, or made by AI? Pick your answer!</span></div>
-        <div class="write-prompt"><span class="wnum">2</span><span><b>Clues:</b> What did you notice? Point to the exact spot or words.</span></div>
-        <div class="write-prompt"><span class="wnum">3</span><span><b>Check:</b> Which SIFT move would you use to prove it?</span></div>
-      </div>
-      <div class="timer-block">
-        <div class="timer-display" id="timer-display">2:00</div>
-        <button class="btn btn-dark" id="btn-timer-start">Start the 2-Minute Timer</button>
-      </div>
-    </div></div>`;
+    <div class="write-prompts-line">Talk it out, then write on your <b>Case Card</b>:<span class="wnum">1</span><b>Claim</b> ·<span class="wnum">2</span><b>Clues</b> ·<span class="wnum">3</span><b>Check</b></div>
+    <div class="timer-block">
+      <div class="timer-display" id="timer-display">2:00</div>
+      <button class="btn btn-dark" id="btn-timer-start">Start the 2-Minute Timer</button>
+    </div>`;
     const wz=stage.querySelector('.write-context img'); if(wz) attachLoupe(wz);
     foot.innerHTML=`
       <button class="btn btn-ghost btn-sm" id="btn-back-examine">← Look Again</button>
@@ -956,8 +954,8 @@ function renderPhase(){
 
     stage.innerHTML=`<div class="reveal-panel">
       <div class="vote-moment reveal-card concealed" id="vote-moment" title="Reveal the truth">
-        <h3>${ico('ballot')} Cast Your Votes</h3>
-        <p class="lede">Hands up, whiteboards up, or shout it out!</p>
+        <h3>Authentic <span class="q-or">or</span> <span class="q-ai">AI?</span></h3>
+        <p class="lede">Cast your votes: hands up, whiteboards up, or shout it out!</p>
         <div class="vote-btns">
           <div class="vote-big authentic ${isAuth?'win':'dim'}">AUTHENTIC<small>real: it really happened</small></div>
           <div class="vote-big ai ${isAuth?'dim':'win'}">AI-MADE<small>made by a computer</small></div>
