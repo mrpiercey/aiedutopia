@@ -1625,5 +1625,275 @@ boot();
   else if(m[1]==='wrapup'){showWrapup();}
 })();
 </script>
+
+<!-- ============================================================
+     SHARED EDITOR · open this page with ?edit to change any text
+     or the fonts. Edits are stored in Firestore and load for every
+     visitor. If the network is unavailable, the game simply shows
+     its built-in text.
+     ============================================================ -->
+<script id="editor-script">
+(function(){
+'use strict';
+const FS_URL='https://firestore.googleapis.com/v1/projects/edutopia-authentic-or-ai/databases/(default)/documents/config/overrides';
+const FS_KEY='AIzaSyDvCzkRR4LRrX2sNbd2wOMiTLEWQUYBcwU';
+const EDIT=/(?:^|[?&#])edit(?:[=&#]|$)/.test(location.search+location.hash);
+
+let OV={v:1,font:{},data:{},dom:{}};   /* the shared overrides document */
+let CUR=null;                          /* element currently being edited */
+let OFFLINE=false;
+
+/* ---------- tiny hash for keying static text by its original content ---------- */
+function djb2(s){let h=5381;for(let i=0;i<s.length;i++){h=((h<<5)+h+s.charCodeAt(i))>>>0;}return h.toString(36);}
+const norm=s=>s.replace(/\s+/g,' ').trim();
+
+/* ---------- reverse index: exact display string -> path(s) into CARDS/CHECKS ----------
+   Lets an on-screen edit flow back into the data, so the printable Case Cards
+   and Teacher Answer Key stay in sync with what the class sees. */
+const ROOTS={C:CARDS,K:CHECKS};
+const SKIP=new Set(['id','n','type','answer','img','url','href','alt','dl','x','y','side','letter']);
+const DIDX=new Map();
+function addIdx(str,path){
+  for(const k of new Set([str,str.trim()])){
+    const a=DIDX.get(k)||[]; if(!a.includes(path))a.push(path); DIDX.set(k,a);
+  }
+}
+function harvest(v,path){
+  if(typeof v==='string'){ if(v.trim().length>=4) addIdx(v,path); return; }
+  if(Array.isArray(v)){ v.forEach((x,i)=>harvest(x,path+'.'+i)); return; }
+  if(v&&typeof v==='object'){ for(const k in v){ if(!SKIP.has(k)&&typeof v[k]!=='function') harvest(v[k],path+'.'+k); } }
+}
+function setPath(path,val){
+  const seg=path.split('.'); let o=ROOTS[seg[0]]; if(!o)return;
+  for(let i=1;i<seg.length-1;i++){ o=o[seg[i]]; if(o==null)return; }
+  o[seg[seg.length-1]]=val;
+}
+
+/* ---------- fonts ---------- */
+const FONTS={
+  'Lexend':'Lexend:wght@400;600;700;800',
+  'Atkinson Hyperlegible':'Atkinson+Hyperlegible:wght@400;700',
+  'Andika':'Andika:wght@400;700',
+  'Comic Neue':'Comic+Neue:wght@400;700',
+  'Nunito':'Nunito:wght@400;600;700;800',
+  'Zilla Slab':'Zilla+Slab:wght@400;500;600;700',
+  'Bitter':'Bitter:wght@400;600;700;800',
+  'Schoolbell':'Schoolbell'
+};
+function loadFont(name){
+  if(!FONTS[name])return;
+  const id='gf-'+djb2(name); if(document.getElementById(id))return;
+  const l=document.createElement('link'); l.rel='stylesheet'; l.id=id;
+  l.href='https://fonts.googleapis.com/css2?family='+FONTS[name]+'&display=swap';
+  document.head.appendChild(l);
+}
+function applyFonts(){
+  const f=OV.font||{}, r=document.documentElement.style;
+  if(f.ui&&FONTS[f.ui]){ loadFont(f.ui); r.setProperty('--font-ui',`'${f.ui}',-apple-system,'Segoe UI',Helvetica,Arial,sans-serif`); }
+  else r.removeProperty('--font-ui');
+  if(f.slab&&FONTS[f.slab]){ loadFont(f.slab); r.setProperty('--font-slab',`'${f.slab}','Zilla Slab',Rockwell,serif`); }
+  else r.removeProperty('--font-slab');
+}
+
+/* ---------- walk the DOM: mark editable text units, apply saved overrides ----------
+   A "unit" is the outermost element that directly contains visible text.
+   Each unit is keyed by a hash of its ORIGINAL content, so the same override
+   finds it again on every render, for every visitor. */
+function excluded(el){
+  const t=el.tagName;
+  if(t==='SCRIPT'||t==='STYLE'||t==='IMG'||t==='INPUT'||t==='SELECT'||t==='TEXTAREA')return true;
+  if(el.id==='timer-display'||el.id==='focus-timer'||el.id==='card-num'||el.id==='card-type-badge')return true;
+  return !!el.closest('svg,#ed-bar,#loupe');
+}
+function hasDirectText(el){
+  for(const n of el.childNodes){ if(n.nodeType===3&&n.nodeValue.trim())return true; }
+  return false;
+}
+function process(root){
+  if(!(root instanceof Element)||excluded(root))return;
+  const els=[root,...root.querySelectorAll('*')];
+  for(const el of els){
+    if(el.dataset.edk)continue;
+    if(excluded(el)||!hasDirectText(el))continue;
+    if(el.parentElement&&el.parentElement.closest('[data-edk]'))continue;
+    const html=el.innerHTML;
+    el.dataset.edk='h'+djb2(norm(html))+'_'+norm(html).length;
+    const paths=DIDX.get(html)||DIDX.get(html.trim());
+    if(paths)el.dataset.edp=paths.join('\x01');
+    if(!paths&&OV.dom[el.dataset.edk]!==undefined)el.innerHTML=OV.dom[el.dataset.edk];
+  }
+}
+new MutationObserver(muts=>{
+  for(const m of muts)for(const n of m.addedNodes){
+    if(n.nodeType!==1)continue;
+    if(n.closest('[contenteditable="true"]'))continue;
+    if(n.parentElement&&n.parentElement.closest('[data-edk]'))continue;
+    process(n);
+  }
+}).observe(document.body,{childList:true,subtree:true});
+
+/* ---------- saving ---------- */
+let saveTimer=null;
+function status(mode){
+  const s=document.getElementById('ed-status'); if(!s)return;
+  s.className=mode;
+  s.textContent=mode==='saving'?'Saving…':mode==='saved'?'✓ Saved for everyone':mode==='error'?'⚠ Not saved — click to retry':'';
+}
+function queueSave(){ status('saving'); clearTimeout(saveTimer); saveTimer=setTimeout(doSave,700); }
+async function doSave(){
+  try{
+    const r=await fetch(FS_URL+'?key='+FS_KEY,{method:'PATCH',headers:{'Content-Type':'application/json'},
+      body:JSON.stringify({fields:{json:{stringValue:JSON.stringify(OV)}}})});
+    if(!r.ok)throw new Error(r.status);
+    status('saved');
+  }catch(e){ status('error'); }
+}
+
+/* ---------- editing ---------- */
+function beginEdit(el){
+  if(CUR&&CUR!==el)commitEdit(CUR);
+  CUR=el;
+  el.dataset.pre=el.innerHTML;
+  el.setAttribute('contenteditable','true');
+  el.classList.add('ed-active');
+  el.focus();
+}
+function endEdit(){
+  if(!CUR)return;
+  CUR.removeAttribute('contenteditable'); CUR.classList.remove('ed-active');
+  delete CUR.dataset.pre; CUR=null;
+}
+function cancelEdit(){ if(!CUR)return; CUR.innerHTML=CUR.dataset.pre; endEdit(); }
+function commitEdit(el){
+  el=el||CUR; if(!el)return;
+  const val=el.innerHTML;
+  if(val!==el.dataset.pre){
+    if(el.dataset.edp){
+      const v=val.trim(), paths=el.dataset.edp.split('\x01');
+      paths.forEach(p=>{ setPath(p,v); OV.data[p]=v; addIdx(v,p); });
+      document.querySelectorAll('[data-edp]').forEach(o=>{ if(o!==el&&o.dataset.edp===el.dataset.edp)o.innerHTML=v; });
+      buildPrintables();
+    }else{
+      OV.dom[el.dataset.edk]=val;
+      document.querySelectorAll('[data-edk="'+el.dataset.edk+'"]').forEach(o=>{ if(o!==el)o.innerHTML=val; });
+    }
+    queueSave();
+  }
+  endEdit();
+}
+
+function initEditorUI(){
+  document.body.classList.add('ed-on');
+  const css=document.createElement('style');
+  css.textContent=`
+    body.ed-on [data-edk]:not(.ed-active):hover{outline:2px dashed rgba(0,148,199,.85);outline-offset:2px;cursor:text;}
+    .ed-active{outline:3px solid var(--orange)!important;outline-offset:2px;background:#fffef5;border-radius:2px;}
+    #ed-bar{position:fixed;left:0;right:0;bottom:0;z-index:99999;display:flex;align-items:center;gap:14px;flex-wrap:wrap;
+      background:var(--midnight);color:#fff;padding:10px 18px;font-family:'Poppins',sans-serif;font-size:13px;box-shadow:0 -4px 18px rgba(0,0,0,.25);}
+    #ed-bar .ed-badge{font-weight:800;background:var(--orange);padding:3px 12px;border-radius:99px;font-size:12px;letter-spacing:.3px;}
+    #ed-bar .ed-tip{opacity:.75;font-size:12px;}
+    #ed-bar label{display:flex;align-items:center;gap:6px;font-weight:600;font-size:12px;}
+    #ed-bar select{font-family:inherit;font-size:13px;border-radius:8px;border:none;padding:4px 8px;background:#fff;color:var(--midnight);}
+    #ed-bar .ed-right{margin-left:auto;display:flex;align-items:center;gap:12px;}
+    #ed-status{font-weight:600;font-size:12px;min-width:120px;text-align:right;}
+    #ed-status.saved{color:#7fe08d;} #ed-status.saving{color:#ffd76e;} #ed-status.error{color:#ff9d7a;cursor:pointer;}
+    #ed-reset{background:none;border:1.5px solid rgba(255,255,255,.4);color:#fff;border-radius:99px;padding:4px 12px;cursor:pointer;font-family:inherit;font-size:12px;}
+    #ed-reset:hover{border-color:#fff;} #ed-reset.arm{background:#c0392b;border-color:#c0392b;font-weight:700;}
+    #ed-exit{color:#fff;opacity:.8;font-weight:600;} #ed-exit:hover{opacity:1;}
+    body.ed-on{padding-bottom:64px;}
+    @media print{#ed-bar{display:none;}}`;
+  document.head.appendChild(css);
+
+  const opts=n=>['<option value="">Default'+(n==='ui'?' (Poppins)':' (slab)')+'</option>']
+    .concat(Object.keys(FONTS).map(f=>`<option value="${f}">${f}</option>`)).join('');
+  const bar=document.createElement('div');
+  bar.id='ed-bar';
+  bar.innerHTML=`
+    <span class="ed-badge">✏️ EDIT MODE</span>
+    <span class="ed-tip">Click any text to change it · double-click buttons &amp; links · <b>Enter</b> saves · <b>Esc</b> cancels</span>
+    <label>Text font <select id="ed-font-ui">${opts('ui')}</select></label>
+    <label>Headline font <select id="ed-font-slab">${opts('slab')}</select></label>
+    <span class="ed-right">
+      <span id="ed-status"></span>
+      <button id="ed-reset" type="button">Reset all edits</button>
+      <a id="ed-exit" href="${location.pathname}">Exit editor</a>
+    </span>`;
+  document.body.appendChild(bar);
+
+  const fu=document.getElementById('ed-font-ui'), fs=document.getElementById('ed-font-slab');
+  fu.value=(OV.font&&OV.font.ui)||''; fs.value=(OV.font&&OV.font.slab)||'';
+  fu.onchange=()=>{ OV.font=OV.font||{}; OV.font.ui=fu.value||null; applyFonts(); queueSave(); };
+  fs.onchange=()=>{ OV.font=OV.font||{}; OV.font.slab=fs.value||null; applyFonts(); queueSave(); };
+  Object.keys(FONTS).forEach(loadFont); /* preview fonts render correctly once picked */
+
+  document.getElementById('ed-status').onclick=()=>{ if(document.getElementById('ed-status').className==='error')doSave(); };
+
+  const reset=document.getElementById('ed-reset');
+  let armT=null;
+  reset.onclick=()=>{
+    if(!reset.classList.contains('arm')){
+      reset.classList.add('arm'); reset.textContent='Really erase ALL edits?';
+      armT=setTimeout(()=>{reset.classList.remove('arm');reset.textContent='Reset all edits';},4000);
+      return;
+    }
+    clearTimeout(armT);
+    OV={v:1,font:{},data:{},dom:{}};
+    doSave().then(()=>location.reload());
+  };
+
+  if(OFFLINE)status('error');
+
+  /* click = edit plain text; interactive things keep working, double-click edits their labels */
+  document.addEventListener('click',e=>{
+    const unit=e.target.closest('[data-edk]');
+    if(!unit||unit===CUR)return;
+    if(e.target.closest('button,a,summary,input,select,label,.hotspot,.deck-card'))return;
+    if(unit.closest('.reveal-card.concealed'))return; /* first click reveals, as in class */
+    e.preventDefault(); e.stopPropagation(); beginEdit(unit);
+  },true);
+  document.addEventListener('dblclick',e=>{
+    if(e.target.closest('#ed-bar'))return;
+    const unit=e.target.closest('[data-edk]');
+    if(!unit||unit===CUR)return;
+    e.preventDefault(); e.stopPropagation(); beginEdit(unit);
+  },true);
+  document.addEventListener('focusout',e=>{ if(CUR&&e.target===CUR)commitEdit(CUR); });
+  /* while typing, keep keystrokes away from the game's slideshow hotkeys */
+  document.addEventListener('keydown',e=>{
+    if(!CUR)return;
+    if(e.key==='Escape'){ e.preventDefault(); e.stopPropagation(); cancelEdit(); return; }
+    if(e.key==='Enter'&&!e.shiftKey){ e.preventDefault(); e.stopPropagation(); CUR.blur(); return; }
+    e.stopPropagation();
+  },true);
+}
+
+/* ---------- init ---------- */
+async function init(){
+  harvest(CARDS,'C'); harvest(CHECKS,'K');
+  try{
+    const ctrl=new AbortController(); const t=setTimeout(()=>ctrl.abort(),5000);
+    const r=await fetch(FS_URL+'?key='+FS_KEY,{cache:'no-store',signal:ctrl.signal});
+    clearTimeout(t);
+    if(!r.ok)throw new Error(r.status);
+    const j=await r.json();
+    const p=JSON.parse((j.fields&&j.fields.json&&j.fields.json.stringValue)||'{}');
+    OV={v:1,font:p.font||{},data:p.data||{},dom:p.dom||{}};
+  }catch(e){ OFFLINE=true; }
+  const entries=Object.entries(OV.data);
+  if(entries.length){
+    entries.forEach(([p,v])=>{ try{ setPath(p,v); addIdx(v,p); }catch(err){} });
+    buildPrintables();
+    /* a deep-linked screen may have rendered before the edits arrived */
+    const act=document.querySelector('.screen.active');
+    if(act&&act.id==='screen-card'&&state.current)renderPhase();
+    else if(act&&act.id==='screen-training')renderTraining();
+  }
+  applyFonts();
+  process(document.body);
+  if(EDIT)initEditorUI();
+}
+init();
+})();
+</script>
 </body>
 </html>

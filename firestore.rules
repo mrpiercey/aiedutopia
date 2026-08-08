@@ -1,0 +1,13 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    // Single shared document holding the game's text/font edits.
+    // Anyone with the editor link can read and write it; nothing else is accessible.
+    match /config/overrides {
+      allow read: if true;
+      allow write: if request.resource.data.keys().hasOnly(['json'])
+                   && request.resource.data.json is string
+                   && request.resource.data.json.size() < 400000;
+    }
+  }
+}
