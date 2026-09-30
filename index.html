@@ -802,7 +802,7 @@ h1.game-title,.card-question,.vote-moment h3{color:var(--pacific);}
       <summary>Teacher's Quick Guide <span class="tg-sub">· how to run this in class (1-minute read)</span></summary>
       <div class="tg-body">
         <p><b>What this is:</b> a slideshow you drive from the front of the room. Nothing advances on its own, and hidden clues stay hidden until you reveal them, so you set the pace and the discussion.</p>
-        <p><b>The flow:</b> Detective Training (6 short slides, ≈10 min) teaches the SIFT moves and 3 clues for pictures + 3 clues for writing. Then come 10 case cards. <b>Cards 1-4 are teaching cards</b> you solve together: an AI picture, then a real picture; an AI article, then a real article — and each one spotlights one SIFT move (S, T, I, F). <b>Cards 5-10 are the game.</b> Every card runs <b>Examine → Think &amp; Write → Vote &amp; Reveal</b>: the last screen opens on the class vote (hands up!), then one press of <span class="kbd">→</span> shows the truth.</p>
+        <p><b>The flow:</b> Detective Training (6 short slides, ≈10 min) teaches the SIFT moves and 3 clues for pictures + 3 clues for writing. Then come 10 case cards. <b>Cards 1-4 are teaching cards</b> you solve together: an AI picture, then a real picture; an AI article, then a real article. Each one spotlights one SIFT move (S, T, I, F). <b>Cards 5-10 are the game.</b> Every card runs <b>Examine → Think &amp; Write → Vote &amp; Reveal</b>: the last screen opens on the class vote (hands up!), then one press of <span class="kbd">→</span> shows the truth.</p>
         <p><b>Pacing ideas:</b> one class period = training + the 4 teaching cards; the game cards another day. Or make it a routine: one card a day. Completed cards are saved on this device, and next time you open the game a <b>Continue</b> button jumps straight to where you left off. Press <b>Start Over</b> for a fresh class.</p>
         <p><b>The writing activity:</b> each card has a matching half-sheet <b>Case Card</b> students write on, alone or in groups: claim, clues in complete sentences, and the SIFT move they'd use. Print them under <b>Print Materials</b> (top right) and cut each page in two.</p>
         <p><b>Younger students:</b> skip the writing and just talk it out as a class, vote with thumbs up (real) or thumbs sideways (AI), and let volunteers point at clues on the board.</p>
@@ -1379,7 +1379,7 @@ CARDS.push(
     'Look at the people behind her. Their faces are blurry smudges, and the cat’s whiskers melt right into the window. AI gets sloppy in the spots nobody looks at.',
     'Her eyes are a little too big and shiny, and her skin is perfectly smooth, with no freckles or marks. Real photos of real people are never that perfect.'
   ],
-  verify:'SIFT move: <b>Stop.</b> Before you believe a picture or share it, stop and look closely. This picture was made by an AI program called Midjourney. It was never a real girl, a real cat, or a real restaurant — and try the photo credit: the link goes to a page that doesn’t exist. A made-up photographer for a made-up picture.',
+  verify:'SIFT move: <b>Stop.</b> Before you believe a picture or share it, stop and look closely. This picture was made by an AI program called Midjourney. It was never a real girl, a real cat, or a real restaurant. And try the photo credit: the link goes to a page that doesn’t exist. A made-up photographer for a made-up picture.',
   source:'Generated with Midjourney, April 2023 (CC BY-SA 4.0, via Wikimedia Commons)',
   links:[
     {label:'Wikimedia file page (marked AI)',url:'https://commons.wikimedia.org/wiki/File:Une_fille_et_son_chat_au_restaurant.png'}
@@ -1432,7 +1432,7 @@ CARDS.push(
   content:'A French Bulldog Named Wilbur Is Elected Mayor of a Kentucky Town',
   excerpt:'<p>Wilbur Beast, a French bulldog, was elected mayor of Rabbit Hash, Kentucky, with 13,143 votes. The town has picked an animal for mayor in every election since 1998. The silly election raises money to take care of the town.</p>',
   sift:{letter:'F',move:'Find it somewhere else',
-    lesson:'Card 3 was fake, but this silly story is <b>true</b>! So how do we tell them apart? <b>Find it somewhere else:</b> look for the same story in another trustworthy place. The chocolate-tree story lived in only ONE place. But Wilbur’s story is also on NBC News, The Washington Post, and Snopes — trustworthy places that check facts before they share them. When you can find a story in other trustworthy places, you can believe it.'},
+    lesson:'Card 3 was fake, but this silly story is <b>true</b>! So how do we tell them apart? <b>Find it somewhere else:</b> look for the same story in another trustworthy place. The chocolate-tree story lived in only ONE place. But Wilbur’s story is also on NBC News, The Washington Post, and Snopes, trustworthy places that check facts before they share them. When you can find a story in other trustworthy places, you can believe it.'},
   clues:[
     'It’s full of real details you can check: the dog’s name (Wilbur Beast), the town’s name (Rabbit Hash, Kentucky), and the exact number of votes (13,143). Fakes stay foggy; real stories get specific.',
     'Lots of trusted news sites told this same story, and the fact-checking site Snopes looked into it and says it is <b>True</b>.',
@@ -1484,7 +1484,7 @@ CARDS.push(
 { id:'c7', n:7, type:'image', answer:'ai', img:'food',
   alt:'A restaurant-style platter of grilled meat, salad, and grilled bread',
   photo:{title:'Tonight’s Mixed Grill Platter',
-    desc:'Fresh off the grill at our downtown kitchen — come hungry!',
+    desc:'Fresh off the grill at our downtown kitchen. Come hungry!',
     by:'The Copper Skillet Bar &amp; Grill', link:'flickr.com/photos/thecopperskillet',
     url:'https://www.flickr.com/photos/thecopperskillet'},
   clues:[
@@ -1692,7 +1692,7 @@ TRAINING.push(
     <button class="hotspot" data-h="2">3</button>
   </div>
   <div class="hotspot-reveal" id="hotspot-reveal2"><span style="opacity:.75">Click a numbered button above to inspect that spot.</span></div>
-  <p class="lede" style="margin-top:20px">Press <b>C</b> anytime to open the Detective Checklist. Ready, detectives? Grab your Case Card — let’s open the case files!</p>`,
+  <p class="lede" style="margin-top:20px">Press <b>C</b> anytime to open the Detective Checklist. Ready, detectives? Grab your Case Card. Let’s open the case files!</p>`,
   mount(){
     mountCallouts('hotspot-wrap2','hotspot-reveal2','mountain',[
       {x:6.5,y:17,side:'left',text:'<b>Clue #1: two suns!</b> This bright sun sits low on the left. Now look at the far right: there’s a <b>second sun</b> in the very same sky. A real photo can only ever have one. <b>SIFT → Stop:</b> when something is impossible in real life, stop and don’t believe it, no matter how amazing it looks.'},
@@ -1715,13 +1715,13 @@ const CHECKS={
    alone or in a group while the card is on the board. Two per page; cut apart. */
 function caseCard(card,scaffolded){
   return `<div class="halfsheet">
-    <div class="hs-top"><span class="t1">Case Card ${card.n} — Authentic or AI?</span><span class="t2"><span class="edubug"></span>Detective Writing Card</span></div>
+    <div class="hs-top"><span class="t1">Case Card ${card.n}: Authentic or AI?</span><span class="t2"><span class="edubug"></span>Detective Writing Card</span></div>
     <div class="hs-name"><span>Detective name(s):</span><span class="short">Date:</span></div>
-    <div class="hs-row"><b>1 · My claim (circle one):</b><span class="circle"></span> Authentic — it really happened <span class="circle"></span> Made by AI</div>
-    <div class="hs-lbl">2 · My clues — what did you notice? Write in complete sentences.</div>
+    <div class="hs-row"><b>1 · My claim (circle one):</b><span class="circle"></span> Authentic: it really happened <span class="circle"></span> Made by AI</div>
+    <div class="hs-lbl">2 · My clues: what did you notice? Write in complete sentences.</div>
     ${scaffolded?'<div class="hs-starter">Starters: “I think this is ______ because…” &nbsp;·&nbsp; “I noticed ______.”</div>':''}
     <div class="hs-line"></div><div class="hs-line"></div><div class="hs-line"></div><div class="hs-line"></div>${scaffolded?'':'<div class="hs-line"></div>'}
-    <div class="hs-sift"><b>3 · My SIFT check — circle the move you would use:</b><br>
+    <div class="hs-sift"><b>3 · My SIFT check: circle the move you would use:</b><br>
       <span class="sbubble">S</span>Stop &nbsp; <span class="sbubble">I</span>Investigate the source &nbsp; <span class="sbubble">F</span>Find it somewhere else &nbsp; <span class="sbubble">T</span>Trace to the original</div>
     ${scaffolded?'<div class="hs-starter">“To check this, I would ______.”</div>':''}
     <div class="hs-line"></div><div class="hs-line"></div>
@@ -1732,7 +1732,7 @@ function caseCardPages(scaffolded){
   let pages='';
   for(let i=0;i<CARDS.length;i+=2){
     pages+=`<div class="hs-page">${caseCard(CARDS[i],scaffolded)}
-      <div class="hs-cut">✂&nbsp; cut here — each detective card is half a sheet</div>
+      <div class="hs-cut">✂&nbsp; cut here: each detective card is half a sheet</div>
       ${CARDS[i+1]?caseCard(CARDS[i+1],scaffolded):''}</div>`;
   }
   return pages;
@@ -1892,7 +1892,7 @@ let saveTimer=null;
 function status(mode){
   const s=document.getElementById('ed-status'); if(!s)return;
   s.className=mode;
-  s.textContent=mode==='saving'?'Saving…':mode==='saved'?'✓ Saved for everyone':mode==='error'?'⚠ Not saved — click to retry':'';
+  s.textContent=mode==='saving'?'Saving…':mode==='saved'?'✓ Saved for everyone':mode==='error'?'⚠ Not saved. Click to retry':'';
 }
 function queueSave(){ status('saving'); clearTimeout(saveTimer); saveTimer=setTimeout(doSave,700); }
 async function doSave(){
