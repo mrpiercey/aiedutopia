@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Authentic or AI? An Edutopia Media Literacy Game</title>
+<title>Authentic or AI? An Edutopia Media Literacy Lesson</title>
 <meta name="description" content="A click-through classroom game: ten pictures, articles, and posts. Students decide what’s real and what’s made by AI, share their clues, and check with SIFT.">
 <link rel="icon" type="image/png" href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEAAAABACAMAAACdt4HsAAAAkFBMVEX/SwAAAAD//fz/UgX/VAD/PQD/AAD/TQD/xK7/SQD/h1j/SwD/fwD/mG//18n/SwD/OwD/aS7/tJj/TAD/TAD/TAD/ekb/vKP/49n/czr/qor/6uL/UAD/XCL//wD/oX3/0L//imIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABd+t48AAAAMHRSTlP+AP/+B/8By/8T/24C//+JBP//Ta42////////Rv8B////AAAAAAAAAAAAAAAAAADWEvAXAAAC10lEQVR42q1XibaiMAxNVwpYLCCL8vTN/P9PTtqyqchiJ4cjtiS3SZomKZB3kpzbF69+0jNS+lP5MZcLzPAubvAnLs8RADBH+Cc6lzFOG7kJIHExXl7Ay41kh5fSfpPrACdcPI2ehSeQKI0dy2cATkwKi9I9BqSG8I8A8kSqaEXcQUQVOcllAJxOYQeljvUd4ETiC9sDwC7xzBEwk492yVszZghwXP4ZAQb7D8h7BDkHkKdD8g6h3wsPYMjlkLz1JDETACfpQXlESH1EgXNgBV9Q5RwJ1gE8+gYg4tYN8J0BkxFApIxX+YR7FimWEgHMqgL1rUC61R9UMAjwWPUAuytK25x98MKDgCHlqgdEQmnzwQZWEgN8K4YQQH2OJg74wLcAgMvDhgXrAGgDkPMqAFsHOKMTn/ZACLHgRAUvsTAOIgNPUZRrrfPZAnl9dRqIumgKfK4YGDYumtvAFcPsHNVZp/8qmvVRUyvaNo36YzVgeUYpdVJX/KPug90VlKO8Rg4BAgNH2+EN999qUTgTBH7NvFodpcloQwnpzNsuYK5+KRRoLbv3AYMJAL8nU46HcRNauzIWtdqqKCzbr2DDNjKxDMDOIwDy0TZDaruuayw/vU5xsA0g0GRaMzYUdDX4bLcGzSjhyDqd7QIYnFiMOjtS+wBQvN9GZ/Q4nzuL9gCUYyDlOK9FD5aJ+sWJ9tWOAJOq1RTKajw0jBbCOkG7bdR+3sYP61fKZmlxOkystZGIPKKxKt47v6IoeuDaB6D4nTsbD9N0nBnG/t29kIMBRn+W+/jwmtUdTRjTbnZ2nOcJJVFZccuy23UaFkozXfTsWuFBTF4TylNKYzkmYDHvzF7TgHhNafxwYX5JqmYzKa4A2LS+UVg2yutjs7RtVFezo7iukC+uweU9vMEIbnHCm6zwNi+80QxudcOb7fB2P/zCEX7lCb90hV/7/sPFM/zqG375Pnz9/wf2UyR6CTTC7QAAAABJRU5ErkJggg==">
 <style id="embedded-fonts">
@@ -18,12 +18,12 @@
 </style>
 <style>
 /* ============================================================
-   EDUTOPIA "AUTHENTIC OR AI?" DESIGN SYSTEM
+   AUTHENTIC OR AI?  ·  Edutopia design system, projector edition
+   One slideshow. One Next button. Every slide fits the screen.
    ============================================================ */
 :root{
   /* Edutopia palette */
-  --orange:#FF4C00;        /* Electric Orange: use sparingly */
-  --dark-orange:#FF780D;
+  --orange:#FF4C00;        /* Electric Orange: used sparingly */
   --tangerine:#FF9B0D;
   --sunshine:#FFBC0D;
   --midnight:#1D2A44;      /* GLEF Midnight Blue */
@@ -37,696 +37,513 @@
   --purple:#532681;
   --light-purple:#A973DF;
   --pink:#E75CAE;
-  --salmon:#F27179;
   --dark-grey:#333333;
   --light-grey:#666666;
+  --line:#E6DED0;
   --cream:#FFF7ED;
   --white:#FFFFFF;
-  /* soft tints of the palette, for backgrounds behind dark text */
   --tint-blue:#DFF5FD;
   --tint-teal:#D9F5F3;
   --tint-purple:#EEE3F9;
   --tint-sun:#FFEFC2;
-  --tint-pink:#FBE0EF;
-  --tint-green:#EEF9CB;
+  --tint-orange:#FFE6DA;
 
   --font-ui:'Poppins',-apple-system,'Segoe UI',Helvetica,Arial,sans-serif;
   --font-slab:'Museo Slab','Zilla Slab',Rockwell,'Courier New',serif;
 
-  --shadow-card:0 4px 20px rgba(29,42,68,.12);
-  --shadow-pop:0 10px 40px rgba(29,42,68,.22);
+  --shadow-card:0 4px 20px rgba(29,42,68,.10);
+  --shadow-pop:0 10px 36px rgba(29,42,68,.20);
   --radius:18px;
+  --bar-h:64px;
+  --nav-h:78px;
+  --ease:cubic-bezier(.22,.8,.3,1);
 }
 *{margin:0;padding:0;box-sizing:border-box;}
 html,body{height:100%;}
 body{
-  font-family:var(--font-ui);
-  background:var(--cream);
-  color:var(--midnight);
-  overflow:hidden;
-  font-size:16px;
-  -webkit-font-smoothing:antialiased;
+  font-family:var(--font-ui);background:var(--cream);color:var(--midnight);
+  overflow:hidden;font-size:16px;-webkit-font-smoothing:antialiased;
 }
+button{font-family:inherit;}
+.ico{width:1.1em;height:1.1em;display:inline-block;vertical-align:-.18em;flex:0 0 auto;}
+:focus-visible{outline:3px solid var(--pacific);outline-offset:3px;}
 
-/* ---------- App bar ---------- */
+/* ---------- top bar: brand + three tools ---------- */
 #appbar{
-  position:fixed;top:0;left:0;right:0;height:64px;z-index:50;
-  display:flex;align-items:center;gap:16px;padding:0 20px;
-  background:var(--white);
-  box-shadow:0 2px 12px rgba(29,42,68,.10);
+  position:fixed;top:0;left:0;right:0;height:var(--bar-h);z-index:50;
+  display:flex;align-items:center;gap:12px;padding:0 20px;background:var(--white);
+  box-shadow:0 2px 12px rgba(29,42,68,.08);
 }
-#appbar .brand{display:flex;align-items:center;gap:10px;cursor:pointer;border:none;background:none;font-family:var(--font-ui);}
-#appbar .brand:focus-visible{outline:3px solid var(--pacific);border-radius:8px;}
-/* official Edutopia "edu" bug (embedded once, reused everywhere) */
+#appbar::after{
+  content:"";position:absolute;left:0;right:0;top:100%;height:5px;
+  background:linear-gradient(90deg,
+    var(--pink) 0 14.3%,var(--light-purple) 0 28.6%,var(--pacific) 0 42.9%,var(--light-teal) 0 57.2%,
+    var(--green) 0 71.5%,var(--sunshine) 0 85.8%,var(--tangerine) 0);
+}
+.brand{display:flex;align-items:center;gap:10px;cursor:pointer;border:none;background:none;text-align:left;}
 .edubug{width:42px;height:42px;flex:0 0 auto;display:inline-block;vertical-align:middle;background:url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAASAAAAEgCAMAAAAjXV6yAAAAkFBMVEX/SwAAAAD//v7/Uwb/VAD/AAD/PQD/ZSn/tZn/fwD/SwD/SwD/TAD/SgD/SQD/18j/lWz/PgD/SwD/hVX/5dz/TAD/cjj/x7H/6+T/ekX/qYf/vKL/oXz//wD/jWH/0L3/XSD/UAD/YB//UAD/ZgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAADCIz7UAAAAMHRSTlP+AP//BAEE//8CsGuNLxP///9L///R/////////wH///9H/yoFAAAAAAAAAAAAAABishE2AAAPkklEQVR42u2da4OqOAyG4xREQEAERNCZOWd3//9v3Ba8cC0p5VLAftozqwgPb5ImtAF2cwxd2++117801z3TcSwM9m/XLXyEfl6f5VRhBjaPS9Vc52zblhVBPkhhPP4UWZZtn50HqfdX1wqIXqGZ/Yfr2EcGpkSjYTz/f2QdbcfNvmpODAmmhqNRNjkaEBg5pielKSFNA0jPPY57PlrsYqHnYN+0jmc390r6WgCZmXQyOKQ/nKKWHpDMh8EuGpCe3WjXPsoopwnS0XZfh18sIF1jt9ixrQHhFMzNsh2mo3H9EYxpWsxVjEKnwIg5tzFNDUYTj878znh03oyYP9JHkxGMhIeZ1nFkOi9GR2ZqIyEaA5CpPcQDE42HjDRzEYAyPHZEJsOTyyiyx0EEI+BhtgWTj9zSBkcEK8EzGiJYDZ6REMGAc+a58bwRDTi/hgED+/x4CirS1QLEIpcSeB6I3OyUlAFErWtvq4InR2TvB7KzIQBR53OOFMKTIYrO2YkpAMg0mXUpOKidmeb8gOhdUsq6SnY2gIhAWj6OpSSeDJHlSIsIZIOXovIpiEibDRCd+ygsn7eIpOZEsF75DCMikPDOrqU8nlxEroSvBgnzihbBh82JJMwMJMxrQaO/mcG6zUvezKAfn8WYV9HM9hMBou7HhgUOu5cjEgdEf+QIixzH7OTHBqTR1JQsExCh6as2NiDKJ1ooH+aIxAnB6t2zpKsGUT6wYD4s8RAlBGJ8zrD4cRYjBEJ8bLJ8QMQWIgRb4yNKCDbHR5AQbI+PGCHYIB8hQoCdH66JT0ZIGxLQfmV8BDQEyPnPyvhQQsj5EKDsy4EVDgdlZbBZPkhCgKj/uBFZIx+W2+vygPTvlfLJCH3r0oD2O2ulfFgpv9tRQyef42r5sBpjJyHonADBqkfndIgPyFxrACuGMrM/IN10o7UDilxT7w1ozQ4a66hhUxlYj6wMNu2AEG4IOE+Y1++Anm6I80waNu2AEG4ItlIi61s+awNk6g5saDi6KQhI24yBPYxMEwO0JQPjGxlsO8J3x/pmQJppkW3xIZap4QFpKyzSI4r4GhYQzVFhg6M5a4XNR7COSAYbeorR6ykHNBiYFm0TUKQ1GBlsfgrUMRmCj4fm+2nYZpUMXzuDbSep3UkrfEI8P9TDR0B8CcFHQHwJwUdAfAnBR0B8CcFHQHwJgVICIhf+INNLqAhIn11A3hd/eNNISG8BpM2+Fijm8wnTadYMac2AdH32LIwYdCRpA5trfA+MiW6fW5QQKJiF+UbN1E70r/NkZFBYralKHYgAuZb5HHyYtC5UWNsJKlbqiX8qA7rMV7+HwrMwhSaJ/5QBGVNPFs06IF2tSnTZC5HJq9N6DZBi633jOQEVVwfDe8OBUhP+w6wKgvcmBVD0Yeq8gApuGlR00fMDertpUNPC5jaxt42BonsKZwb03o8Iz0qQ9QFUsrFnVQhUnAQpYGKvqRAo+rRwbkCvjBWUjGEKAHrGMVAyhilgYs84Borui58d0DOOgaJPe+YH9Cjeg5oWpoCJgZbZGOR52AdQWz4Giu5sVgBQXvMAJYO8EoDyQA9quiAVfFDuhEDRdfUKAMqdECjaXEEFQJkTAjVdkBKAMicEarogJXxQlm2AojsPlADE9iaAogujVQCUlTxA0WV3SgCyMgV976OPiTWPaP+9AzV9tDggn46uv/SZKoKiu8OaAZHgdPoJ6EjogkW22Mq4XBL6z5/T6XRP06BkIPQPd/p39ukk/zD7NPs4PUpgIL00yPpouigs+83gQheA+eMCunQsYbwW9XPq+PAd56Wh/zzaByM4eIWlTmGcJkT8KJTx5c2YB8jgr2CMywoqnVt9nHBzaegdxIx705rU6y0ROkiQxmFpHeshIBwToyB/bk2XmyYNKxiJETSdo8fMzkCGMei58C4prE/xvNK9Ck9I4sapedlvnIDPc9JGfTFs4Lfps/4TgdBiPDoP6oPn9bPXNFvdTYy0wOh6EkRcu8cJP4rF2PXTxA+qx058oTAGPYIYeYv8QJ4/55ND6QrF8HgHJvuf+6FZU6SyyLPqjA4cmVY/6hOhZAPEi0HBtVnZ5biRIhFnJ20UPHYQdwGi4xftcKsLZi+CJSEQjvJp0fJL3y0T8v60Bq6gdNK/VX9ppJ2ADnhAocR6UBrnhQEV7m9aVWvZtV6NbsTNUvOrbnhWQGJR/pfrGSt6bj6ZsnmljT7Tj9UAZIkCKp53gx+uTF8bNRQj1tCTrlxsQkB7kW7Rt87QGnaF3xsuPqsBCKL/QCCXL+ujcb7lpx3xN0XGFEUAgSYC6IIoQVTzyYodVqZtN1AdkCsCqPRTMW7aUbYh8oU9W3UAodctVKznB3C7KgNOihCD8oD+4gEZuB+6cdKkhG9/KgI64wGVrzzEXVn5jCrqCmFNgAyUdZD6vtyT3+KheSmmQoCw9cTKKd2biwY+qSWaN5x7UhMQOWIBVS/8RIym0VDB89pmANxnFYsD1FUC55SK27yTB2sCFPcGdCXNMySuC1ocINKbz8sHJUKPFZYGKKi7lthDjN/bqSVL486Clgfo0OOxW5eRGmsC5HGeYSJ/6trim1YBqOaCYmFAhlirm4UBMuQBJasGlMgDCsQOsTBAgTyg2kzzsBBA515XJwyovhqF3/JmYdn8GIDSVQPyPoAGBlQ/xH0RgP7iivZBa4reP4otAxDyqUbyJTQNRh1iVYCML5FiF+4Qy/BBGu7Rc73aYUjnYosARB894xYv1Cqp4n3pvAVOFPGrO24SKyFbKiYzpRpEGBBmAZUvGKQLP0HawphMslqtvo0GCL3CzGh/mMMdl+s1bjmETD2oesPwaxRDEAZ07lUx8/COh7QcQqaimLQ9nOyKLzEIL+J0eqxcQEo1+5bXZqYyNWmCjohEJHbWxr877EJyo08YM0r3jHyhb3v3diiv5zrpBAT3Q6G3IsTie0Hyq3i785uA2jsAVRQdY1d9CWYAbCsCdjNLIlzweNhU0Lb6jHuytw4FGViPGAhMvho3s6C3Q3mi2ZhR88Ux3ko7e7n+4k6mIrWLcGsB/Ia6y5egNce1czfwDrOzG3CAjIixRJ0v21CH35J5EEkVXkHLa7+dIXY9ZGPI9FAT+/I06CK+cV5gU2813SSo/PbAue4AG5xJl6IPKN3foMemXoFt4YlIHIsbP1U2sl/sT5GuLR9tTshPZYpY2bZwgcYClaleiGpKX3FVPyg/5t8xYvUQYgz7z4GejQVEtj2X3dCPj/DoBm+pvYcMmaRzDhh3B/mT37c1hdNziUa7ZP+83FVIuJsRTs37/wxcXnPplEeI3OHHa24i1nrhhtneWCgxxB3bxS5AENN20u2qwiZDT/tOEYvtcQQbLKXlzcak6bUhHv+8TuUdU6R2gASdGRvX9hBV2tArvp7p1WBJtEVXUN5C3JAFhB2hzk/CIiG/670svBnFH6/1XhT5BCDRoku0yVvpzTv1DesBYm5f2tQbVPdjhkLPUNLmza8+ef+P2JBq8ibe/+XUuuW0vDmcM7dPCpTjIkXyPvj11a+AewMLG1xvr9YYhX384Q+AVJvAHl3eihi84P3lP5Vc4s457o9XbBZBO0vQQZuBhMWLfdIi6E34V+92OBwK7S7QfSDaG0326hNY3Lp9PfxcjH+My6kUfLx7V+ZT2SF/LfZuSI2Hu8KVL400bO5yEQDItyrt1+yWnNpfuBfefgxMrxzj9Nv07cNLlCT3eJj7R+9PCdL1Nw2kGv+8m932bkJlnOJ6BxrvdhLxiSS537z8yq4hXVd9r/ZloeYc4psZ5X12gsSQ72bkvtoly/R5I6zBjeeFV3p1Xpz+9HiRpZ89PssGNL6IziAwb8NtyZbtzwuECV+zN3HLdkUbvc07ik3/1WznOvcrjU2lXzwyO6Dyi0f03eclz9xX16j38qPZLaz88iMVXz2iRAxT9wVsisQwdV/hp0gMU/clkLNbmKb4a0RVsTBlX0Q7r4AaXkT7mQp1vcr446Y7Xob9cdNdr1PXe/YFXt+gC+/0BkCfjLWap1YB6fon0ucxXtcbAVHD+0T6LMZru2ZAuv6J9CzGFwVUAqToS1rmKdY3AjI/EmICMlsBfSRUE1AF0EdCVQFVAG1eQjUBVQFtXkJVAVUBbVxCdQHVAG1cQjUB1QBtOiMrZ2EtgHRzwxmZa+qdgKgRblVCVEDarhuQbm61LhRpdQE1AFL0xasTvVYVA2ijob4hxLcB2qifbvDQLYA2Wb8vVeq7AO00c2tGRiyzkU8LIHN7ftrZmQKANjcZapwC8QBtLJK1RDAeoI0lrf/qpiCgTRlZu4FxANG8ditGRg1svxMHpGvuRnKyyNX0HoC2E+vbInwXoI3UzpqqZEhAm3BDXAfUBYhmrdH6HZCp9wa0BTfEdUCdgJgbWjcfvgPqBrTy1cHF9b49Aa3aUXc5aBQg/duNVkqIRO63Lg2IbVJYJyHKZ9fJBwFovU85nPYUVQjQWgmh+KAArXI/4ntP4QCAVpiVERvHBwlodeUzXomsF6CVaQitHzygVRES4IMHtCJCInwEAK2GkBAfEUArISTGRwgQmw8tH9BZiI8YIHpoBxYtIkLnz0J8BAExQkvOXEkkykcUEJ1eLTi3Z/m7thsXECO01BojOYrzEQfESijHZQI67hD1H3lA9Jn0Miv5NP0S59MH0CJddQ/3LAGI/pS7rFI+sdx+fHoCYr7OXpZ5ibtnKUDMES3GzJh59XE/UoAWZGb9zUsOUG5myiMiEuYlCSgzM9VFRCwJ85IFpL6IZOUjDWhnmiqLiMnHNHdzAmK+WlURZfLZy16fNCB2i1wlkzOamsrKZxBA2V06qzYnItF5APkMBGin73d7peyMWhc9JX2nCqAsUlA7I6rgodYlGbyGBsTmRDtHCUQUj7OTm/uMASizMwUQ5Xj2+mCXNRwgGs9mV9FDPeaAFzUkoLkRjYBnaEBzIhoFz/CAckSuHZFJGRES2e4IeMYA9EB0tqaTEQHrPA6ecQDlQT+zNDKFeDLbGi6wTwGIIdIfMiIj08nEo4+EZzxAzNJYKqTZ4zFidGym1b053lWMCIjdV3bmziiMMjpO5vH0Ma9hVEDZ/Jqdvmszf0SGg0P9TqYdfa+PfAFjA8pMjenIPR+tISCxQ1hH5nceB14+oOxGZ7l1BknC3Ng3H3B22ujamRJQ5o/y++069jECUS1lH4+OtqPlmtT0qc57MkBFSBklK3q++5HLJUdjUTbubmo4kwN6QHpcoeY6Z9u2rKhEo8QssizbPjuuVvnqmgE9L3X/rvhprvb3fD4fC4P+86/rFj6yn4FNNv4HjL4BGjtZ12QAAAAASUVORK5CYII=) center/contain no-repeat;-webkit-print-color-adjust:exact;print-color-adjust:exact;}
-.brand-name{font-family:var(--font-slab);font-weight:700;font-size:22px;color:var(--midnight);letter-spacing:.2px;}
-.brand-sub{font-size:11px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:var(--light-grey);margin-top:-3px;}
+.brand-name{display:block;font-family:var(--font-slab);font-weight:700;font-size:22px;color:var(--midnight);line-height:1.1;}
+.brand-sub{display:block;font-size:11px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:var(--light-grey);}
 #appbar .spacer{flex:1;}
-#progressdots{display:flex;gap:5px;align-items:center;margin-right:6px;}
-#progressdots .dot{width:9px;height:9px;border-radius:50%;background:#d9d2c5;}
-#progressdots .dot.done{background:var(--teal);}
-#progressdots .dot.current{background:var(--orange);transform:scale(1.35);}
 .bar-btn{
-  border:2px solid var(--midnight);background:var(--white);color:var(--midnight);
-  font-family:var(--font-ui);font-weight:700;font-size:14px;padding:8px 16px;border-radius:99px;
-  cursor:pointer;transition:all .15s;white-space:nowrap;
+  display:inline-flex;align-items:center;gap:7px;border:none;background:var(--tint-blue);color:var(--midnight);
+  font-weight:700;font-size:14px;padding:9px 16px;border-radius:99px;cursor:pointer;white-space:nowrap;
+  transition:background .15s,color .15s;
 }
 .bar-btn:hover{background:var(--midnight);color:var(--white);}
-.bar-btn.hidden{display:none;}
-.btn.hidden{display:none;}
+#btn-checklist{background:var(--tint-sun);}
+#btn-menu{background:var(--midnight);color:var(--white);}
+#btn-menu:hover{background:var(--pacific);}
 
-/* ---------- Screens ---------- */
-.screen{
-  position:fixed;inset:64px 0 0 0;overflow-y:auto;display:none;
+/* ---------- the deck ---------- */
+#deck{position:fixed;top:calc(var(--bar-h) + 5px);bottom:var(--nav-h);left:0;right:0;}
+body.on-title #deck{bottom:0;}
+.slide{
+  position:absolute;inset:0;overflow-y:auto;overflow-x:hidden;
+  padding:clamp(14px,2.4vh,28px) clamp(18px,3vw,48px);
+  display:flex;flex-direction:column;
 }
-.screen.active{display:block;}
-.screen-inner{max-width:1200px;margin:0 auto;padding:36px 40px 60px;}
+.slide.enter{animation:slideIn .45s var(--ease);}
+.slide.enter-back{animation:slideBack .45s var(--ease);}
+@keyframes slideIn{from{opacity:0;transform:translateX(40px)}to{opacity:1;transform:none}}
+@keyframes slideBack{from{opacity:0;transform:translateX(-40px)}to{opacity:1;transform:none}}
+@keyframes rise{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}
+.rise{opacity:0;animation:rise .5s var(--ease) forwards;}
+@media (prefers-reduced-motion:reduce){
+  .slide.enter,.slide.enter-back,.rise,.verdict{animation:none !important;opacity:1 !important;}
+}
+.inner{width:100%;max-width:1320px;margin:auto;}
 
-/* ---------- Buttons ---------- */
+/* backdrop: flat circles tucked in the corners, like the edu bug */
+#deck{
+  --r1:min(14vw,200px);--r2:min(10vw,140px);
+  background:
+    radial-gradient(circle at 100% 0,var(--tint-blue) 0 var(--r1),transparent calc(var(--r1) + 1.5px)),
+    radial-gradient(circle at 0 100%,var(--tint-sun) 0 var(--r1),transparent calc(var(--r1) + 1.5px)),
+    var(--cream);
+}
+body.on-title #deck,body.on-end #deck{
+  background:
+    radial-gradient(circle at 0 0,var(--sunshine) 0 var(--r1),transparent calc(var(--r1) + 1.5px)),
+    radial-gradient(circle at 100% 14%,var(--tech-blue) 0 var(--r2),transparent calc(var(--r2) + 1.5px)),
+    radial-gradient(circle at 3% 100%,var(--light-teal) 0 var(--r2),transparent calc(var(--r2) + 1.5px)),
+    radial-gradient(circle at 100% 100%,var(--light-purple) 0 var(--r1),transparent calc(var(--r1) + 1.5px)),
+    var(--cream);
+}
+
+/* ---------- buttons ---------- */
 .btn{
-  font-family:var(--font-ui);font-weight:700;border:none;cursor:pointer;border-radius:99px;
-  transition:transform .12s, box-shadow .12s, background .12s;
+  font-weight:700;border:none;cursor:pointer;border-radius:99px;
   display:inline-flex;align-items:center;justify-content:center;gap:10px;
+  transition:transform .15s var(--ease),box-shadow .15s,background .15s;
 }
 .btn:hover{transform:translateY(-2px);box-shadow:var(--shadow-pop);}
-.btn:active{transform:translateY(0);}
-.btn-primary{background:var(--orange);color:var(--white);font-size:22px;padding:16px 44px;}
-.btn-dark{background:var(--midnight);color:var(--white);font-size:18px;padding:13px 32px;}
-.btn-ghost{background:var(--white);color:var(--midnight);border:2.5px solid var(--midnight);font-size:17px;padding:11px 28px;}
-.btn-sm{font-size:14px;padding:8px 18px;}
+.btn:active{transform:none;}
+.btn-primary{background:var(--orange);color:var(--white);font-size:clamp(20px,2vw,26px);padding:16px 48px;}
+.btn-dark{background:var(--midnight);color:var(--white);font-size:18px;padding:13px 30px;}
+.btn-ghost{background:var(--white);color:var(--midnight);border:2.5px solid var(--midnight);font-size:17px;padding:11px 26px;}
 
-/* ---------- Title screen ---------- */
-#screen-title{background:var(--cream);}
-#screen-title .screen-inner{display:flex;flex-direction:column;align-items:center;text-align:center;padding-top:34px;}
+/* ---------- bottom nav: Back · progress · Next ---------- */
+#nav{
+  position:fixed;left:0;right:0;bottom:0;height:var(--nav-h);z-index:40;
+  display:flex;align-items:center;gap:16px;padding:0 20px;background:var(--white);
+  box-shadow:0 -2px 14px rgba(29,42,68,.08);
+}
+body.on-title #nav{display:none;}
+#nav-back{background:none;border:2px solid var(--line);color:var(--midnight);font-size:16px;padding:11px 22px;}
+#nav-back:hover{border-color:var(--midnight);box-shadow:none;}
+#nav-back[disabled]{visibility:hidden;}
+#nav-next{flex:0 0 auto;min-width:230px;font-size:19px;padding:14px 30px;}
+#nav-next.is-reveal{background:var(--orange);}
+#nav-next .k{font-size:12px;font-weight:600;opacity:.6;border:1.5px solid currentColor;border-radius:6px;padding:0 6px;margin-left:4px;}
+.map{flex:1 1 0;display:flex;align-items:center;justify-content:center;gap:clamp(4px,.6vw,9px);min-width:0;}
+.map-group{display:flex;align-items:center;gap:clamp(4px,.5vw,7px);}
+.map-label{font-size:12px;font-weight:800;letter-spacing:.1em;text-transform:uppercase;color:var(--light-grey);margin-right:2px;}
+.map-sep{width:clamp(8px,1.4vw,22px);height:2px;background:var(--line);border-radius:2px;}
+.map button{
+  border:none;cursor:pointer;border-radius:99px;font-weight:700;color:var(--midnight);background:#EFE8DB;
+  transition:background .2s,color .2s,transform .2s;
+}
+.map .pip{width:12px;height:12px;padding:0;}
+.map .num{width:clamp(26px,2.4vw,34px);height:clamp(26px,2.4vw,34px);font-size:clamp(12px,1vw,15px);}
+.map button:hover{transform:scale(1.12);}
+.map button.done{background:var(--light-green);}
+.map button.here{background:var(--pacific);color:var(--white);transform:scale(1.18);}
+.map button.teach:not(.here):not(.done){box-shadow:inset 0 0 0 2px var(--sunshine);}
+
+/* ---------- title ---------- */
+.title-slide .inner{display:flex;flex-direction:column;align-items:center;text-align:center;max-width:1000px;}
+.edubug.big{width:clamp(64px,9vh,88px);height:clamp(64px,9vh,88px);margin-bottom:14px;}
 .title-kicker{
-  font-weight:700;font-size:15px;letter-spacing:.22em;text-transform:uppercase;color:var(--space-blue);
-  background:var(--white);border:2px solid var(--tech-blue);padding:7px 20px;border-radius:99px;margin-bottom:22px;
+  font-weight:700;font-size:14px;letter-spacing:.2em;text-transform:uppercase;color:var(--midnight);
+  background:var(--sunshine);padding:7px 20px;border-radius:99px;margin-bottom:18px;
 }
-h1.game-title{
-  font-family:var(--font-slab);font-weight:700;font-size:clamp(52px,7.5vw,92px);line-height:1.02;
-  color:var(--midnight);
-}
-h1.game-title .vs{color:var(--light-grey);font-size:.45em;vertical-align:middle;padding:0 .25em;font-family:var(--font-ui);font-weight:600;}
-h1.game-title .ai{color:var(--orange);}
-.title-tag{font-size:clamp(18px,2vw,23px);color:var(--dark-grey);max-width:760px;margin:20px 0 8px;line-height:1.55;}
-.title-tag strong{color:var(--midnight);}
-.title-actions{display:flex;gap:16px;margin-top:32px;flex-wrap:wrap;justify-content:center;}
-.title-foot{margin-top:26px;font-size:14px;color:var(--light-grey);}
-.kbd{background:var(--white);border:1.5px solid #d9d2c5;border-bottom-width:3px;border-radius:6px;padding:1px 7px;font-family:inherit;font-weight:600;}
+h1.game-title{font-family:var(--font-slab);font-weight:700;font-size:clamp(56px,9vh,104px);line-height:1;color:var(--pacific);}
+.q-or{font-family:var(--font-ui);font-weight:600;font-size:.45em;color:var(--light-grey);vertical-align:.15em;padding:0 .22em;}
+.q-ai{color:var(--orange);}
+.title-tag{font-size:clamp(19px,2.6vh,25px);color:var(--dark-grey);max-width:780px;margin:22px 0 0;line-height:1.5;}
+.title-actions{display:flex;gap:14px;margin-top:34px;flex-wrap:wrap;justify-content:center;align-items:center;}
+.title-foot{margin-top:28px;font-size:15px;color:var(--light-grey);}
+.kbd{background:var(--white);border:1.5px solid #d9d2c5;border-bottom-width:3px;border-radius:6px;padding:1px 7px;font-weight:600;}
 
-/* ---------- Teacher's quick guide (collapsed by default) ---------- */
-.teacher-guide{max-width:820px;width:100%;margin-top:26px;background:var(--white);border-radius:var(--radius);box-shadow:var(--shadow-card);text-align:left;}
-.teacher-guide summary{cursor:pointer;padding:17px 26px;font-weight:700;font-size:16px;color:var(--midnight);list-style:none;display:flex;align-items:center;gap:10px;}
-.teacher-guide summary::-webkit-details-marker{display:none;}
-.teacher-guide summary::before{content:"▸";color:var(--orange);font-size:15px;transition:transform .15s;}
-.teacher-guide[open] summary::before{transform:rotate(90deg);}
-.teacher-guide summary .tg-sub{font-weight:500;color:var(--light-grey);font-size:14px;}
-.tg-body{padding:2px 26px 22px;display:grid;gap:11px;}
-.tg-body p{font-size:15.5px;line-height:1.55;color:var(--dark-grey);}
-.tg-body b{color:var(--midnight);}
+/* ---------- shared slide headings ---------- */
+.eyebrow{
+  display:inline-flex;align-items:center;gap:8px;font-weight:800;font-size:13px;letter-spacing:.14em;text-transform:uppercase;
+  color:var(--midnight);background:var(--tech-blue);border-radius:99px;padding:6px 15px;
+}
+.eyebrow.teach{background:var(--sunshine);}
+.eyebrow.t-article{background:var(--light-teal);}
+.eyebrow.t-post{background:var(--light-purple);}
+.slide h2{font-family:var(--font-slab);font-weight:700;font-size:clamp(32px,5.4vh,54px);line-height:1.08;color:var(--midnight);margin:10px 0 6px;}
+.lede{font-size:clamp(19px,2.5vh,25px);line-height:1.45;color:var(--dark-grey);max-width:1000px;}
 
-/* ---------- Training ---------- */
-#screen-training .screen-inner{max-width:1280px;}
-.training-head{display:flex;align-items:center;gap:14px;margin-bottom:6px;}
-.training-step{font-weight:800;font-size:14px;letter-spacing:.14em;color:var(--white);background:var(--pacific);border-radius:99px;padding:6px 16px;text-transform:uppercase;}
-.training-slide h2{font-family:var(--font-slab);font-weight:700;font-size:clamp(34px,4vw,52px);margin:12px 0 10px;color:var(--midnight);}
-.training-slide .lede{font-size:clamp(20px,2vw,26px);line-height:1.5;color:var(--dark-grey);max-width:1000px;}
-.training-slide{display:none;animation:fadein .35s;}
-.training-slide.on{display:block;}
-@keyframes fadein{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
-.clue-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:16px;margin-top:26px;}
-.clue-card{
-  background:var(--white);border-radius:var(--radius);box-shadow:var(--shadow-card);padding:20px 22px;
-  border-top:6px solid var(--teal);
+/* ---------- learn slides ---------- */
+.learn-grid{display:grid;gap:clamp(12px,2vh,20px);margin-top:clamp(16px,3vh,30px);}
+.learn-grid.four{grid-template-columns:repeat(2,1fr);}
+.learn-grid.three{grid-template-columns:repeat(3,1fr);}
+.lcard{
+  background:var(--white);border-radius:var(--radius);box-shadow:var(--shadow-card);
+  padding:clamp(16px,2.6vh,26px) clamp(18px,1.8vw,28px);display:flex;gap:18px;align-items:flex-start;
 }
-.clue-card.img-clue{border-top-color:var(--pacific);}
-.clue-card.txt-clue{border-top-color:var(--purple);}
-.clue-card .clue-emoji{font-size:30px;margin-bottom:8px;}
-.clue-card h3{font-size:23px;font-weight:700;margin-bottom:6px;}
-.clue-card p{font-size:19px;line-height:1.5;color:var(--dark-grey);}
-.sift-list{margin-top:26px;display:grid;gap:14px;}
-.sift-item{
-  display:flex;gap:18px;align-items:flex-start;background:var(--white);border-radius:var(--radius);
-  box-shadow:var(--shadow-card);padding:20px 24px;
+.three .lcard{flex-direction:column;gap:12px;border-top:7px solid var(--c,var(--teal));}
+.lcard .letter{
+  flex:0 0 auto;width:clamp(54px,7.5vh,72px);height:clamp(54px,7.5vh,72px);border-radius:16px;display:flex;align-items:center;justify-content:center;
+  font-family:var(--font-slab);font-weight:700;font-size:clamp(30px,4.5vh,42px);color:var(--white);background:var(--c);
 }
-.sift-letter{
-  flex:0 0 auto;width:56px;height:56px;border-radius:14px;display:flex;align-items:center;justify-content:center;
-  font-family:var(--font-slab);font-weight:700;font-size:32px;color:var(--white);
-}
-.sift-item h3{font-size:25px;margin-bottom:4px;}
-.sift-item p{font-size:20px;line-height:1.55;color:var(--dark-grey);}
-.training-nav{display:flex;gap:14px;margin-top:36px;align-items:center;}
-.training-nav .spacer{flex:1;}
-.tdots{display:flex;gap:8px;}
-.tdots .dot{width:11px;height:11px;border-radius:50%;background:#d9d2c5;cursor:pointer;border:none;padding:0;}
-.tdots .dot.on{background:var(--orange);}
+.lcard .badge-ico{width:58px;height:58px;border-radius:50%;display:flex;align-items:center;justify-content:center;background:var(--tint,var(--tint-teal));color:var(--midnight);}
+.lcard .badge-ico .ico{width:28px;height:28px;stroke-width:1.6;}
+.lcard h3{font-size:clamp(22px,3.1vh,30px);font-weight:700;line-height:1.2;margin-bottom:4px;}
+.lcard p{font-size:clamp(17px,2.4vh,23px);line-height:1.45;color:var(--dark-grey);}
 
-/* hotspot practice */
-.hotspot-wrap{position:relative;max-width:1180px;margin:22px auto 0;}
-.hotspot-wrap img{width:100%;border-radius:var(--radius);box-shadow:var(--shadow-pop);display:block;}
-.hotspot{
-  position:absolute;width:44px;height:44px;border-radius:50%;border:3px solid var(--white);
-  background:rgba(255,76,0,.92);color:var(--white);font-weight:800;font-size:20px;cursor:pointer;
-  display:flex;align-items:center;justify-content:center;box-shadow:0 3px 12px rgba(0,0,0,.35);
-  transition:transform .15s;font-family:var(--font-ui);
+/* ---------- card slides: shared ---------- */
+.card-head{display:flex;align-items:center;gap:14px;flex-wrap:wrap;}
+.card-head h2{margin:0;font-size:clamp(28px,4.4vh,44px);color:var(--pacific);}
+.card-head .spacer{flex:1;}
+.look{display:flex;flex-direction:column;flex:1;min-height:0;}
+.look .content{flex:1;display:flex;flex-direction:column;justify-content:center;margin:clamp(10px,2vh,20px) 0;}
+.vote-row{display:flex;gap:20px;justify-content:center;align-items:center;flex-wrap:wrap;}
+.vote-pill{
+  font-family:var(--font-slab);font-weight:700;font-size:clamp(22px,3.4vh,32px);color:var(--white);
+  border-radius:18px;padding:12px 34px;min-width:240px;text-align:center;line-height:1.1;
 }
-.hotspot:hover{transform:scale(1.15);}
-.hotspot.found{background:var(--green);}
-/* callout layout: markers sit OUTSIDE the photo, thin lines point to the spot */
-.hotspot-wrap.callouts{padding:54px 54px 20px;}
-.callout-svg{position:absolute;inset:0;width:100%;height:100%;pointer-events:none;z-index:1;}
-.callout-svg line.case{stroke:var(--white);stroke-width:4.5;opacity:.85;}
-.callout-svg line.lead{stroke:var(--orange);stroke-width:2;}
-.callout-svg circle{fill:none;stroke:var(--orange);stroke-width:2.5;}
-.callout-svg circle.case{stroke:var(--white);stroke-width:5;opacity:.85;}
-.hotspot-wrap.callouts .hotspot{z-index:2;}
-/* magnifier loupe: hover any zoomable image to inspect details */
+.vote-pill small{display:block;font-family:var(--font-ui);font-weight:600;font-size:14px;opacity:.9;margin-top:4px;}
+.vote-pill.authentic{background:var(--pacific);}
+.vote-pill.ai{background:var(--orange);}
+.vote-hint{font-size:15px;font-weight:600;color:var(--light-grey);text-align:center;margin-top:10px;}
+
+/* the thing being judged: picture, article, or post */
+.pic{display:flex;flex-direction:column;align-items:center;gap:10px;}
+.pic-frame{position:relative;display:inline-block;line-height:0;}
+.pic img{max-width:100%;border-radius:14px;box-shadow:var(--shadow-card);display:block;}
+.look .pic img{max-height:calc(100vh - var(--bar-h) - var(--nav-h) - 330px);min-height:220px;object-fit:contain;}
+.cap{text-align:center;max-width:860px;line-height:1.35;}
+.cap-title{font-family:var(--font-slab);font-weight:700;font-size:clamp(18px,2.4vh,23px);color:var(--midnight);}
+.cap-desc{font-size:15px;color:var(--dark-grey);}
+.cap-credit{font-size:14px;font-weight:600;color:var(--light-grey);margin-top:3px;}
+.cap-credit a{color:var(--pacific);}
+img.zoomable{cursor:zoom-in;}
 #loupe{
-  position:fixed;width:200px;height:200px;border-radius:50%;
+  position:fixed;width:220px;height:220px;border-radius:50%;
   border:3px solid var(--white);outline:2px solid rgba(29,42,68,.35);
   box-shadow:0 8px 30px rgba(0,0,0,.45);background-repeat:no-repeat;background-color:#111;
   pointer-events:none;display:none;z-index:99;
 }
-img.zoomable{cursor:zoom-in;}
-/* download-the-file detective link */
-.img-dl{
-  display:inline-flex;align-items:center;gap:7px;font-family:var(--font-ui);font-weight:700;font-size:14px;
-  color:var(--space-blue);background:var(--white);border:2px solid var(--space-blue);border-radius:99px;
-  padding:6px 16px;text-decoration:none;transition:all .13s;
-}
-.img-dl:hover{background:var(--space-blue);color:var(--white);}
-.img-dl .ico{width:16px;height:16px;}
-.dl-row{display:flex;justify-content:center;margin-top:14px;}
-.zoom-hint{font-size:14px;font-weight:600;color:var(--light-grey);text-align:center;margin-top:10px;display:flex;align-items:center;justify-content:center;gap:6px;}
-.zoom-hint .ico{width:15px;height:15px;}
-/* generic social-media post frame (deliberately unbranded) */
-.social-post{background:var(--white);border-radius:14px;box-shadow:var(--shadow-pop);overflow:hidden;}
-.sp-head{display:flex;align-items:center;gap:10px;padding:12px 14px 9px;}
-.sp-avatar{width:42px;height:42px;border-radius:50%;background:linear-gradient(135deg,var(--pacific),var(--teal));color:var(--white);font-weight:800;font-size:15px;display:flex;align-items:center;justify-content:center;flex:0 0 auto;}
-.sp-name{font-weight:700;font-size:15px;color:var(--midnight);line-height:1.2;}
-.sp-meta{font-size:12.5px;color:var(--light-grey);}
-.sp-dots{margin-left:auto;color:var(--light-grey);font-weight:800;letter-spacing:2px;}
-.sp-text{padding:0 14px 10px;font-size:15px;line-height:1.45;color:var(--dark-grey);}
-.social-post img{width:100%;display:block;border-radius:0;box-shadow:none;}
-/* large clean post for the "examine first" practice step */
-.examine-post{max-width:1080px;margin:22px auto 0;}
-.examine-post .sp-head{padding:16px 20px 11px;}
-.examine-post .sp-avatar{width:48px;height:48px;font-size:17px;}
-.examine-post .sp-name{font-size:19px;}
-.examine-post .sp-meta{font-size:14px;}
-.examine-post .sp-text{font-size:clamp(17px,1.7vw,21px);padding:2px 20px 15px;line-height:1.5;}
-.examine-post .sp-stats{font-size:15px;padding:11px 20px;}
-.examine-post .sp-actions{font-size:16px;}
-.sp-stats{display:flex;justify-content:space-between;align-items:center;padding:9px 14px;font-size:13px;color:var(--light-grey);border-bottom:1px solid #ece4d4;}
-.sp-stats .ico{width:15px;height:15px;color:var(--orange);}
-.sp-actions{display:flex;}
-.sp-actions span{flex:1;display:flex;align-items:center;justify-content:center;gap:7px;padding:10px 0;font-weight:700;font-size:14px;color:var(--light-grey);}
-.sp-actions .ico{width:17px;height:17px;}
-/* clue popover: opens right on the photo, next to the ringed spot, never over it */
-.hotspot-pop{
-  position:absolute;z-index:3;width:min(420px,70%);background:var(--midnight);color:var(--white);
-  border-radius:16px;padding:16px 44px 16px 18px;font-size:clamp(16px,1.5vw,19px);line-height:1.45;
-  box-shadow:var(--shadow-pop);display:none;
-}
-.hotspot-pop.on{display:block;animation:fadein .2s;}
-.hotspot-pop .num{display:inline-flex;width:30px;height:30px;border-radius:50%;background:var(--orange);align-items:center;justify-content:center;font-weight:800;margin-right:8px;vertical-align:-7px;}
-.hotspot-pop .close{position:absolute;top:8px;right:10px;width:28px;height:28px;border-radius:50%;border:none;background:rgba(255,255,255,.15);color:var(--white);font-size:15px;cursor:pointer;}
-.hotspot-pop .close:hover{background:rgba(255,255,255,.3);}
 
 /* generic news-article frame (deliberately unbranded) */
-.article-frame{background:var(--white);border-radius:14px;box-shadow:var(--shadow-pop);overflow:hidden;max-width:880px;margin:0 auto;width:100%;}
+.article-frame{background:var(--white);border-radius:14px;box-shadow:var(--shadow-pop);overflow:hidden;max-width:960px;margin:0 auto;width:100%;}
 .af-bar{display:flex;align-items:center;gap:8px;background:var(--midnight);padding:10px 14px;}
 .af-bar .dot{width:11px;height:11px;border-radius:50%;background:rgba(255,255,255,.35);}
-.af-bar .url{flex:1;min-width:0;background:rgba(255,255,255,.14);color:#cfd6e4;font-size:13px;border-radius:99px;padding:4px 14px;font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
-.af-bar a.url{text-decoration:none;cursor:pointer;}
+.af-bar .url{flex:1;min-width:0;background:rgba(255,255,255,.14);color:#cfd6e4;font-size:14px;border-radius:99px;padding:4px 14px;font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;text-decoration:none;}
 .af-bar a.url:hover{background:rgba(255,255,255,.26);color:#fff;text-decoration:underline;}
-.af-body{padding:26px 34px 30px;}
-.af-kicker{font-size:13px;font-weight:800;letter-spacing:.14em;text-transform:uppercase;color:var(--orange);margin-bottom:10px;}
-.af-headline{font-family:var(--font-slab);font-weight:700;font-size:clamp(26px,3.2vw,44px);line-height:1.15;color:var(--midnight);}
-.af-excerpt{font-family:Georgia,'Times New Roman',serif;font-size:clamp(17px,1.9vw,22px);line-height:1.6;color:var(--dark-grey);margin-top:16px;border-top:1.5px solid #eee7d8;padding-top:14px;}
-.af-excerpt p+p{margin-top:.7em;}
-/* posts shown on the play stage */
-.stage>.social-post{max-width:600px;margin:0 auto;width:100%;}
-.stage>.social-post .sp-text{font-size:clamp(16px,1.8vw,21px);padding:2px 18px 14px;line-height:1.5;}
-.stage>.social-post .sp-head{padding:14px 18px 10px;}
+.af-body{padding:clamp(18px,3vh,30px) clamp(22px,2.6vw,38px);}
+.af-kicker{font-size:13px;font-weight:800;letter-spacing:.14em;text-transform:uppercase;color:var(--pacific);margin-bottom:8px;}
+.af-headline{font-family:var(--font-slab);font-weight:700;font-size:clamp(28px,5vh,48px);line-height:1.14;color:var(--midnight);}
+.af-excerpt{font-family:Georgia,'Times New Roman',serif;font-size:clamp(19px,2.9vh,26px);line-height:1.55;color:var(--dark-grey);margin-top:14px;border-top:1.5px solid #eee7d8;padding-top:14px;}
 
-/* ---------- Card grid ---------- */
-#screen-grid h2{font-family:var(--font-slab);font-weight:700;font-size:clamp(32px,3.6vw,46px);margin-bottom:6px;}
-#screen-grid .lede{font-size:19px;color:var(--dark-grey);margin-bottom:26px;}
-.deck-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(190px,1fr));gap:16px;}
-.deck-card{
-  position:relative;background:var(--white);border:none;border-radius:var(--radius);box-shadow:var(--shadow-card);
-  padding:18px 16px 14px;cursor:pointer;text-align:left;font-family:var(--font-ui);
-  transition:transform .13s, box-shadow .13s;min-height:118px;display:flex;flex-direction:column;gap:8px;
-}
-.deck-card:hover{transform:translateY(-3px);box-shadow:var(--shadow-pop);}
-.deck-card .num{font-family:var(--font-slab);font-weight:700;font-size:34px;color:var(--midnight);line-height:1;}
-.deck-card .badges{display:flex;gap:6px;flex-wrap:wrap;margin-top:auto;}
-.badge{font-size:11.5px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--white);border-radius:99px;padding:3px 10px;}
-.badge.type-article{background:var(--teal);}
-.badge.type-post{background:var(--purple);}
-.badge.type-image{background:var(--pacific);}
-.badge.lvl{background:var(--white);color:var(--midnight);border:1.5px solid var(--midnight);}
-.badge.teach{background:var(--sunshine);color:var(--midnight);}
-.badge.hidden{display:none;}
-.deck-card.done{opacity:.45;}
-.deck-card.done::after{
-  content:"✓";position:absolute;top:10px;right:14px;font-size:24px;font-weight:800;color:var(--green);
-}
-.deck-card.filtered-out{display:none;}
+/* generic social-media post frame (deliberately unbranded) */
+.social-post{background:var(--white);border-radius:14px;box-shadow:var(--shadow-pop);overflow:hidden;max-width:700px;margin:0 auto;width:100%;}
+.sp-head{display:flex;align-items:center;gap:12px;padding:14px 18px 10px;}
+.sp-avatar{width:46px;height:46px;border-radius:50%;background:linear-gradient(135deg,var(--pacific),var(--teal));color:var(--white);font-weight:800;font-size:16px;display:flex;align-items:center;justify-content:center;flex:0 0 auto;}
+.sp-name{font-weight:700;font-size:18px;color:var(--midnight);line-height:1.2;}
+.sp-meta{font-size:13.5px;color:var(--light-grey);}
+.sp-dots{margin-left:auto;color:var(--light-grey);font-weight:800;letter-spacing:2px;}
+.sp-text{padding:2px 18px 14px;font-size:clamp(18px,2.8vh,25px);line-height:1.5;color:var(--dark-grey);}
+.social-post img{width:100%;display:block;border-radius:0;box-shadow:none;}
+.sp-stats{display:flex;justify-content:space-between;align-items:center;padding:10px 18px;font-size:14px;color:var(--light-grey);border-top:1px solid #ece4d4;}
+.sp-stats .ico{color:var(--tangerine);}
+mark.tell{background:linear-gradient(transparent 52%, rgba(255,188,13,.8) 52%);padding:0 2px;border-radius:3px;color:inherit;}
 
-/* ---------- Card play ---------- */
-#screen-card .screen-inner{max-width:1320px;padding-top:20px;}
-.card-topline{display:flex;align-items:center;gap:12px;margin-bottom:16px;flex-wrap:wrap;}
-.card-num-pill{font-family:var(--font-slab);font-weight:700;font-size:20px;background:var(--midnight);color:var(--white);border-radius:12px;padding:4px 16px;}
-.phase-steps{display:flex;gap:6px;margin-left:auto;align-items:center;}
-.phase-step{font-size:13px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--light-grey);padding:5px 13px;border-radius:99px;background:var(--white);border:2px solid transparent;}
-.phase-step.on{color:var(--white);background:var(--orange);}
-.phase-step.past{color:var(--midnight);border-color:#d9d2c5;}
-
-.stage{
-  background:var(--white);border-radius:22px;box-shadow:var(--shadow-card);
-  min-height:430px;padding:26px 40px 30px;display:flex;flex-direction:column;justify-content:center;position:relative;
+/* ---------- reveal: picture on the left, answer on the right ---------- */
+.reveal{display:grid;grid-template-columns:minmax(0,.8fr) minmax(0,1.2fr);gap:clamp(18px,2.4vw,40px);align-items:start;margin-top:clamp(10px,2vh,18px);flex:1;}
+.reveal .left{position:sticky;top:0;}
+.reveal .pic img{max-height:calc(100vh - var(--bar-h) - var(--nav-h) - 200px);}
+.reveal .cap-desc{display:none;}
+.reveal .af-headline{font-size:clamp(22px,3.4vh,34px);}
+.reveal .af-excerpt{font-size:clamp(16px,2.2vh,20px);}
+.reveal .sp-text{font-size:clamp(17px,2.4vh,22px);}
+.verdict{
+  display:inline-flex;align-items:center;gap:14px;border-radius:18px;padding:8px 26px;
+  font-family:var(--font-slab);font-weight:700;font-size:clamp(28px,4.4vh,44px);color:var(--white);
+  animation:stamp .45s cubic-bezier(.2,1.6,.4,1);
 }
-.stage .content-headline{
-  font-family:var(--font-slab);font-weight:700;font-size:clamp(34px,4.2vw,56px);line-height:1.16;color:var(--midnight);
-}
-.stage .content-kicker{font-size:14px;font-weight:700;letter-spacing:.15em;text-transform:uppercase;color:var(--light-grey);margin-bottom:12px;display:flex;align-items:center;gap:10px;}
-.stage .content-kicker::before{content:"";width:34px;height:4px;background:var(--orange);border-radius:2px;display:inline-block;}
-.stage .content-passage{
-  font-family:Georgia,'Times New Roman',serif;font-size:clamp(21px,2.3vw,29px);line-height:1.65;color:var(--dark-grey);
-  max-width:940px;
-}
-.stage .content-passage p+p{margin-top:.8em;}
-.stage .passage-label{margin-top:22px;font-size:16px;color:var(--light-grey);font-style:italic;}
-.stage-img-wrap{display:flex;flex-direction:column;align-items:center;gap:12px;}
-.stage-img-wrap img{max-height:max(360px,calc(100vh - 330px));max-width:100%;border-radius:14px;box-shadow:var(--shadow-card);}
-.stage-img-caption{font-size:16px;color:var(--light-grey);font-style:italic;max-width:860px;text-align:center;}
-.stage-img-caption .cap-title{font-family:var(--font-slab);font-weight:700;font-style:normal;font-size:clamp(18px,1.9vw,23px);color:var(--midnight);}
-.stage-img-caption .cap-desc{font-style:normal;font-size:15px;color:var(--dark-grey);margin-top:2px;}
-.stage-img-caption .cap-credit{font-style:normal;font-size:14px;font-weight:600;color:var(--light-grey);margin-top:7px;}
-.stage-img-caption .cap-credit a{color:var(--pacific);text-decoration:underline;text-underline-offset:2px;}
-.stage-img-caption .cap-credit a:hover{color:var(--orange);}
-.stage-foot{display:flex;gap:14px;margin-top:26px;align-items:center;flex-wrap:wrap;}
-.stage-foot .spacer{flex:1;}
-.hint-quiet{font-size:14px;color:var(--light-grey);}
-
-/* the big question every card page leads with */
-.card-question{font-family:var(--font-slab);font-weight:700;text-align:center;font-size:clamp(26px,2.8vw,38px);color:var(--midnight);margin:0 0 14px;line-height:1.1;}
-.card-question .q-or,.vote-moment h3 .q-or{font-family:var(--font-ui);font-weight:600;font-size:.55em;color:var(--light-grey);vertical-align:.12em;padding:0 .2em;}
-.card-question .q-ai,.vote-moment h3 .q-ai{color:var(--orange);}
-
-/* vote phase: the card stays on screen while the class votes. After the
-   reveal it shrinks so the clues take the stage; posts give way to their
-   copy with the tells marked. */
-.vote-context{margin-bottom:20px;}
-.vote-context .content-kicker{display:none;}
-.vote-context .stage-img-wrap img{max-height:max(280px,calc(100vh - 430px));}
-.vote-context .stage-img-caption{display:none;}
-.vote-context .social-post{max-width:640px;margin:0 auto;}
-.vote-context .sp-actions{display:none;}
-.reveal-panel:has(.vote-moment:not(.concealed)) .vote-context .stage-img-wrap img{max-height:280px;}
-.reveal-panel:has(.vote-moment:not(.concealed)) .vote-context .af-body{padding:14px 24px 16px;}
-.reveal-panel:has(.vote-moment:not(.concealed)) .vote-context .af-headline{font-size:clamp(20px,2.2vw,30px);}
-.reveal-panel:has(.vote-moment:not(.concealed)) .vote-context .af-excerpt{font-size:15px;margin-top:8px;padding-top:8px;}
-.reveal-panel:has(.vote-moment:not(.concealed)) .vote-context .social-post{max-width:520px;}
-.reveal-panel:has(.vote-moment:not(.concealed)) .vote-context .sp-text{font-size:15px;}
-.reveal-panel.has-marked:has(.vote-moment:not(.concealed)) .vote-context{display:none;}
-.content-passage.marked{font-size:clamp(17px,1.7vw,21px);margin-bottom:24px;}
-
-/* vote & reveal: the reveal screen opens on the vote moment (verdict hidden).
-   One click / → lights up the true answer and shows the rest of the reveal. */
-.vote-moment{text-align:center;margin-bottom:22px;}
-.vote-moment h3{font-family:var(--font-slab);font-weight:700;font-size:clamp(26px,3vw,38px);margin-bottom:16px;}
-.vote-btns{display:flex;gap:24px;justify-content:center;flex-wrap:wrap;}
-.vote-big{
-  font-family:var(--font-slab);font-weight:700;font-size:34px;border-radius:22px;
-  padding:24px 52px;color:var(--white);transition:transform .3s, opacity .3s, filter .3s;min-width:250px;
-}
-.vote-big.authentic{background:var(--space-blue);}
-.vote-big.ai{background:var(--orange);}
-.vote-big small{display:block;font-family:var(--font-ui);font-weight:600;font-size:15px;opacity:.85;margin-top:6px;letter-spacing:.05em;}
-/* while votes are open: the truth below stays hidden, and → / click reveals it */
-.vote-moment.concealed ~ .reveal-rest{display:none;}
-.screen-inner:has(.vote-moment.concealed) #btn-next-card,
-.screen-inner:has(.vote-moment.concealed) #btn-finish{display:none;}
-.vote-moment.concealed::after{
-  content:"Votes in? Click to reveal the truth";display:block;margin-top:18px;
-  font-family:var(--font-ui);font-size:13px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--pacific);
-}
-.vote-moment.concealed:hover::after{color:var(--orange);}
-/* after the reveal: the winner lights up, the loser fades, the row shrinks */
-.vote-moment:not(.concealed) h3{display:none;}
-.vote-moment:not(.concealed) .vote-big{font-size:21px;padding:13px 30px;min-width:200px;border-radius:16px;}
-.vote-moment:not(.concealed) .vote-big.win{outline:4px solid var(--sunshine);outline-offset:3px;}
-.vote-moment:not(.concealed) .vote-big.dim{opacity:.28;filter:grayscale(.7);transform:scale(.93);}
-
-/* teaching cards (cards 1-4): each reveal spotlights one SIFT move */
-.sift-spotlight{
-  display:flex;gap:20px;align-items:flex-start;background:var(--white);border:3px solid var(--teal);
-  border-radius:var(--radius);padding:22px 26px;margin:0 0 26px;box-shadow:var(--shadow-card);
-}
-.sift-spotlight h4{font-size:14px;font-weight:800;letter-spacing:.13em;text-transform:uppercase;color:var(--space-blue);margin-bottom:6px;}
-.sift-spotlight p{font-size:clamp(18px,1.9vw,23px);line-height:1.55;color:var(--dark-grey);}
-
-/* reveal phase */
-.reveal-panel .verdict{
-  display:inline-flex;align-items:center;gap:16px;border-radius:20px;padding:18px 34px;margin-bottom:26px;
-  font-family:var(--font-slab);font-weight:700;font-size:clamp(32px,3.6vw,48px);color:var(--white);
-  animation:stamp .4s cubic-bezier(.2,1.6,.4,1);
-}
-@keyframes stamp{from{transform:scale(1.6) rotate(-6deg);opacity:0}to{transform:none;opacity:1}}
-.verdict.authentic{background:var(--space-blue);}
+@keyframes stamp{from{transform:scale(1.5) rotate(-5deg);opacity:0}to{transform:none;opacity:1}}
+.verdict.authentic{background:var(--pacific);}
 .verdict.ai{background:var(--orange);}
-.verdict .vicon{font-size:.9em;}
-.reveal-cols{display:grid;grid-template-columns:1.15fr .85fr;gap:26px;align-items:start;}
-@media (max-width:900px){.reveal-cols{grid-template-columns:1fr;}}
-.reveal-clues h4,.reveal-verify h4{font-size:15px;font-weight:800;letter-spacing:.13em;text-transform:uppercase;color:var(--light-grey);margin-bottom:14px;}
-.reveal-clue{display:flex;gap:14px;align-items:flex-start;margin-bottom:14px;font-size:clamp(16px,1.7vw,19px);line-height:1.5;}
-.reveal-clue .ic{flex:0 0 auto;width:32px;height:32px;border-radius:50%;background:var(--midnight);color:var(--white);display:flex;align-items:center;justify-content:center;font-size:16px;}
-.reveal-verify{background:var(--cream);border-radius:var(--radius);padding:22px 24px;border-left:6px solid var(--teal);}
-.reveal-verify p{font-size:17px;line-height:1.55;color:var(--dark-grey);}
-.reveal-verify .src{margin-top:12px;font-size:15px;font-weight:600;color:var(--space-blue);}
-.reveal-discuss{margin-top:22px;background:var(--midnight);color:var(--white);border-radius:var(--radius);padding:20px 26px;font-size:clamp(17px,1.8vw,21px);line-height:1.5;display:flex;gap:14px;align-items:flex-start;}
-.reveal-discuss .demoji{font-size:26px;}
-/* text highlight in reveal */
-mark.tell{background:linear-gradient(transparent 55%, rgba(255,188,13,.75) 55%);padding:0 2px;border-radius:3px;}
+.verdict .ico{width:.8em;height:.8em;stroke-width:2.4;}
+.sec-h{font-size:13px;font-weight:800;letter-spacing:.13em;text-transform:uppercase;color:var(--light-grey);margin:clamp(10px,1.8vh,20px) 0 8px;}
+.clue{display:flex;gap:14px;align-items:flex-start;margin-bottom:clamp(6px,1.2vh,12px);font-size:clamp(16px,2.25vh,21px);line-height:1.45;color:var(--dark-grey);}
+.clue .n{flex:0 0 auto;width:32px;height:32px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:16px;color:var(--midnight);background:var(--c,var(--sunshine));margin-top:1px;}
+.checkit{display:flex;gap:16px;align-items:flex-start;background:var(--tint-teal);border-radius:var(--radius);padding:16px 20px;margin-top:6px;}
+.checkit .letter{flex:0 0 auto;width:48px;height:48px;border-radius:12px;display:flex;align-items:center;justify-content:center;font-family:var(--font-slab);font-weight:700;font-size:28px;color:var(--white);background:var(--c,var(--teal));}
+.checkit p{font-size:clamp(15px,2.05vh,19px);line-height:1.5;color:var(--dark-grey);}
+.checkit h4{font-size:13px;font-weight:800;letter-spacing:.12em;text-transform:uppercase;color:var(--space-blue);margin-bottom:3px;}
+.links{margin-top:10px;display:flex;flex-wrap:wrap;gap:8px;}
+.links a{font-size:14px;font-weight:600;color:var(--white);background:var(--space-blue);text-decoration:none;border-radius:99px;padding:5px 14px;}
+.links a:hover{background:var(--pacific);}
+.links a .ico{width:.9em;height:.9em;margin-left:3px;}
+.discuss{margin-top:14px;background:var(--purple);color:var(--white);border-radius:var(--radius);padding:16px 22px;font-size:clamp(17px,2.4vh,21px);line-height:1.45;display:flex;gap:14px;align-items:flex-start;}
+.discuss .ico{width:26px;height:26px;flex:0 0 auto;margin-top:2px;}
 
-/* ---------- click-to-reveal builds (slideshow-style) ----------
-   Anything with .reveal-card.concealed hides its .rv text (color:transparent,
-   zero layout shift) behind a "Click to reveal" label. Click, or press →,
-   to reveal. Used on training clue cards, SIFT items, and reveal-phase clues. */
-.reveal-card.concealed{cursor:pointer;}
-.reveal-card .rv{position:relative;display:block;}
-.reveal-card.concealed .rv,.reveal-card.concealed .rv *{color:transparent !important;}
-.reveal-card.concealed .rv mark{background:none;}
-.reveal-card.concealed .rv::after{
-  content:"Click to reveal";position:absolute;left:0;top:3px;
-  font-family:var(--font-ui);font-size:12.5px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;
-  color:var(--pacific);font-style:normal;transition:color .13s;
+/* practice: numbered rings drawn right on the photo */
+.ring{
+  position:absolute;width:clamp(44px,6vh,64px);height:clamp(44px,6vh,64px);transform:translate(-50%,-50%);
+  border:4px solid var(--orange);border-radius:50%;box-shadow:0 0 0 3px rgba(255,255,255,.85);
+  opacity:0;animation:rise .4s var(--ease) forwards;
 }
-.reveal-card.concealed:hover .rv::after{color:var(--orange);}
-.reveal-all{
-  border:none;background:none;font-family:var(--font-ui);font-size:12px;font-weight:700;
-  letter-spacing:.08em;text-transform:uppercase;color:var(--pacific);cursor:pointer;
-  margin-left:10px;text-decoration:underline;text-underline-offset:3px;
+.ring b{
+  position:absolute;top:-14px;right:-14px;width:28px;height:28px;border-radius:50%;background:var(--orange);color:var(--white);
+  font:800 15px/28px var(--font-ui);text-align:center;box-shadow:0 2px 6px rgba(0,0,0,.3);
 }
-.reveal-all:hover{color:var(--orange);}
-.reveal-recap{font-family:var(--font-slab);font-weight:600;font-size:clamp(19px,2vw,25px);color:var(--space-blue);margin-bottom:24px;max-width:900px;line-height:1.35;}
-/* ---- line-icon system ---- */
-.ico{width:1.1em;height:1.1em;display:inline-block;vertical-align:-.18em;flex:0 0 auto;}
-.bar-btn .ico{margin-right:4px;}
-.clue-emoji{line-height:0;color:var(--teal);margin-bottom:10px;}
-.clue-card.img-clue .clue-emoji{color:var(--pacific);}
-.clue-card.txt-clue .clue-emoji{color:var(--purple);}
-.clue-emoji .ico{width:30px;height:30px;stroke-width:1.6;}
-.exit-ticket h3 .ico{width:.85em;height:.85em;vertical-align:-.08em;margin-right:.16em;color:var(--tangerine);}
-.verdict .ico{width:.78em;height:.78em;stroke-width:2.3;}
-.reveal-discuss .demoji{line-height:0;}
-.reveal-discuss .demoji .ico{width:25px;height:25px;stroke-width:1.7;}
-.src .ico{width:1.05em;height:1.05em;vertical-align:-.16em;margin-right:2px;}
-.src-links a .ico{width:.9em;height:.9em;vertical-align:-.06em;stroke-width:2;margin-left:3px;}
-.wrap-medal{line-height:0;margin-bottom:6px;color:var(--orange);}
-.poster-title .ico{width:26px;height:26px;vertical-align:-5px;margin-right:5px;}
-.article-excerpt{font-family:Georgia,'Times New Roman',serif;font-size:clamp(18px,1.9vw,24px);line-height:1.6;color:var(--dark-grey);max-width:920px;margin-top:26px;padding-top:22px;border-top:1.5px solid #e5ddce;}
-.article-excerpt p+p{margin-top:.75em;}
-.src-links{margin-top:14px;display:flex;flex-wrap:wrap;gap:8px;align-items:center;}
-.src-links span{font-size:13px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--light-grey);}
-.src-links a{font-size:14.5px;font-weight:600;color:var(--white);background:var(--space-blue);text-decoration:none;border-radius:99px;padding:5px 14px;}
-.src-links a:hover{background:var(--pacific);}
 
-/* ---------- Wrap-up ---------- */
-#screen-wrapup .screen-inner{text-align:center;max-width:940px;}
-#screen-wrapup h2{font-family:var(--font-slab);font-weight:700;font-size:clamp(40px,5vw,64px);margin:20px 0 10px;}
-.exit-ticket{background:var(--white);border-radius:var(--radius);box-shadow:var(--shadow-card);padding:30px 36px;text-align:left;margin-top:14px;}
-.exit-ticket h3{font-family:var(--font-slab);font-size:26px;margin-bottom:12px;display:flex;gap:10px;align-items:center;}
-.exit-ticket p{font-size:20px;line-height:1.6;color:var(--dark-grey);}
+/* ---------- end slide ---------- */
+.end-slide .inner{text-align:center;max-width:960px;}
+.medal{width:clamp(80px,12vh,112px);height:clamp(80px,12vh,112px);border-radius:50%;background:var(--sunshine);display:flex;align-items:center;justify-content:center;margin:0 auto 8px;}
+.medal .ico{width:58%;height:58%;stroke-width:1.4;}
+.exit-ticket{background:var(--white);border-radius:var(--radius);box-shadow:var(--shadow-card);padding:26px 34px;text-align:left;margin-top:22px;border-top:7px solid var(--pink);}
+.exit-ticket h3{font-family:var(--font-slab);font-size:26px;margin-bottom:10px;display:flex;gap:10px;align-items:center;}
+.exit-ticket h3 .ico{color:var(--pink);}
+.exit-ticket p{font-size:clamp(19px,2.6vh,23px);line-height:1.55;color:var(--dark-grey);}
 
-/* ---------- Checklist drawer ---------- */
-#drawer{
-  position:fixed;top:64px;right:0;bottom:0;width:min(430px,92vw);background:var(--midnight);color:var(--white);
-  z-index:60;transform:translateX(105%);transition:transform .28s cubic-bezier(.4,0,.2,1);
-  box-shadow:-8px 0 40px rgba(0,0,0,.3);overflow-y:auto;padding:30px 30px 50px;
+/* ---------- menu panel ---------- */
+#overlay{position:fixed;inset:0;background:rgba(29,42,68,.4);z-index:55;opacity:0;pointer-events:none;transition:opacity .25s;}
+#overlay.on{opacity:1;pointer-events:auto;}
+.panel{
+  position:fixed;top:0;right:0;bottom:0;width:min(440px,92vw);z-index:60;overflow-y:auto;
+  transform:translateX(105%);transition:transform .3s var(--ease);box-shadow:-8px 0 40px rgba(0,0,0,.25);
+  padding:28px 28px 40px;
 }
-#drawer.open{transform:none;}
-#drawer h3{font-family:var(--font-slab);font-size:28px;margin-bottom:4px;color:var(--white);}
-#drawer .dsub{color:var(--tech-blue);font-size:14px;font-weight:600;margin-bottom:22px;}
-#drawer h4{font-size:13px;font-weight:800;letter-spacing:.14em;text-transform:uppercase;color:var(--sunshine);margin:22px 0 10px;}
+.panel.open{transform:none;}
+.panel .close{position:absolute;top:16px;right:16px;width:38px;height:38px;border-radius:50%;border:none;font-size:18px;cursor:pointer;}
+.panel h3{font-family:var(--font-slab);font-size:28px;margin-bottom:4px;}
+#menu{background:var(--white);color:var(--midnight);}
+#menu .close{background:var(--cream);color:var(--midnight);}
+#menu h4{font-size:12.5px;font-weight:800;letter-spacing:.13em;text-transform:uppercase;color:var(--light-grey);margin:24px 0 10px;}
+.jump-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:8px;}
+.jump-grid button{
+  border:none;border-radius:12px;padding:10px 0;font-family:var(--font-slab);font-weight:700;font-size:22px;cursor:pointer;
+  color:var(--midnight);background:var(--tint-blue);
+}
+.jump-grid button.t-article{background:var(--tint-teal);}
+.jump-grid button.t-post{background:var(--tint-purple);}
+.jump-grid button.done{background:var(--light-green);}
+.jump-grid button:hover{outline:2.5px solid var(--midnight);}
+.menu-row{
+  display:flex;align-items:center;gap:12px;width:100%;text-align:left;border:none;background:none;
+  font-size:16px;font-weight:600;color:var(--midnight);padding:11px 12px;border-radius:12px;cursor:pointer;
+}
+.menu-row:hover{background:var(--cream);}
+.menu-row small{display:block;font-weight:400;color:var(--light-grey);font-size:13px;}
+.menu-row .ico{width:22px;height:22px;color:var(--pacific);}
+.howto p{font-size:15px;line-height:1.55;color:var(--dark-grey);margin-bottom:8px;}
+.howto b{color:var(--midnight);}
+#btn-reset.arm{background:var(--tint-orange);color:#b33600;}
+
+/* checklist drawer */
+#drawer{background:var(--midnight);color:var(--white);}
+#drawer .close{background:rgba(255,255,255,.12);color:var(--white);}
+#drawer .dsub{color:var(--tech-blue);font-size:14px;font-weight:600;margin-bottom:18px;}
+#drawer h4{font-size:13px;font-weight:800;letter-spacing:.14em;text-transform:uppercase;color:var(--sunshine);margin:20px 0 8px;}
+#drawer h4:nth-of-type(2){color:var(--tech-blue);}
+#drawer h4:nth-of-type(3){color:var(--light-green);}
 #drawer ul{list-style:none;}
-#drawer li{padding:7px 0 7px 30px;position:relative;font-size:15.5px;line-height:1.45;color:#e8ecf4;}
-#drawer li::before{content:"";position:absolute;left:2px;top:16px;width:11px;height:2px;background:var(--tech-blue);border-radius:2px;}
-#drawer .close-drawer{position:absolute;top:18px;right:18px;background:rgba(255,255,255,.12);border:none;color:var(--white);width:36px;height:36px;border-radius:50%;font-size:18px;cursor:pointer;}
+#drawer li{padding:7px 0 7px 26px;position:relative;font-size:16px;line-height:1.45;color:#e8ecf4;}
+#drawer li::before{content:"";position:absolute;left:2px;top:17px;width:11px;height:2px;background:var(--tech-blue);border-radius:2px;}
 
-/* ---------- Overlay ---------- */
-#overlay{position:fixed;inset:0;background:rgba(29,42,68,.4);z-index:55;display:none;}
-#overlay.on{display:block;}
-
-/* ---------- Print menu ---------- */
-#printmenu{
-  position:fixed;top:70px;right:20px;background:var(--white);border-radius:16px;box-shadow:var(--shadow-pop);
-  z-index:70;padding:10px;display:none;min-width:290px;
+/* ---------- smaller screens ---------- */
+@media (max-width:980px){
+  .reveal{grid-template-columns:1fr;}
+  .reveal .left{position:static;}
+  .learn-grid.three{grid-template-columns:1fr;}
 }
-#printmenu.open{display:block;}
-#printmenu button{
-  display:block;width:100%;text-align:left;border:none;background:none;font-family:var(--font-ui);
-  font-size:15px;font-weight:600;color:var(--midnight);padding:12px 14px;border-radius:10px;cursor:pointer;
+@media (max-width:760px){
+  .brand-sub,.bar-btn .lbl{display:none;}
+  .learn-grid.four{grid-template-columns:1fr;}
+  .map .pip,.map-label,.map-sep{display:none;}
+  #nav-next{min-width:0;font-size:16px;padding:12px 18px;}
+  #nav-next .k{display:none;}
+  .vote-pill{min-width:0;padding:10px 20px;}
 }
-#printmenu button:hover{background:var(--cream);}
-#printmenu button small{display:block;font-weight:400;color:var(--light-grey);font-size:13px;margin-top:2px;}
-#printmenu .pm-head{font-size:12px;font-weight:800;letter-spacing:.13em;text-transform:uppercase;color:var(--light-grey);padding:8px 14px 4px;}
 
 /* ============================================================
    PRINTABLES: hidden on screen, shown via body.print-*
    ============================================================ */
+.lcard .hand{margin-top:8px;font-size:clamp(14px,1.9vh,17px);font-weight:600;color:var(--space-blue);display:flex;gap:7px;align-items:center;}
+.lcard .hand .ico{color:var(--tangerine);}
+.truth{display:flex;gap:12px;align-items:flex-start;margin-top:clamp(14px,2.4vh,24px);background:var(--tint-sun);border-radius:14px;padding:14px 20px;font-size:clamp(16px,2.2vh,20px);line-height:1.45;color:var(--dark-grey);max-width:1100px;}
+.truth .ico{width:24px;height:24px;color:var(--tangerine);margin-top:2px;}
+.stem{font-size:15px;color:var(--light-grey);text-align:center;margin-top:4px;}
+.stem b{color:var(--midnight);}
+
 .printable{display:none;}
 @media print{
-  @page{margin:.55in;}
-  body{overflow:visible;background:#fff;font-size:12px;}
-  #appbar,.screen,#drawer,#overlay,#printmenu{display:none !important;}
-  .printable{display:none;}
-  body.print-evidence #print-evidence{display:block;}
-  body.print-evidence-open #print-evidence-open{display:block;}
-  body.print-checklist #print-checklist{display:block;}
-  body.print-answers #print-answers{display:block;}
+  @page{margin:.5in;}
+  html,body{height:auto;overflow:visible;background:#fff;font-size:12px;}
+  #appbar,#deck,#nav,.panel,#overlay,#loupe,#ed-bar{display:none !important;}
+  body[data-print="print-plan"] #print-plan,
+  body[data-print="print-evidence"] #print-evidence,
+  body[data-print="print-checklist"] #print-checklist,
+  body[data-print="print-bookmarks"] #print-bookmarks,
+  body[data-print="print-exit"] #print-exit,
+  body[data-print="print-answers"] #print-answers{display:block;}
   .printable{color:#000;font-family:var(--font-ui);}
-  .p-header{display:flex;align-items:baseline;justify-content:space-between;border-bottom:3px solid #000;padding-bottom:8px;margin-bottom:14px;}
-  .p-header .p-title{font-family:var(--font-slab);font-weight:700;font-size:22px;}
-  .p-header .p-brand{font-size:11px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;}
-  .p-nameline{display:flex;gap:24px;font-size:12px;margin-bottom:14px;}
-  .p-nameline span{flex:1;border-bottom:1px solid #000;padding-bottom:2px;}
-  /* student case cards: half-sheets, two per page with a cut line */
+  .printable .edubug{width:16px;height:16px;vertical-align:-4px;}
+  .p-header{display:flex;align-items:baseline;justify-content:space-between;border-bottom:3px solid #000;padding-bottom:6px;margin-bottom:10px;}
+  .p-header .p-title{font-family:var(--font-slab);font-weight:700;font-size:21px;}
+  .p-header .p-brand{font-size:9.5px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;}
+
+  /* lesson plan */
+  .pl-goal{font-size:11px;line-height:1.45;margin-bottom:8px;}
+  .pl-table{width:100%;border-collapse:collapse;font-size:10.5px;margin-bottom:10px;}
+  .pl-table th,.pl-table td{border:1px solid #000;padding:4px 7px;text-align:left;vertical-align:top;line-height:1.35;}
+  .pl-table th{background:#eee;font-size:10px;text-transform:uppercase;letter-spacing:.05em;}
+  .pl-table td:first-child{white-space:nowrap;font-weight:700;}
+  .pl-cols{display:grid;grid-template-columns:1fr 1fr;gap:8px;}
+  .pl-box{border:1.5px solid #000;border-radius:8px;padding:7px 10px;break-inside:avoid;}
+  .pl-box h3{font-family:var(--font-slab);font-size:13px;margin-bottom:4px;}
+  .pl-box ol,.pl-box ul{padding-left:16px;font-size:10.5px;line-height:1.45;}
+  .pl-research{margin-top:9px;font-size:9.5px;line-height:1.45;border-top:1.5px solid #000;padding-top:6px;}
+
+  /* SIFT poster */
+  .poster{border:4px solid #000;border-radius:18px;padding:.25in .3in;}
+  .poster-top{font-size:11px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;}
+  .poster-h{font-family:var(--font-slab);font-size:40px;line-height:1.05;margin:6px 0 14px;text-align:center;}
+  .poster-sift{display:grid;gap:10px;}
+  .ps-row{display:flex;gap:16px;align-items:center;border:2px solid #000;border-radius:14px;padding:8px 14px;}
+  .ps-L{flex:0 0 auto;width:72px;height:72px;border-radius:14px;background:#000;color:#fff;font-family:var(--font-slab);font-weight:700;font-size:50px;display:flex;align-items:center;justify-content:center;-webkit-print-color-adjust:exact;print-color-adjust:exact;}
+  .ps-name{font-family:var(--font-slab);font-weight:700;font-size:22px;}
+  .ps-say{font-size:13.5px;line-height:1.35;}
+  .ps-hand{font-size:12.5px;font-weight:700;margin-top:3px;}
+  .poster-cols{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:12px;}
+  .poster-box{border:2px solid #000;border-radius:12px;padding:8px 12px;}
+  .poster-box h3{font-family:var(--font-slab);font-size:17px;margin-bottom:4px;}
+  .poster-box ul{list-style:none;}
+  .poster-box li{font-size:11.5px;line-height:1.4;padding:2px 0;}
+  .poster-remember{margin-top:12px;text-align:center;font-size:14px;border:2px dashed #000;border-radius:12px;padding:8px;}
+
+  /* bookmarks: four tall strips */
+  .bm-page{display:grid;grid-template-columns:repeat(4,1fr);gap:0;height:9.7in;}
+  .bm{border:1.5px dashed #888;padding:.22in .16in;display:flex;flex-direction:column;justify-content:space-between;gap:10px;}
+  .bm-top{text-align:center;font-size:11px;border-bottom:2px solid #000;padding-bottom:7px;}
+  .bm-top .edubug{width:28px !important;height:28px !important;display:block;margin:0 auto 4px;}
+  .bm-big{font-family:var(--font-slab);font-weight:700;font-size:30px;line-height:1;}
+  .bm-row{display:flex;flex-direction:column;align-items:center;text-align:center;gap:6px;line-height:1.3;}
+  .bm-row b{font-size:15px;}
+  .bm-row span{font-size:11px;}
+  .bm-L{flex:0 0 auto;width:64px;height:64px;border:3px solid #000;border-radius:14px;font:700 44px/1 'Zilla Slab',Rockwell,serif !important;display:flex;align-items:center;justify-content:center;}
+  .bm-clues{font-size:10.5px;line-height:1.5;border-top:1.5px solid #000;padding-top:8px;}
+  .bm-name{font-size:10.5px;}
+
+  /* writing cards */
   .hs-page{break-after:page;}
-  .halfsheet{height:4.5in;border:2px solid #000;border-radius:12px;padding:.16in .22in;display:flex;flex-direction:column;break-inside:avoid;overflow:hidden;}
-  .hs-cut{height:.5in;display:flex;align-items:center;gap:10px;color:#777;font-size:10px;font-weight:600;}
+  .halfsheet{height:4.6in;border:2px solid #000;border-radius:12px;padding:.15in .22in;display:flex;flex-direction:column;break-inside:avoid;overflow:hidden;}
+  .hs-cut{height:.4in;display:flex;align-items:center;gap:10px;color:#777;font-size:10px;font-weight:600;}
   .hs-cut::before,.hs-cut::after{content:"";flex:1;border-top:1.5px dashed #999;}
   .hs-top{display:flex;justify-content:space-between;align-items:baseline;border-bottom:2.5px solid #000;padding-bottom:4px;margin-bottom:6px;}
   .hs-top .t1{font-family:var(--font-slab);font-weight:700;font-size:17px;}
   .hs-top .t2{font-size:9px;font-weight:700;letter-spacing:.09em;text-transform:uppercase;display:flex;align-items:center;gap:5px;}
-  .printable .edubug{width:16px;height:16px;vertical-align:-4px;}
   .hs-name{font-size:11px;display:flex;gap:16px;margin-bottom:6px;}
   .hs-name span{flex:1;border-bottom:1px solid #000;padding-bottom:2px;}
   .hs-name span.short{flex:0 0 1.2in;}
   .hs-row{font-size:11.5px;margin:3px 0;}
   .hs-row .circle{display:inline-block;width:12px;height:12px;border:1.5px solid #000;border-radius:50%;vertical-align:-2px;margin:0 4px 0 12px;}
   .hs-lbl{font-size:10.5px;font-weight:700;margin-top:6px;}
-  .hs-line{border-bottom:1px solid #888;height:.27in;}
+  .hs-line{border-bottom:1px solid #888;height:.26in;}
   .hs-starter{font-size:9.5px;font-style:italic;color:#444;margin-top:2px;}
-  .hs-sift{font-size:10.5px;margin-top:7px;line-height:1.7;}
-  .hs-sift .sbubble{border:1.5px solid #000;border-radius:99px;padding:1px 8px;font-weight:700;white-space:nowrap;margin-right:4px;}
-  .hs-foot{font-size:9px;color:#555;margin-top:auto;padding-top:4px;}
-  /* checklist poster */
-  #print-checklist h2.poster-title{font-family:var(--font-slab);font-size:30px;text-align:center;margin:6px 0 2px;}
-  #print-checklist .poster-sub{text-align:center;font-size:12px;margin-bottom:14px;}
-  .poster-cols{display:grid;grid-template-columns:1fr 1fr;gap:14px;}
-  .poster-box{border:2px solid #000;border-radius:10px;padding:10px 14px;break-inside:avoid;}
-  .poster-box h3{font-family:var(--font-slab);font-size:16px;border-bottom:2px solid #000;padding-bottom:4px;margin-bottom:8px;}
-  .poster-box ul{list-style:none;padding:0;}
-  .poster-box li{font-size:11.5px;line-height:1.45;padding:3px 0 3px 18px;position:relative;}
-  .poster-box li::before{content:"☐";position:absolute;left:0;}
-  .poster-box.full{grid-column:1/-1;}
-  .sift-print{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-top:4px;}
-  .sift-print div{border:1.5px solid #000;border-radius:8px;padding:8px;font-size:10.5px;line-height:1.35;}
-  .sift-print b{font-size:15px;display:block;font-family:var(--font-slab);}
+  .hs-sift{font-size:10.5px;margin-top:7px;line-height:1.8;}
+  .hs-sift .sbubble{border:1.5px solid #000;border-radius:99px;padding:1px 7px;font-weight:700;margin:0 3px 0 8px;}
+
+  /* exit tickets: 2 x 2 */
+  .et-page{display:grid;grid-template-columns:1fr 1fr;grid-template-rows:1fr 1fr;height:9.7in;}
+  .et{border:1.5px dashed #888;padding:.2in;display:flex;flex-direction:column;gap:5px;}
+  .et-top{display:flex;flex-direction:column;border-bottom:2px solid #000;padding-bottom:4px;margin-bottom:4px;}
+  .et-top b{font-family:var(--font-slab);font-size:18px;}
+  .et-top span{font-size:8px;text-transform:uppercase;letter-spacing:.06em;}
+  .et-q{font-size:12px;line-height:1.35;margin-top:8px;}
+  .et .hs-line{height:.32in;}
+  .et-sift{display:grid;grid-template-columns:1fr 1fr;gap:14px 10px;font-size:12.5px;font-weight:700;margin-top:8px;}
+
   /* answer key */
-  #print-answers .ak-item{border-bottom:1px solid #999;padding:8px 0;break-inside:avoid;font-size:11px;line-height:1.4;}
-  #print-answers .ak-item .ak-head{font-weight:700;font-size:12px;}
-  #print-answers .ak-verdict{display:inline-block;border:1.5px solid #000;border-radius:99px;padding:0 8px;font-weight:700;font-size:10px;margin-left:6px;}
+  #print-answers .ak-item{border-bottom:1px solid #999;padding:7px 0;break-inside:avoid;font-size:10.5px;line-height:1.4;}
+  #print-answers .ak-head{font-weight:700;font-size:11.5px;}
+  #print-answers .ak-verdict{display:inline-block;border:1.5px solid #000;border-radius:99px;padding:0 8px;font-weight:700;font-size:9.5px;margin-left:6px;}
 }
 
-/* ============================================================
-   COLOR PASS: Edutopia palette, front-of-room friendly
-   Electric Orange stays rare: the edu bug, the one main button,
-   and the "AI" answer. Everything else draws on the blues and
-   the secondary palette, with Midnight text on bright colors so
-   it reads from the back row.
-   Authentic = Pacific Blue · AI = Electric Orange, everywhere.
-   ============================================================ */
-
-/* ---- app bar: palette ribbon under the brand ---- */
-#appbar::after{
-  content:"";position:absolute;left:0;right:0;top:100%;height:6px;
-  background:linear-gradient(90deg,
-    var(--pink) 0 14.3%,var(--light-purple) 0 28.6%,var(--pacific) 0 42.9%,var(--light-teal) 0 57.2%,
-    var(--green) 0 71.5%,var(--sunshine) 0 85.8%,var(--tangerine) 0);
-}
-.bar-btn{border-color:transparent;background:var(--tint-blue);}
-#btn-grid{background:var(--tint-sun);}
-#btn-print{background:var(--tint-teal);}
-.bar-btn:focus-visible,.btn:focus-visible,.deck-card:focus-visible{outline:3px solid var(--pacific);outline-offset:3px;}
-#progressdots .dot{width:10px;height:10px;}
-#progressdots .dot.done{background:var(--green);}
-#progressdots .dot.current{background:var(--pacific);}
-
-/* ---- screen backdrops: flat circles, like the bug, tucked in the corners ---- */
-.screen{
-  --r1:min(15vw,210px);--r2:min(11vw,150px);--r3:min(17vw,240px);
-  background:
-    radial-gradient(circle at 100% 0,var(--tint-blue) 0 var(--r1),transparent calc(var(--r1) + 1.5px)),
-    radial-gradient(circle at 0 100%,var(--tint-sun) 0 var(--r3),transparent calc(var(--r3) + 1.5px)),
-    radial-gradient(circle at 100% 100%,var(--tint-teal) 0 var(--r2),transparent calc(var(--r2) + 1.5px)),
-    var(--cream);
-}
-#screen-title,#screen-wrapup{
-  background:
-    radial-gradient(circle at 0 0,var(--sunshine) 0 var(--r1),transparent calc(var(--r1) + 1.5px)),
-    radial-gradient(circle at 100% 14%,var(--tech-blue) 0 var(--r2),transparent calc(var(--r2) + 1.5px)),
-    radial-gradient(circle at 3% 100%,var(--light-teal) 0 var(--r2),transparent calc(var(--r2) + 1.5px)),
-    radial-gradient(circle at 100% 100%,var(--light-purple) 0 var(--r3),transparent calc(var(--r3) + 1.5px)),
-    var(--cream);
-}
-
-/* ---- title ---- */
-.edubug.big{width:84px;height:84px;margin-bottom:16px;}
-.title-kicker{background:var(--sunshine);border-color:var(--sunshine);color:var(--midnight);}
-h1.game-title,.card-question,.vote-moment h3{color:var(--pacific);}
-.how-steps{display:flex;gap:14px;flex-wrap:wrap;justify-content:center;margin-top:24px;}
-.how-step{
-  display:flex;align-items:center;gap:12px;text-align:left;background:var(--white);
-  border-radius:16px;box-shadow:var(--shadow-card);padding:12px 20px 12px 12px;
-}
-.how-step b{display:block;font-size:17px;color:var(--midnight);}
-.how-step small{display:block;font-size:14px;color:var(--light-grey);margin-top:1px;}
-.how-ico{width:46px;height:46px;border-radius:50%;display:flex;align-items:center;justify-content:center;color:var(--midnight);flex:0 0 auto;}
-.how-ico .ico{width:24px;height:24px;}
-.how-step.s1 .how-ico{background:var(--sunshine);}
-.how-step.s2 .how-ico{background:var(--pink);}
-.how-step.s3 .how-ico{background:var(--light-green);}
-.teacher-guide summary::before{color:var(--pacific);}
-
-/* ---- the three phases keep their colors on every card ---- */
-.phase-step.on{color:var(--midnight);}
-.phase-step[data-phase="examine"].on{background:var(--sunshine);}
-.phase-step[data-phase="reveal"].on{background:var(--light-green);}
-
-/* ---- training ---- */
-.training-step{background:var(--tech-blue);color:var(--midnight);}
-.tdots .dot.on{background:var(--pacific);}
-.clue-card .clue-emoji{
-  width:58px;height:58px;border-radius:50%;display:flex;align-items:center;justify-content:center;
-  background:var(--tint-teal);color:var(--space-blue);
-}
-.clue-card.img-clue .clue-emoji{background:var(--tint-blue);color:var(--space-blue);}
-.clue-card.txt-clue .clue-emoji{background:var(--tint-purple);color:var(--purple);}
-.clue-grid>.clue-card:not(.img-clue):not(.txt-clue):nth-child(1){border-top-color:var(--sunshine);}
-.clue-grid>.clue-card:not(.img-clue):not(.txt-clue):nth-child(1) .clue-emoji{background:var(--tint-sun);}
-.clue-grid>.clue-card:not(.img-clue):not(.txt-clue):nth-child(2){border-top-color:var(--pink);}
-.clue-grid>.clue-card:not(.img-clue):not(.txt-clue):nth-child(2) .clue-emoji{background:var(--tint-pink);color:var(--purple);}
-.clue-grid>.clue-card:not(.img-clue):not(.txt-clue):nth-child(3){border-top-color:var(--green);}
-.clue-grid>.clue-card:not(.img-clue):not(.txt-clue):nth-child(3) .clue-emoji{background:var(--tint-green);}
-.reveal-card.concealed:hover .rv::after,.vote-moment.concealed:hover::after,.reveal-all:hover{color:var(--purple);}
-
-/* ---- card types: Picture = Tech Blue · Article = Light Teal · Post = Light Purple ---- */
-.badge.type-image,.badge.type-article,.badge.type-post{color:var(--midnight);}
-.badge.type-image{background:var(--tech-blue);}
-.badge.type-article{background:var(--light-teal);}
-.badge.type-post{background:var(--light-purple);}
-.deck-grid{grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:18px;}
-.deck-card{min-height:150px;padding:18px 18px 16px;border-radius:20px;overflow:hidden;}
-.deck-card.t-image{background:var(--tech-blue);}
-.deck-card.t-article{background:var(--light-teal);}
-.deck-card.t-post{background:var(--light-purple);}
-.deck-card .num{font-size:56px;}
-.deck-card .type-ico{position:absolute;top:16px;right:16px;color:var(--midnight);opacity:.55;line-height:0;}
-.deck-card .type-ico .ico{width:34px;height:34px;stroke-width:1.5;}
-.deck-card .badge{background:var(--white);color:var(--midnight);}
-.deck-card .badge.teach{background:var(--midnight);color:var(--white);}
-.deck-card.done{opacity:.5;}
-.deck-card.done .type-ico{display:none;}
-.deck-card.done::after{
-  top:14px;right:14px;width:38px;height:38px;border-radius:50%;background:var(--white);color:var(--green);
-  display:flex;align-items:center;justify-content:center;font-size:22px;
-}
-.stage{border-top:8px solid var(--tech-blue);}
-.stage[data-type="article"]{border-top-color:var(--light-teal);}
-.stage[data-type="post"]{border-top-color:var(--light-purple);}
-.stage .content-kicker::before{background:var(--sunshine);}
-.af-kicker{color:var(--pacific);}
-.sp-stats .ico{color:var(--tangerine);}
-
-/* ---- vote & reveal ---- */
-.vote-big.authentic,.verdict.authentic{background:var(--pacific);}
-.reveal-clue:nth-of-type(4n+1) .ic{background:var(--sunshine);color:var(--midnight);}
-.reveal-clue:nth-of-type(4n+2) .ic{background:var(--light-teal);color:var(--midnight);}
-.reveal-clue:nth-of-type(4n+3) .ic{background:var(--light-purple);color:var(--midnight);}
-.reveal-clue:nth-of-type(4n+4) .ic{background:var(--light-green);color:var(--midnight);}
-.reveal-clue .ic{font-weight:800;}
-.reveal-verify{background:var(--tint-teal);}
-.reveal-discuss{background:var(--purple);}
-
-/* ---- wrap-up ---- */
-.wrap-medal{
-  width:112px;height:112px;border-radius:50%;background:var(--sunshine);color:var(--midnight);
-  display:flex;align-items:center;justify-content:center;margin:0 auto 6px;
-}
-.exit-ticket{border-top:6px solid var(--pink);}
-.exit-ticket h3 .ico{color:var(--pink);}
-
-/* ---- checklist drawer: one color per section ---- */
-#drawer h4:nth-of-type(2){color:var(--tech-blue);}
-#drawer h4:nth-of-type(3){color:var(--light-green);}
-
-/* ---------- Responsive ---------- */
-@media (max-width:760px){
-  .screen-inner{padding:24px 18px 50px;}
-  .stage{padding:28px 22px;}
-  .brand-sub{display:none;}
-  #progressdots{display:none;}
-}
 </style>
+
 </head>
 <body>
 
-<!-- ================= APP BAR ================= -->
+<!-- ================= TOP BAR ================= -->
 <header id="appbar">
-  <button class="brand" id="btn-home" title="Back to title screen">
+  <button class="brand" id="btn-home" title="Back to the title slide">
     <span class="edubug" role="img" aria-label="Edutopia"></span>
     <span>
       <span class="brand-name">Authentic or AI?</span>
-      <span class="brand-sub" style="display:block">An Edutopia Media Literacy Game</span>
+      <span class="brand-sub">An Edutopia Media Literacy Game</span>
     </span>
   </button>
   <div class="spacer"></div>
-  <div id="progressdots" title="Cards completed"></div>
-  <button class="bar-btn hidden" id="btn-grid">Card Grid</button>
-  <button class="bar-btn" id="btn-checklist"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="M20.5 20.5 16.8 16.8"/></svg> Clue Checklist <span style="opacity:.5;font-weight:600">C</span></button>
-  <button class="bar-btn" id="btn-print"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 9V3h10v6"/><rect x="3" y="9" width="18" height="8" rx="2"/><rect x="7" y="14" width="10" height="6" rx="1"/><path d="M17 12.3h.01"/></svg> Print Materials</button>
+  <button class="bar-btn" id="btn-checklist" title="Clue Checklist (C)"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="M20.5 20.5 16.8 16.8"/></svg><span class="lbl">Clue Checklist</span></button>
+  <button class="bar-btn" id="btn-full" title="Full screen (F)"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 9V4h5M20 9V4h-5M4 15v5h5M20 15v5h-5"/></svg><span class="lbl">Full Screen</span></button>
+  <button class="bar-btn" id="btn-menu" title="Jump to a card, printables, how to use"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"/></svg><span class="lbl">Menu</span></button>
 </header>
 
-<!-- ================= PRINT MENU ================= -->
-<div id="printmenu">
-  <div class="pm-head">Print-ready materials</div>
-  <button data-print="print-evidence">Student Writing Cards (Scaffolded)<small>10 half-sheet cards with sentence starters · cut each page in two</small></button>
-  <button data-print="print-evidence-open">Student Writing Cards (Open)<small>10 half-sheet cards with blank lines · for confident writers</small></button>
-  <button data-print="print-checklist">Clue Checklist Poster<small>One-page reference to keep on desks</small></button>
-  <button data-print="print-answers">Teacher Answer Key<small>All 10 verdicts, clues &amp; sources</small></button>
-</div>
+<!-- ================= THE DECK (slides render here) ================= -->
+<main id="deck" aria-live="polite"></main>
+
+<!-- ================= BOTTOM NAV ================= -->
+<nav id="nav" aria-label="Slide controls">
+  <button class="btn" id="nav-back">← Back</button>
+  <div class="map" id="map"></div>
+  <button class="btn btn-dark" id="nav-next">Next →</button>
+</nav>
+
+<!-- ================= MENU ================= -->
+<div id="overlay"></div>
+<aside class="panel" id="menu" aria-label="Menu">
+  <button class="close" data-close aria-label="Close">✕</button>
+  <h3>Menu</h3>
+  <h4>Jump to</h4>
+  <button class="menu-row" id="jump-learn"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 6C10 4.6 6.6 4.6 4 5.2v13c2.6-.6 6-.6 8 1 2-1.6 5.4-1.6 8-1v-13c-2.6-.6-6-.6-8 .8Z"/><path d="M12 6v12"/></svg><span>The lesson (SIFT + clues + practice)</span></button>
+  <div class="jump-grid" id="jump-grid" style="margin-top:8px"></div>
+  <h4>Printables</h4>
+  <div id="print-list"></div>
+  <h4>How to use</h4>
+  <div class="howto">
+    <p><b>Just press Next</b> (or <span class="kbd">→</span>, space, or a clicker). It walks through the whole lesson: 3 short slides, 1 practice photo, then 10 cards.</p>
+    <p><b>Each card has two steps.</b> First the class looks, talks, and votes with hands up. Press <b>Reveal</b> to show the answer and the clues.</p>
+    <p><b>Cards 1-4</b> (gold rings below) you solve together. <b>Cards 5-10</b> the class tries on their own.</p>
+    <p><b>Hover any picture</b> to zoom in. Progress saves on this computer, so you can stop and pick up next class.</p>
+  </div>
+  <h4>Start fresh</h4>
+  <button class="menu-row" id="btn-reset"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 12a8 8 0 1 0 2.4-5.7L4 8.5"/><path d="M4 4v4.5h4.5"/></svg><span>Start over<small>Clears the saved progress for a new class</small></span></button>
+</aside>
 
 <!-- ================= CHECKLIST DRAWER ================= -->
-<div id="overlay"></div>
-<aside id="drawer" aria-label="Clue checklist">
-  <button class="close-drawer" id="btn-close-drawer" aria-label="Close">✕</button>
-  <h3><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="M20.5 20.5 16.8 16.8"/></svg> Clue Checklist</h3>
-  <div class="dsub">Keep this open while you look</div>
+<aside class="panel" id="drawer" aria-label="Clue checklist">
+  <button class="close" data-close aria-label="Close">✕</button>
+  <h3>Clue Checklist</h3>
+  <div class="dsub">Keep this open while the class looks</div>
   <h4>Start with your SIFT moves</h4>
   <ul>
     <li><b>Stop</b>: don’t share or believe it yet. How does it make you feel?</li>
@@ -748,105 +565,13 @@ h1.game-title,.card-question,.vote-moment h3{color:var(--pacific);}
   </ul>
 </aside>
 
-<!-- ================= TITLE SCREEN ================= -->
-<section class="screen active" id="screen-title">
-  <div class="screen-inner">
-    <span class="edubug big" role="img" aria-label="Edutopia"></span>
-    <div class="title-kicker">A Media Literacy Game for Class</div>
-    <h1 class="game-title">Authentic <span class="vs">or</span> <span class="ai">AI?</span></h1>
-    <p class="title-tag">Ten cards: pictures, news stories, and posts. Some are real. Some were made by AI. Learn the clues, practice on one photo, then vote as a class.</p>
-    <div class="how-steps" aria-label="How the game works">
-      <div class="how-step s1"><span class="how-ico"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 6C10 4.6 6.6 4.6 4 5.2v13c2.6-.6 6-.6 8 1 2-1.6 5.4-1.6 8-1v-13c-2.6-.6-6-.6-8 .8Z"/><path d="M12 6v12"/></svg></span><span><b>1 · Learn</b><small>SIFT moves and 6 clues</small></span></div>
-      <div class="how-step s2"><span class="how-ico"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="M20.5 20.5 16.8 16.8"/></svg></span><span><b>2 · Practice</b><small>Find the clues in one photo</small></span></div>
-      <div class="how-step s3"><span class="how-ico"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4.5 12.5 9.5 17.5 20 6.5"/></svg></span><span><b>3 · Play</b><small>Look, vote, and reveal</small></span></div>
-    </div>
-    <div class="title-actions">
-      <button class="btn btn-primary hidden" id="btn-continue">Continue →</button>
-      <button class="btn btn-primary" id="btn-start-training">Start →</button>
-      <button class="btn btn-ghost" id="btn-skip-to-cards">Skip to the Cards</button>
-      <button class="btn btn-ghost hidden" id="btn-title-restart">Start Over</button>
-    </div>
-    <details class="teacher-guide">
-      <summary>Teacher's Quick Guide <span class="tg-sub">· 1-minute read</span></summary>
-      <div class="tg-body">
-        <p><b>What this is:</b> a slideshow you drive from the front of the room. Nothing advances on its own, and clues stay hidden until you reveal them.</p>
-        <p><b>The flow:</b> 5 short slides teach the SIFT moves and 3 clues for pictures + 3 for writing, with one practice photo. Then come 10 cards. <b>Cards 1-4</b> you solve together, and each spotlights one SIFT move. <b>Cards 5-10</b> are the game. Every card: <b>look and talk</b>, then <b>vote and reveal</b>.</p>
-        <p><b>Pacing:</b> one period = the slides + the 4 teaching cards; the game cards another day, or one card a day. Progress is saved on this device, and <b>Continue</b> picks up where you left off.</p>
-        <p><b>Optional writing:</b> half-sheet writing cards for every card are under <b>Print Materials</b> (top right), with a clue poster and the answer key.</p>
-        <p><b>Driving it:</b> <span class="kbd">→</span> reveals the next clue, then advances. <span class="kbd">←</span> goes back. <span class="kbd">C</span> opens the Clue Checklist. Hover any picture to zoom in.</p>
-      </div>
-    </details>
-    <p class="title-foot">Keyboard: <span class="kbd">→</span> reveal &amp; advance · <span class="kbd">←</span> back · <span class="kbd">C</span> checklist</p>
-  </div>
-</section>
-
-<!-- ================= TRAINING ================= -->
-<section class="screen" id="screen-training">
-  <div class="screen-inner">
-    <div id="training-slides"></div>
-    <div class="training-nav">
-      <button class="btn btn-ghost btn-sm" id="btn-tprev">← Back</button>
-      <div class="spacer"></div>
-      <div class="tdots" id="tdots"></div>
-      <div class="spacer"></div>
-      <button class="btn btn-dark" id="btn-tnext">Next →</button>
-    </div>
-  </div>
-</section>
-
-<!-- ================= CARD GRID ================= -->
-<section class="screen" id="screen-grid">
-  <div class="screen-inner">
-    <h2>Pick a Card</h2>
-    <p class="lede">Cards <b>1-4</b> we solve together. Cards <b>5-10</b> are the game!</p>
-    <p class="hint-quiet" style="margin:6px 0 20px">Press → to play the cards in order</p>
-    <div class="deck-grid" id="deck-grid"></div>
-  </div>
-</section>
-
-<!-- ================= CARD PLAY ================= -->
-<section class="screen" id="screen-card">
-  <div class="screen-inner">
-    <div class="card-topline">
-      <div class="card-num-pill" id="card-num">Card 1</div>
-      <span class="badge" id="card-type-badge"></span>
-      <span class="badge teach hidden" id="card-teach-badge">Teaching Card · Solve It Together</span>
-      <div class="phase-steps">
-        <span class="phase-step" data-phase="examine">1 · Look &amp; Talk</span>
-        <span class="phase-step" data-phase="reveal">2 · Vote &amp; Reveal</span>
-      </div>
-    </div>
-    <div class="stage" id="stage"></div>
-    <div class="stage-foot" id="stage-foot"></div>
-  </div>
-</section>
-
-<!-- ================= WRAP-UP ================= -->
-<section class="screen" id="screen-wrapup">
-  <div class="screen-inner">
-    <div class="wrap-medal"><svg class="ico" style="width:68px;height:68px;stroke-width:1.35" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="8.5" r="5.5"/><path d="M8.4 13 7 22l5-2.7L17 22l-1.4-9"/></svg></div>
-    <h2>You Did It!</h2>
-    <p class="lede" style="font-size:21px;color:var(--dark-grey)">You looked closely, found the clues, and checked the sources. That is what smart media users do every day.</p>
-    <div class="exit-ticket">
-      <h3><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 20h4L19 9l-4-4L4 16Z"/><path d="M14 6l4 4"/></svg> Exit Ticket</h3>
-      <p><b>Which clue will you use in real life?</b> Tell about one thing you saw online that you want to double-check, and the SIFT move you would use on it.</p>
-    </div>
-    <div class="title-actions" style="margin-top:30px">
-      <button class="btn btn-dark" id="btn-play-again">Back to Card Grid</button>
-      <button class="btn btn-ghost" id="btn-restart">Start Over</button>
-    </div>
-  </div>
-</section>
-
-<!-- ============================================================
-     PRINTABLE 1: EVIDENCE SHEET (SCAFFOLDED)
-     ============================================================ -->
+<!-- ================= PRINTABLES (built by script) ================= -->
+<div class="printable" id="print-plan"></div>
 <div class="printable" id="print-evidence"></div>
-<!-- PRINTABLE 2: EVIDENCE SHEET (OPEN) -->
 <div class="printable" id="print-evidence-open"></div>
-<!-- PRINTABLE 3: CHECKLIST POSTER -->
 <div class="printable" id="print-checklist"></div>
-<!-- PRINTABLE 4: TEACHER ANSWER KEY -->
+<div class="printable" id="print-bookmarks"></div>
+<div class="printable" id="print-exit"></div>
 <div class="printable" id="print-answers"></div>
 
 <script>
@@ -886,7 +611,7 @@ const LOUPE=document.createElement('div'); LOUPE.id='loupe'; document.body.appen
 function attachLoupe(img){
   img.classList.add('zoomable');
   img.addEventListener('pointermove',e=>{
-    const r=img.getBoundingClientRect(), Z=2.75, S=200;
+    const r=img.getBoundingClientRect(), Z=2.75, S=220;
     const x=e.clientX-r.left, y=e.clientY-r.top;
     LOUPE.style.display='block';
     LOUPE.style.left=(e.clientX-S/2)+'px';
@@ -898,100 +623,147 @@ function attachLoupe(img){
   img.addEventListener('pointerleave',()=>{LOUPE.style.display='none';});
 }
 
-const state={
-  completed:{},           // cardId -> true
-  current:null, phase:'examine',
-  trainingIdx:0,
-};
-
-function show(screenId){
-  $$('.screen').forEach(s=>s.classList.remove('active'));
-  $('#'+screenId).classList.add('active');
-  $('#btn-grid').classList.toggle('hidden', screenId==='screen-title');
-  if(screenId==='screen-title') updateTitleActions();
-  window.scrollTo(0,0);
-}
-
-/* title screen adapts to saved progress: mid-deck, "Continue" jumps straight
-   to the next card so part two is one click */
-function nextUncompleted(){ return activeCards().find(c=>!state.completed[c.id]); }
-function updateTitleActions(){
-  const started=Object.keys(state.completed).length>0;
-  const next=nextUncompleted();
-  const mid=started&&!!next;
-  const cont=$('#btn-continue');
-  cont.classList.toggle('hidden',!mid);
-  if(mid) cont.textContent='Continue: Card '+next.n+' →';
-  $('#btn-start-training').classList.toggle('btn-primary',!mid);
-  $('#btn-start-training').classList.toggle('btn-ghost',mid);
-  $('#btn-title-restart').classList.toggle('hidden',!started);
-}
-
-/* ---------- persistence: progress survives a reload / next class period ---------- */
-function saveState(){
-  try{ localStorage.setItem('authentic-or-ai-k5',JSON.stringify({
-    completed:state.completed
-  })); }catch(e){}
-}
-function loadState(){
-  try{
-    const s=JSON.parse(localStorage.getItem('authentic-or-ai-k5')); if(!s) return;
-    state.completed=s.completed||{};
-  }catch(e){}
-}
-function clearState(){ try{ localStorage.removeItem('authentic-or-ai-k5'); }catch(e){} }
-
-/* ---------- deck helpers ---------- */
-function activeCards(){ return CARDS; }
-function renderDots(){
-  const cards=activeCards();
-  $('#progressdots').innerHTML=cards.map(c=>{
-    const cls=state.completed[c.id]?'done':(state.current&&state.current.id===c.id?'current':'');
-    return `<span class="dot ${cls}"></span>`;
-  }).join('');
-}
-
-/* ---------- deck grid ---------- */
+/* ============================================================
+   THE SLIDESHOW
+   One list of slides. Next → always moves forward:
+   on a card it first reveals the answer, then goes to the next card.
+   ============================================================ */
 const TYPE_LABEL={image:'Picture',article:'Article',post:'Post'};
-const TYPE_ICON={image:'image',article:'news',post:'chat'};
-function renderGrid(){
-  $('#deck-grid').innerHTML=activeCards().map(c=>`
-    <button class="deck-card t-${c.type} ${state.completed[c.id]?'done':''}" data-id="${c.id}">
-      <span class="num">${c.n}</span>
-      <span class="type-ico">${ico(TYPE_ICON[c.type])}</span>
-      <span class="badges">
-        <span class="badge type-${c.type}">${TYPE_LABEL[c.type]}</span>
-        ${c.teach?'<span class="badge teach">Learn Together</span>':''}
-      </span>
-    </button>`).join('');
-  renderDots();
-}
-$('#deck-grid').addEventListener('click',e=>{
-  const b=e.target.closest('.deck-card'); if(!b)return;
-  openCard(CARDS.find(c=>c.id===b.dataset.id));
-});
+const LEARN=[]; /* filled in the CONTENT section */
+let SLIDES=[];
+const state={ i:0, step:0, completed:{} };
+const KEY='authentic-or-ai-v2';
 
-/* ---------- card play ---------- */
-function openCard(card){
-  state.current=card; state.phase='examine';
-  show('screen-card'); renderPhase(); renderDots();
+function buildSlides(){
+  SLIDES=[{kind:'title'}]
+    .concat(LEARN.map(l=>({kind:'learn',learn:l})))
+    .concat([{kind:'practice'}])
+    .concat(CARDS.map(c=>({kind:'card',card:c})))
+    .concat([{kind:'end'}]);
 }
-function cardIndex(){ return activeCards().findIndex(c=>c.id===state.current.id); }
+const cur=()=>SLIDES[state.i];
+const steps=s=>(s.kind==='card'||s.kind==='practice')?2:1;
+const slideOfCard=n=>SLIDES.findIndex(s=>s.kind==='card'&&s.card.n===n);
 
-function setPhaseSteps(){
-  const order=['examine','reveal'];
-  const cur=order.indexOf(state.phase);
-  $$('.phase-step').forEach(el=>{
-    const i=order.indexOf(el.dataset.phase);
-    el.classList.toggle('on',i===cur);
-    el.classList.toggle('past',i<cur);
+/* ---------- persistence: pick up where you left off next class ---------- */
+function saveState(){ try{ localStorage.setItem(KEY,JSON.stringify({i:state.i,completed:state.completed})); }catch(e){} }
+function loadState(){
+  try{ const s=JSON.parse(localStorage.getItem(KEY)); if(!s) return;
+    state.completed=s.completed||{}; state.saved=Math.min(+s.i||0,SLIDES.length-1); }catch(e){}
+}
+function clearState(){ try{ localStorage.removeItem(KEY); }catch(e){} state.completed={}; state.saved=0; }
+
+/* ---------- moving around ---------- */
+function go(i,step,dir){
+  i=Math.max(0,Math.min(SLIDES.length-1,i));
+  const back=dir===-1;
+  state.i=i; state.step=step||0;
+  if(i>0){ state.saved=i; }
+  render(back?'enter-back':'enter');
+  saveState();
+}
+function next(){
+  const s=cur();
+  if(state.step<steps(s)-1){ state.step++; render('none'); return; }
+  if(state.i<SLIDES.length-1) go(state.i+1,0,1);
+}
+function back(){
+  if(state.step>0){ state.step--; render('none'); return; }
+  if(state.i>0){ const p=SLIDES[state.i-1]; go(state.i-1,steps(p)-1,-1); }
+}
+
+/* ---------- render ---------- */
+function render(anim){
+  const s=cur(), deck=$('#deck');
+  if(s.kind==='card'&&state.step===1){ state.completed[s.card.id]=true; saveState(); }
+  document.body.classList.toggle('on-title',s.kind==='title');
+  document.body.classList.toggle('on-end',s.kind==='end');
+  let html='';
+  if(s.kind==='title') html=titleHTML();
+  else if(s.kind==='learn') html=`<div class="inner">${s.learn.html}</div>`;
+  else if(s.kind==='practice') html=practiceHTML();
+  else if(s.kind==='card') html=cardHTML(s.card);
+  else html=endHTML();
+  deck.innerHTML=`<section class="slide ${s.kind}-slide ${anim&&anim!=='none'?anim:''}">${html}</section>`;
+  deck.querySelectorAll('.pic img').forEach(im=>{attachLoupe(im); if(!im.complete) im.addEventListener('load',fitSlide,{once:true});});
+  if(s.kind==='title') wireTitle();
+  if(s.kind==='end') wireEnd();
+  renderNav();
+  fitSlide();
+}
+
+/* every slide fits the screen: if it runs long, ease the text down a little */
+function fitSlide(){
+  const sl=$('#deck .slide'); if(!sl) return;
+  const t=sl.querySelector('.reveal .right')||sl.querySelector('.inner'); if(!t) return;
+  t.style.zoom=1;
+  let z=1;
+  while(sl.scrollHeight-sl.clientHeight>2&&z>0.72){ z-=0.04; t.style.zoom=z; }
+}
+let fitT=null;
+window.addEventListener('resize',()=>{clearTimeout(fitT);fitT=setTimeout(fitSlide,120);});
+document.addEventListener('fullscreenchange',()=>setTimeout(fitSlide,150));
+
+function renderNav(){
+  const s=cur();
+  $('#nav-back').disabled=state.i===0;
+  const nb=$('#nav-next');
+  let label='Next', reveal=false;
+  if((s.kind==='card'||s.kind==='practice')&&state.step===0){ label='Reveal the Answer'; reveal=true; }
+  else if(SLIDES[state.i+1]&&SLIDES[state.i+1].kind==='card') label=s.kind==='card'?'Next Card':'Start Card 1';
+  else if(SLIDES[state.i+1]&&SLIDES[state.i+1].kind==='practice') label='Practice';
+  else if(SLIDES[state.i+1]&&SLIDES[state.i+1].kind==='end') label='Finish';
+  nb.innerHTML=label+' →';
+  nb.classList.toggle('is-reveal',reveal);
+  nb.style.visibility=s.kind==='end'?'hidden':'visible';
+  /* progress map: lesson pips, then card numbers */
+  const pip=(idx,cls,title,txt)=>`<button class="${cls} ${idx===state.i?'here':(idx<state.i||state.done?'':'')}" data-go="${idx}" title="${title}">${txt||''}</button>`;
+  let learn='', cards='';
+  SLIDES.forEach((sl,idx)=>{
+    if(sl.kind==='learn'||sl.kind==='practice'){
+      learn+=`<button class="pip ${idx===state.i?'here':(idx<state.i?'done':'')}" data-go="${idx}" title="${sl.kind==='practice'?'Practice':'Lesson slide'}"></button>`;
+    }
+    if(sl.kind==='card'){
+      const c=sl.card;
+      cards+=`<button class="num ${idx===state.i?'here':(state.completed[c.id]?'done':'')} ${c.teach?'teach':''}" data-go="${idx}" title="Card ${c.n}">${c.n}</button>`;
+    }
   });
+  $('#map').innerHTML=`<div class="map-group"><span class="map-label">Learn</span>${learn}</div><span class="map-sep"></span><div class="map-group"><span class="map-label">Cards</span>${cards}</div>`;
+}
+$('#map').addEventListener('click',e=>{const b=e.target.closest('[data-go]'); if(b) go(+b.dataset.go,0, +b.dataset.go<state.i?-1:1);});
+$('#nav-next').onclick=next;
+$('#nav-back').onclick=back;
+
+/* ---------- title ---------- */
+function titleHTML(){
+  const resumeAt=state.saved&&state.saved>0&&state.saved<SLIDES.length-1?state.saved:0;
+  const rs=resumeAt?SLIDES[resumeAt]:null;
+  const rsName=rs?(rs.kind==='card'?'Card '+rs.card.n:(rs.kind==='practice'?'the practice photo':'the lesson')):'';
+  return `<div class="inner">
+    <span class="edubug big" role="img" aria-label="Edutopia"></span>
+    <div class="title-kicker">A Media Literacy Game for Class</div>
+    <h1 class="game-title">Authentic <span class="q-or">or</span> <span class="q-ai">AI?</span></h1>
+    <p class="title-tag">Some pictures and stories online are real. Some were made by AI. Today we learn how to tell, and how to check before we share.</p>
+    <div class="title-actions">
+      ${resumeAt
+        ?`<button class="btn btn-primary" id="t-resume">Continue: ${rsName} →</button>
+          <button class="btn btn-ghost" id="t-start">Start from the beginning</button>`
+        :`<button class="btn btn-primary" id="t-start">Start →</button>`}
+      <button class="btn btn-ghost" id="t-print">${ico('printer')} Printables</button>
+    </div>
+    <p class="title-foot">Press <span class="kbd">→</span> or click <b>Next</b> to move through the whole lesson. About 45 minutes.</p>
+  </div>`;
+}
+function wireTitle(){
+  const r=$('#t-resume'); if(r) r.onclick=()=>go(state.saved,0,1);
+  $('#t-start').onclick=()=>go(1,0,1);
+  $('#t-print').onclick=()=>openPanel('menu','print-list');
 }
 
-function contentHTML(card){
+/* ---------- the thing being judged ---------- */
+function contentHTML(card,revealed){
   if(card.type==='article'){
-    return `<div class="content-kicker">A news story from the internet</div>
-      <div class="article-frame">
+    return `<div class="article-frame">
         <div class="af-bar"><span class="dot"></span><span class="dot"></span><span class="dot"></span>${card.url
           ?`<a class="url" href="${card.href||'https://'+card.url}" target="_blank" rel="noopener" title="Open this address in a new tab">${card.url}</a>`
           :`<span class="url">news-site.com/todays-story</span>`}</div>
@@ -1003,222 +775,204 @@ function contentHTML(card){
       </div>`;
   }
   if(card.type==='post'){
-    return `<div class="content-kicker">A post from a social feed</div>
-      <div class="social-post">
+    return `<div class="social-post">
         <div class="sp-head">
           <div class="sp-avatar">${card.postAvatar||'??'}</div>
-          <div>
-            <div class="sp-name">${card.postName||'Someone Online'}</div>
-            <div class="sp-meta">${card.postMeta||'Just now'} · ${ico('globe')}</div>
-          </div>
+          <div><div class="sp-name">${card.postName||'Someone Online'}</div>
+            <div class="sp-meta">${card.postMeta||'Just now'} · ${ico('globe')}</div></div>
           <div class="sp-dots">···</div>
         </div>
-        <p class="sp-text">${card.postText}</p>
+        <div class="sp-text">${revealed&&card.revealContent?card.revealContent:card.postText}</div>
         <div class="sp-stats"><span>${ico('star')} ${card.postLikes||'1,024 favorites'}</span><span>${card.postShares||'212 comments · 458 shares'}</span></div>
-        <div class="sp-actions"><span>${ico('star')} Favorite</span><span>${ico('chat')} Comment</span><span>${ico('share')} Share</span></div>
       </div>`;
   }
   const src=IMG[card.img];
   const cap=card.photo
-    ?`<div class="stage-img-caption">
+    ?`<div class="cap">
         <div class="cap-title">${card.photo.title}</div>
         <div class="cap-desc">${card.photo.desc}</div>
         <div class="cap-credit">Photo by ${card.photo.by} · <a href="${card.photo.url}" target="_blank" rel="noopener" title="Open the photo source in a new tab">${card.photo.link}</a></div>
       </div>`
-    :`<div class="stage-img-caption">${card.caption||'Look closely. Real photo, or AI?'}</div>`;
-  return `<div class="stage-img-wrap">
-      ${src?`<img src="${src}" alt="${card.alt||'Mystery image'}">`:`<div style="padding:80px;text-align:center;color:var(--light-grey)">[ Image asset missing: ${card.img} ]</div>`}
-      ${cap}
+    :`<div class="cap">${card.caption||''}</div>`;
+  return `<div class="pic"><div class="pic-frame">${src?`<img src="${src}" alt="${card.alt||'Mystery image'}">`:''}</div>${cap}</div>`;
+}
+
+const VOTE_ROW=`<div class="vote-row">
+    <div class="vote-pill authentic">Authentic<small>it’s real</small></div>
+    <div class="vote-pill ai">AI-Made<small>a computer made it</small></div>
+  </div>
+  <div class="vote-hint"><b>Think</b> on your own · <b>Pair</b> with a partner · then hands up to <b>vote</b></div>
+  <div class="stem">Say: <b>“I think it’s ___ because I noticed ___.”</b></div>`;
+const CLUE_COLORS=['var(--sunshine)','var(--light-teal)','var(--light-purple)','var(--light-green)'];
+
+function cardHead(card){
+  return `<div class="card-head">
+    <span class="eyebrow t-${card.type}">Card ${card.n} of ${CARDS.length} · ${TYPE_LABEL[card.type]}</span>
+    ${card.teach?'<span class="eyebrow teach">Solve it together</span>':''}
+  </div>`;
+}
+
+function cardHTML(card){
+  if(state.step===0){
+    return `<div class="look inner">
+      <div class="card-head" style="justify-content:space-between">
+        <div class="card-head"><span class="eyebrow t-${card.type}">Card ${card.n} of ${CARDS.length} · ${TYPE_LABEL[card.type]}</span>${card.teach?'<span class="eyebrow teach">Solve it together</span>':''}</div>
+        <h2>Authentic <span class="q-or">or</span> <span class="q-ai">AI?</span></h2>
+      </div>
+      <div class="content">${contentHTML(card,false)}</div>
+      ${VOTE_ROW}
     </div>`;
+  }
+  const isAuth=card.answer==='authentic';
+  const L=card.teach&&card.sift?card.sift.letter:((card.verify.match(/SIFT move: <b>(\w)/)||[])[1]||'S');
+  const checkText=card.teach&&card.sift?card.sift.lesson:card.verify;
+  const checkHead=card.teach&&card.sift?'The SIFT move this card teaches: '+card.sift.move:'How you could check it';
+  let d=0; const delay=()=>`style="animation-delay:${(d+=.12).toFixed(2)}s"`;
+  return `<div class="inner">
+    ${cardHead(card)}
+    <div class="reveal">
+      <div class="left">${contentHTML(card,true)}</div>
+      <div class="right">
+        <div class="verdict ${card.answer}">${isAuth?ico('check'):ico('cpu')} ${isAuth?'Authentic':'AI-Made'}</div>
+        <div class="sec-h rise" ${delay()}>How we know</div>
+        ${card.clues.map((c,i)=>`<div class="clue rise" ${delay()}><span class="n" style="--c:${CLUE_COLORS[i%4]}">${i+1}</span><span>${c}</span></div>`).join('')}
+        <div class="checkit rise" ${delay()} style="--c:${SIFT_COLORS[L]||'var(--teal)'}">
+          <div class="letter">${L}</div>
+          <div><h4>${checkHead}</h4><p>${checkText}</p>
+          ${card.links&&card.links.length?`<div class="links">${card.links.map(l=>`<a href="${l.url}" target="_blank" rel="noopener">${l.label} ${ico('arrowUR')}</a>`).join('')}</div>`:''}</div>
+        </div>
+        <div class="discuss rise" ${delay()}>${ico('chat')}<span><b>Talk about it:</b> ${card.discuss}</span></div>
+      </div>
+    </div>
+  </div>`;
 }
 
-function renderPhase(){
-  const card=state.current;
-  $('#card-num').textContent='Card '+card.n;
-  const tb=$('#card-type-badge');
-  tb.textContent=TYPE_LABEL[card.type]; tb.className='badge type-'+card.type;
-  $('#card-teach-badge').classList.toggle('hidden',!card.teach);
-  setPhaseSteps();
-  const stage=$('#stage'), foot=$('#stage-foot');
-  stage.dataset.type=card.type;
-  const qHead=`<h2 class="card-question">Authentic <span class="q-or">or</span> <span class="q-ai">AI?</span></h2>`;
-
-  if(state.phase==='examine'){
-    stage.innerHTML=qHead+contentHTML(card);
-    const zi=stage.querySelector('.stage-img-wrap img'); if(zi) attachLoupe(zi);
-    foot.innerHTML=`
-      <span class="spacer"></span>
-      <button class="btn btn-dark" id="btn-to-vote">Vote →</button>`;
-    $('#btn-to-vote').onclick=()=>{state.phase='reveal';renderPhase();};
-  }
-
-  else if(state.phase==='reveal'){
-    const isAuth=card.answer==='authentic';
-    state.completed[card.id]=true;
-    renderDots(); saveState();
-
-    /* the card stays on screen while the class votes; one click / → lights
-       up the true answer and opens the clues */
-    stage.innerHTML=`<div class="reveal-panel ${card.revealContent?'has-marked':''}">
-      <div class="vote-context">${contentHTML(card)}</div>
-      <div class="vote-moment reveal-card concealed" id="vote-moment" title="Reveal the truth">
-        <h3>Vote! Authentic <span class="q-or">or</span> <span class="q-ai">AI?</span></h3>
-        <div class="vote-btns">
-          <div class="vote-big authentic ${isAuth?'win':'dim'}">AUTHENTIC<small>real: it really happened</small></div>
-          <div class="vote-big ai ${isAuth?'dim':'win'}">AI-MADE<small>made by a computer</small></div>
-        </div>
-      </div>
-      <div class="reveal-rest">
-      <div class="verdict ${card.answer}">
-        <span class="vicon">${isAuth?ico('check'):ico('cpu')}</span>
-        <span>${isAuth?'AUTHENTIC':'AI-MADE'}</span>
-      </div>
-      ${card.revealContent?`<div class="content-passage marked">${card.revealContent}</div>`:''}
-      <div class="reveal-cols">
-        <div class="reveal-clues">
-          <h4>The clues that give it away <button class="reveal-all" id="btn-clues-all">Show all</button></h4>
-          ${card.clues.map((c,i)=>`<div class="reveal-clue reveal-card concealed"><span class="ic">${i+1}</span><span class="rv">${c}</span></div>`).join('')}
-        </div>
-        <div class="reveal-verify">
-          <h4>How you could check it</h4>
-          <p>${card.verify}</p>
-          ${card.source?`<div class="src">${ico('bookmark')} ${card.source}</div>`:''}
-          ${card.links&&card.links.length?`<div class="src-links"><span>Check it yourself:</span>${card.links.map(l=>`<a href="${l.url}" target="_blank" rel="noopener">${l.label} ${ico('arrowUR')}</a>`).join('')}</div>`:''}
-        </div>
-      </div>
-      ${card.teach&&card.sift?`<div class="sift-spotlight reveal-card concealed" style="border-color:${SIFT_COLORS[card.sift.letter]};margin:26px 0 0">
-        <div class="sift-letter" style="background:${SIFT_COLORS[card.sift.letter]}">${card.sift.letter}</div>
-        <div><h4>The SIFT move this card teaches: ${card.sift.move}</h4><span class="rv"><p>${card.sift.lesson}</p></span></div>
-      </div>`:''}
-      <div class="reveal-discuss"><span class="demoji">${ico('chat')}</span><span><b>Discuss:</b> ${card.discuss}</span></div>
-      </div>
+/* ---------- practice photo: same two steps as a card ---------- */
+function practiceHTML(){
+  const P=PRACTICE;
+  const post=`<div class="social-post" style="max-width:${state.step?'100%':'760px'}">
+      <div class="sp-head"><div class="sp-avatar">SS</div>
+        <div><div class="sp-name">Summit Squad Adventures</div><div class="sp-meta">Yesterday at 6:12 AM · ${ico('globe')}</div></div>
+        <div class="sp-dots">···</div></div>
+      <div class="sp-text">${P.text}</div>
+      <div class="pic"><div class="pic-frame"><img src="${IMG.mountain||''}" alt="${P.alt}">
+        ${state.step?P.spots.map((s,i)=>`<span class="ring" style="left:${s.x}%;top:${s.y}%;animation-delay:${(i*.25).toFixed(2)}s"><b>${i+1}</b></span>`).join(''):''}
+      </div></div>
     </div>`;
-    const vz=stage.querySelector('.vote-context img'); if(vz) attachLoupe(vz);
-    $('#btn-clues-all').onclick=()=>$$('#stage .reveal-card.concealed').forEach(x=>x.classList.remove('concealed'));
-
-    const remaining=activeCards().filter(c=>!state.completed[c.id]).length;
-    foot.innerHTML=`
-      <button class="btn btn-ghost btn-sm" id="btn-back-look">← Look Again</button>
-      <button class="btn btn-ghost btn-sm" id="btn-back-grid">Card Grid</button>
-      <span class="spacer"></span>
-      ${remaining? `<button class="btn btn-dark" id="btn-next-card">Next Card →</button>`
-                 : `<button class="btn btn-primary" id="btn-finish">Finish →</button>`}`;
-    $('#btn-back-look').onclick=()=>{state.phase='examine';renderPhase();};
-    $('#btn-back-grid').onclick=()=>{show('screen-grid');renderGrid();};
-    if(remaining){
-      $('#btn-next-card').onclick=nextCard;
-    } else {
-      $('#btn-finish').onclick=showWrapup;
-    }
+  if(state.step===0){
+    return `<div class="look inner">
+      <div class="card-head" style="justify-content:space-between">
+        <span class="eyebrow teach">Practice together</span>
+        <h2>Authentic <span class="q-or">or</span> <span class="q-ai">AI?</span></h2>
+      </div>
+      <div class="content">${post}</div>
+      <div class="vote-hint" style="font-size:18px">Hover to zoom in. What looks off? Point to the spot.</div>
+    </div>`;
   }
+  return `<div class="inner">
+    <div class="card-head"><span class="eyebrow teach">Practice together</span></div>
+    <div class="reveal">
+      <div class="left">${post}</div>
+      <div class="right">
+        <div class="verdict ai">${ico('cpu')} AI-Made</div>
+        <div class="sec-h">How we know: find each number on the photo</div>
+        ${P.spots.map((s,i)=>`<div class="clue rise" style="animation-delay:${(.15+i*.25).toFixed(2)}s"><span class="n" style="--c:var(--orange);color:#fff">${i+1}</span><span>${s.text}</span></div>`).join('')}
+        <div class="discuss rise" style="animation-delay:.9s">${ico('chat')}<span><b>Talk about it:</b> The caption says “No filter!” Why do fake posts say things like that?</span></div>
+      </div>
+    </div>
+  </div>`;
 }
 
-function nextCard(){
-  const cards=activeCards();
-  const idx=cardIndex();
-  // next uncompleted card after current, wrapping
-  for(let k=1;k<=cards.length;k++){
-    const c=cards[(idx+k)%cards.length];
-    if(!state.completed[c.id]){ openCard(c); return; }
+/* ---------- end ---------- */
+function endHTML(){
+  return `<div class="inner">
+    <div class="medal">${ico('award')}</div>
+    <h2>You Did It!</h2>
+    <p class="lede" style="margin:0 auto">You looked closely, found the clues, and checked the sources. Remember: <b>SIFT before you share!</b></p>
+    <div class="exit-ticket">
+      <h3>${ico('edit')} Exit Ticket</h3>
+      <p><b>Which clue will you use in real life?</b> Tell about one thing you saw online that you want to double-check, and the SIFT move you would use on it.</p>
+    </div>
+    <div class="title-actions">
+      <button class="btn btn-dark" id="e-print">${ico('printer')} Print Exit Tickets</button>
+      <button class="btn btn-ghost" id="e-home">Back to the Title</button>
+    </div>
+  </div>`;
+}
+function wireEnd(){
+  $('#e-print').onclick=()=>doPrint('print-exit');
+  $('#e-home').onclick=()=>go(0,0,-1);
+}
+
+/* ---------- panels: menu + checklist ---------- */
+function openPanel(id,scrollTo){
+  closePanels();
+  $('#'+id).classList.add('open'); $('#overlay').classList.add('on');
+  if(id==='menu') renderMenu();
+  if(scrollTo){ const t=$('#'+scrollTo); if(t) setTimeout(()=>t.scrollIntoView({block:'start',behavior:'smooth'}),150); }
+}
+function closePanels(){ $$('.panel').forEach(p=>p.classList.remove('open')); $('#overlay').classList.remove('on'); }
+function togglePanel(id){ $('#'+id).classList.contains('open')?closePanels():openPanel(id); }
+$('#btn-menu').onclick=()=>togglePanel('menu');
+$('#btn-checklist').onclick=()=>togglePanel('drawer');
+$('#overlay').onclick=closePanels;
+$$('.panel [data-close]').forEach(b=>b.onclick=closePanels);
+$('#btn-home').onclick=()=>{closePanels();go(0,0,-1);};
+$('#jump-learn').onclick=()=>{closePanels();go(1,0,1);};
+
+function renderMenu(){
+  $('#jump-grid').innerHTML=CARDS.map(c=>`<button class="t-${c.type} ${state.completed[c.id]?'done':''}" data-card="${c.n}" title="Card ${c.n}: ${TYPE_LABEL[c.type]}">${c.n}</button>`).join('');
+  $('#print-list').innerHTML=PRINTS.map(p=>`<button class="menu-row" data-print="${p.id}">${ico(p.icon)}<span>${p.title}<small>${p.desc}</small></span></button>`).join('');
+}
+$('#jump-grid').addEventListener('click',e=>{const b=e.target.closest('[data-card]'); if(!b)return; closePanels(); go(slideOfCard(+b.dataset.card),0,1);});
+$('#print-list').addEventListener('click',e=>{const b=e.target.closest('[data-print]'); if(b) doPrint(b.dataset.print);});
+
+const resetBtn=$('#btn-reset'); let armT=null;
+resetBtn.onclick=()=>{
+  if(!resetBtn.classList.contains('arm')){
+    resetBtn.classList.add('arm'); resetBtn.querySelector('span').firstChild.textContent='Click again to clear progress';
+    armT=setTimeout(()=>{resetBtn.classList.remove('arm');resetBtn.querySelector('span').firstChild.textContent='Start over';},4000);
+    return;
   }
-  showWrapup();
-}
-function showWrapup(){
-  show('screen-wrapup');
-}
-
-/* ---------- training ---------- */
-const TRAINING=[]; /* populated in CONTENT section */
-function renderTraining(){
-  const wrap=$('#training-slides');
-  wrap.innerHTML=TRAINING.map((t,i)=>`<div class="training-slide ${i===state.trainingIdx?'on':''}">${t.html}</div>`).join('');
-  $('#tdots').innerHTML=TRAINING.map((_,i)=>`<button class="dot ${i===state.trainingIdx?'on':''}" data-i="${i}" aria-label="Slide ${i+1}"></button>`).join('');
-  $('#btn-tprev').style.visibility=state.trainingIdx===0?'hidden':'visible';
-  $('#btn-tnext').textContent=state.trainingIdx===TRAINING.length-1?'Open the Cards →':'Next →';
-  if(TRAINING[state.trainingIdx].mount) TRAINING[state.trainingIdx].mount();
-}
-$('#tdots').addEventListener('click',e=>{const b=e.target.closest('.dot');if(!b)return;state.trainingIdx=+b.dataset.i;renderTraining();});
-$('#btn-tprev').onclick=()=>{if(state.trainingIdx>0){state.trainingIdx--;renderTraining();}};
-$('#btn-tnext').onclick=()=>{
-  if(state.trainingIdx<TRAINING.length-1){state.trainingIdx++;renderTraining();}
-  else {show('screen-grid');renderGrid();}
+  clearTimeout(armT); resetBtn.classList.remove('arm'); resetBtn.querySelector('span').firstChild.textContent='Start over';
+  clearState(); closePanels(); go(0,0,-1);
 };
 
-/* ---------- global nav ---------- */
-$('#btn-start-training').onclick=()=>{state.trainingIdx=0;renderTraining();show('screen-training');};
-$('#btn-skip-to-cards').onclick=()=>{renderGrid();show('screen-grid');};
-$('#btn-continue').onclick=()=>{const c=nextUncompleted();if(c)openCard(c);};
-$('#btn-title-restart').onclick=()=>{state.completed={};clearState();renderDots();updateTitleActions();};
-$('#btn-home').onclick=()=>show('screen-title');
-$('#btn-grid').onclick=()=>{renderGrid();show('screen-grid');};
-$('#btn-play-again').onclick=()=>{renderGrid();show('screen-grid');};
-$('#btn-restart').onclick=()=>{state.completed={};clearState();renderDots();show('screen-title');};
-
-/* click-to-reveal: any concealed card/clue opens on click */
-document.addEventListener('click',e=>{
-  const rc=e.target.closest('.reveal-card.concealed');
-  if(rc) rc.classList.remove('concealed');
-});
-
-/* checklist drawer */
-function toggleDrawer(force){
-  const open=force!==undefined?force:!$('#drawer').classList.contains('open');
-  $('#drawer').classList.toggle('open',open);
-  $('#overlay').classList.toggle('on',open);
+/* ---------- print ---------- */
+function doPrint(id){
+  closePanels();
+  document.body.dataset.print=id;
+  document.body.classList.add('printing');
+  setTimeout(()=>window.print(),60);
 }
-$('#btn-checklist').onclick=()=>toggleDrawer();
-$('#btn-close-drawer').onclick=()=>toggleDrawer(false);
-$('#overlay').onclick=()=>{toggleDrawer(false);$('#printmenu').classList.remove('open');};
+window.addEventListener('afterprint',()=>{document.body.classList.remove('printing');delete document.body.dataset.print;});
 
-/* print menu */
-$('#btn-print').onclick=e=>{e.stopPropagation();$('#printmenu').classList.toggle('open');};
-document.addEventListener('click',e=>{ if(!e.target.closest('#printmenu')&&!e.target.closest('#btn-print')) $('#printmenu').classList.remove('open'); });
-$$('#printmenu button[data-print]').forEach(b=>b.onclick=()=>{
-  $('#printmenu').classList.remove('open');
-  document.body.className='print-'+b.dataset.print.replace('print-','');
-  window.print();
-});
-window.addEventListener('afterprint',()=>{document.body.className='';});
+/* ---------- full screen ---------- */
+function toggleFull(){
+  if(document.fullscreenElement) document.exitFullscreen();
+  else if(document.documentElement.requestFullscreen) document.documentElement.requestFullscreen().catch(()=>{});
+}
+$('#btn-full').onclick=toggleFull;
 
-/* keyboard */
+/* ---------- keyboard + presentation clickers ---------- */
 document.addEventListener('keydown',e=>{
-  if(e.key==='c'||e.key==='C'){toggleDrawer();return;}
-  if(e.key==='Escape'){toggleDrawer(false);$('#printmenu').classList.remove('open');return;}
-  const active=$('.screen.active').id;
-  if(e.key==='ArrowRight'||e.key===' '){
-    // → works like a presentation clicker: reveal the next hidden build, then advance
-    if(active==='screen-training'){
-      e.preventDefault();
-      const c=$('.training-slide.on .reveal-card.concealed');
-      if(c) c.classList.remove('concealed'); else $('#btn-tnext').click();
-    }
-    else if(active==='screen-title'&&e.key==='ArrowRight'){
-      const cont=$('#btn-continue');
-      (cont.classList.contains('hidden')?$('#btn-start-training'):cont).click();
-    }
-    else if(active==='screen-grid'){e.preventDefault();const first=activeCards().find(c=>!state.completed[c.id]);if(first)openCard(first);else showWrapup();}
-    else if(active==='screen-card'){
-      e.preventDefault();
-      if(state.phase==='examine'){state.phase='reveal';renderPhase();}
-      else {
-        const c=$('#stage .reveal-card.concealed');
-        if(c){c.classList.remove('concealed');return;}
-        const btn=$('#btn-next-card')||$('#btn-finish');if(btn)btn.click();
-      }
-    }
-  }
-  if(e.key==='ArrowLeft'&&active==='screen-training'){$('#btn-tprev').click();}
-  if(e.key==='ArrowLeft'&&active==='screen-card'){
-    if(state.phase==='reveal'){state.phase='examine';renderPhase();}
-  }
+  const tg=e.target; if(tg&&tg.closest&&tg.closest('input,textarea,select,[contenteditable="true"]')) return;
+  const k=e.key;
+  if(k==='Escape'){closePanels();return;}
+  if(k==='c'||k==='C'){togglePanel('drawer');return;}
+  if(k==='f'||k==='F'){toggleFull();return;}
+  if($('.panel.open')) return;
+  if(k==='ArrowRight'||k===' '||k==='PageDown'||(k==='Enter'&&(tg===document.body||tg===document))){e.preventDefault();next();}
+  else if(k==='ArrowLeft'||k==='PageUp'){e.preventDefault();back();}
+  else if(k==='Home'){go(0,0,-1);}
 });
 
 /* ---------- boot (called after content loads at bottom) ---------- */
 function boot(){
+  buildSlides();
   loadState();
-  renderDots();
-  updateTitleActions();
   buildPrintables();
+  render('enter');
 }
 </script>
 
@@ -1432,228 +1186,209 @@ CARDS.push(
 );
 
 /* ============================================================
-   DETECTIVE TRAINING SLIDES
+   THE LESSON SLIDES (before the cards)
+   Kept to three: SIFT with hand motions, picture clues, word clues.
    ============================================================ */
-/* Practice-photo helper: numbered markers live in the padding around the
-   photo; a thin line + ring points at the exact spot so nothing is covered.
-   Clicking a marker opens its clue in a popover right on the photo, below
-   the spot (or above it, low in the frame), never on top of it.
-   spots: [{x,y,side,text}] with x/y in % of the image, side = which margin
-   the marker sits in ('left'|'right'|'top'|'bottom'). */
-function mountCallouts(wrapId,popId,imgKey,spots){
-  const wrap=document.getElementById(wrapId), img=wrap.querySelector('img'),
-        svg=wrap.querySelector('svg.callout-svg'), btns=[...wrap.querySelectorAll('.hotspot')],
-        pop=document.getElementById(popId);
-  const at=[]; let open=-1;
-  if(IMG[imgKey]) img.src=IMG[imgKey];
-  attachLoupe(img);
-  function placePop(){
-    if(open<0||!at[open])return;
-    const {tx,ty}=at[open], W=wrap.clientWidth, H=wrap.clientHeight, pw=pop.offsetWidth, ph=pop.offsetHeight;
-    const iy=img.offsetTop, ih=img.clientHeight;
-    let l=tx-pw/2, t=(ty<iy+ih/2)?ty+30:ty-30-ph;
-    l=Math.max(8,Math.min(l,W-pw-8)); t=Math.max(8,Math.min(t,H-ph-8));
-    pop.style.left=l+'px'; pop.style.top=t+'px';
-  }
-  function layout(){
-    if(!img.clientHeight||!wrap.clientWidth) return;
-    const W=wrap.clientWidth, H=wrap.clientHeight,
-          ix=img.offsetLeft, iy=img.offsetTop, iw=img.clientWidth, ih=img.clientHeight;
-    svg.setAttribute('viewBox','0 0 '+W+' '+H);
-    let marks='';
-    spots.forEach((s,i)=>{
-      const tx=ix+iw*s.x/100, ty=iy+ih*s.y/100;
-      let mx,my;
-      if(s.side==='left'){mx=ix/2;my=ty;}
-      else if(s.side==='right'){mx=ix+iw+(W-ix-iw)/2;my=ty;}
-      else if(s.side==='top'){mx=tx;my=iy/2;}
-      else {mx=tx;my=iy+ih+(H-iy-ih)/2;}
-      at[i]={tx,ty};
-      btns[i].style.left=(mx-22)+'px'; btns[i].style.top=(my-22)+'px';
-      marks+='<line class="case" x1="'+mx+'" y1="'+my+'" x2="'+tx+'" y2="'+ty+'"/>'
-            +'<line class="lead" x1="'+mx+'" y1="'+my+'" x2="'+tx+'" y2="'+ty+'"/>'
-            +'<circle class="case" cx="'+tx+'" cy="'+ty+'" r="12"/>'
-            +'<circle cx="'+tx+'" cy="'+ty+'" r="12"/>';
-    });
-    svg.innerHTML=marks;
-    placePop();
-  }
-  /* data-URI images can report complete before decode; retry until sized */
-  img.onload=layout;
-  if(img.decode) img.decode().then(layout).catch(()=>{});
-  layout(); requestAnimationFrame(layout);
-  window.addEventListener('resize',layout);
-  btns.forEach(b=>b.onclick=()=>{
-    b.classList.add('found');
-    open=+b.dataset.h;
-    pop.innerHTML='<span class="num">'+(open+1)+'</span>'+spots[open].text
-      +'<button class="close" aria-label="Close">✕</button>';
-    pop.querySelector('.close').onclick=()=>{pop.classList.remove('on');open=-1;};
-    pop.classList.add('on');
-    placePop();
-  });
-}
-TRAINING.push(
+const SIFT_MOVES=[
+  {L:'S',name:'Stop',say:'Don’t share it. Don’t believe it yet. Notice how it makes you feel.',hand:'Hold up your hand like a stop sign.'},
+  {L:'I',name:'Investigate the source',say:'Who made this? Look them up. Are they real? Can you trust them?',hand:'Circle your fingers into a magnifying glass.'},
+  {L:'F',name:'Find it somewhere else',say:'Do other trustworthy places tell the same story?',hand:'Point away, to somewhere else.'},
+  {L:'T',name:'Trace to the original',say:'Follow it back to where it started: the first photo, the real study.',hand:'Draw a line back over your shoulder.'}
+];
+const PIC_CLUES=[
+  {ico:'search',h:'Zoom in close',p:'Hands, faces, fur, and letters often come out melted, smudged, or scrambled.'},
+  {ico:'sun',h:'Check the light',p:'Do the shadows make sense? Is there more than one sun?'},
+  {ico:'pin',h:'Ask where it came from',p:'Real photos come from a real person, place, and camera. Can you find them?'}
+];
+const WORD_CLUES=[
+  {ico:'user',h:'Look for real names',p:'“Experts say” with no names is a <b>ghost source</b>. Real stories name who, where, and when.'},
+  {ico:'book',h:'Use what you know',p:'Does it make sense? Chocolate trees can’t grow in the coldest place on Earth!'},
+  {ico:'globe',h:'Check another place',p:'Is a trusted site telling the same story? If no one else has it, be careful.'}
+];
+LEARN.push(
 { html:`
-  <div class="training-head"><span class="training-step">Learn · 1 of 5</span></div>
-  <h2>The Four Moves: <span style="color:var(--teal)">SIFT</span></h2>
-  <p class="lede">Fact-checkers use four moves on everything they see. <b>Click each move to reveal it.</b></p>
-  <div class="sift-list">
-    <div class="sift-item reveal-card concealed"><div class="sift-letter" style="background:var(--orange)">S</div><div class="rv"><h3>Stop</h3><p>Don’t share it yet! Don’t believe it yet! How does it make you feel? Tricky posts try to give you BIG feelings.</p></div></div>
-    <div class="sift-item reveal-card concealed"><div class="sift-letter" style="background:var(--pacific)">I</div><div class="rv"><h3>Investigate the source</h3><p>Who made this? Look them up. Are they real? Can you trust them?</p></div></div>
-    <div class="sift-item reveal-card concealed"><div class="sift-letter" style="background:var(--teal)">F</div><div class="rv"><h3>Find it somewhere else</h3><p>Can you find the same story in another trustworthy place? If a big story is only in ONE place, be careful.</p></div></div>
-    <div class="sift-item reveal-card concealed"><div class="sift-letter" style="background:var(--purple)">T</div><div class="rv"><h3>Trace to the original</h3><p>Follow the story back to where it started: the first photo, the real book, the real scientist.</p></div></div>
+  <span class="eyebrow teach">Learn · 1 of 3</span>
+  <h2>Before you share it, <span style="color:var(--teal)">SIFT</span> it</h2>
+  <p class="lede">Fact-checkers use four moves. Say each one and do the hand motion together.</p>
+  <div class="learn-grid four">
+    ${SIFT_MOVES.map((m,i)=>`<div class="lcard rise" style="--c:${SIFT_COLORS[m.L]};animation-delay:${(.1+i*.15).toFixed(2)}s">
+      <div class="letter">${m.L}</div>
+      <div><h3>${m.name}</h3><p>${m.say}</p><p class="hand">${ico('hand')} ${m.hand}</p></div></div>`).join('')}
   </div>`},
 
 { html:`
-  <div class="training-head"><span class="training-step">Learn · 2 of 5</span></div>
+  <span class="eyebrow">Learn · 2 of 3</span>
   <h2>3 Clues for <span style="color:var(--pacific)">Pictures</span></h2>
-  <p class="lede">AI pictures look great from far away and fall apart up close. <b>Click each clue.</b></p>
-  <div class="clue-grid">
-    <div class="clue-card img-clue reveal-card concealed"><div class="clue-emoji">${ico('search')}</div><h3>1 · Zoom in close</h3><p class="rv">Hands, faces, fur, and letters often come out melted, smudged, or scrambled in AI pictures.</p></div>
-    <div class="clue-card img-clue reveal-card concealed"><div class="clue-emoji">${ico('sun')}</div><h3>2 · Check the light</h3><p class="rv">Do the shadows make sense? AI often lights faces with sunshine that comes from nowhere.</p></div>
-    <div class="clue-card img-clue reveal-card concealed"><div class="clue-emoji">${ico('pin')}</div><h3>3 · Ask where it came from</h3><p class="rv">Real photos come from a real person, a real place, and a real camera. If nobody can say where a photo came from, be suspicious.</p></div>
-  </div>`},
+  <p class="lede">AI pictures can look great from far away. Up close, they often fall apart.</p>
+  <div class="learn-grid three">
+    ${PIC_CLUES.map((c,i)=>`<div class="lcard rise" style="--c:var(--pacific);--tint:var(--tint-blue);animation-delay:${(.1+i*.15).toFixed(2)}s">
+      <div class="badge-ico">${ico(c.ico)}</div><h3>${i+1} · ${c.h}</h3><p>${c.p}</p></div>`).join('')}
+  </div>
+  <p class="truth rise" style="animation-delay:.6s">${ico('alert')} <span><b>Heads up:</b> AI keeps getting better, and even experts get fooled. A clue means <i>be suspicious</i>. Checking the source is how you know for sure.</span></p>`},
 
 { html:`
-  <div class="training-head"><span class="training-step">Learn · 3 of 5</span></div>
+  <span class="eyebrow t-post">Learn · 3 of 3</span>
   <h2>3 Clues for <span style="color:var(--purple)">Words</span></h2>
-  <p class="lede">AI writing sounds sure of itself but is often empty inside. <b>Click each clue.</b></p>
-  <div class="clue-grid">
-    <div class="clue-card txt-clue reveal-card concealed"><div class="clue-emoji">${ico('user')}</div><h3>1 · Look for real names</h3><p class="rv">Real stories name real people, places, and dates. “Experts say” with no names is a ghost source!</p></div>
-    <div class="clue-card txt-clue reveal-card concealed"><div class="clue-emoji">${ico('book')}</div><h3>2 · Use what you know</h3><p class="rv">Does it make sense with what you already know? (Chocolate trees can’t grow in the coldest place on Earth!)</p></div>
-    <div class="clue-card txt-clue reveal-card concealed"><div class="clue-emoji">${ico('globe')}</div><h3>3 · Check another place</h3><p class="rv">Is a trusted site telling the same story? If no one else has it, that silence is a loud clue.</p></div>
-  </div>`},
-
-{ html:`
-  <div class="training-head"><span class="training-step">Practice · 4 of 5</span></div>
-  <h2>Practice: Real or AI?</h2>
-  <p class="lede">This post is going around online. <b>Hover to zoom in.</b> What looks off to you?</p>
-  <div class="examine-post">
-    <div class="social-post">
-      <div class="sp-head">
-        <div class="sp-avatar">SS</div>
-        <div>
-          <div class="sp-name">Summit Squad Adventures</div>
-          <div class="sp-meta">Yesterday at 6:12 AM · ${ico('globe')}</div>
-        </div>
-        <div class="sp-dots">···</div>
-      </div>
-      <p class="sp-text">SUMMIT DAY!! 47 days of training and we finally made it above the clouds. Still can't believe this view is real. No filter!</p>
-      <img id="practice-img1" alt="Photo of four hikers posing on a rocky mountain summit at sunrise">
-      <div class="sp-stats"><span>${ico('star')} 2,347 favorites</span><span>412 comments · 89 shares</span></div>
-    </div>
-  </div>`,
-  mount(){ const im=document.getElementById('practice-img1'); if(im){ im.src=IMG.mountain; attachLoupe(im); } }},
-
-{ html:`
-  <div class="training-head"><span class="training-step">Practice · 5 of 5</span></div>
-  <h2>Practice: Check the Clues</h2>
-  <p class="lede">It’s AI-made. <b>Click each number</b> to see how we know.</p>
-  <div class="hotspot-wrap callouts" id="hotspot-wrap2">
-    <div class="social-post">
-      <div class="sp-head">
-        <div class="sp-avatar">SS</div>
-        <div>
-          <div class="sp-name">Summit Squad Adventures</div>
-          <div class="sp-meta">Yesterday at 6:12 AM · ${ico('globe')}</div>
-        </div>
-        <div class="sp-dots">···</div>
-      </div>
-      <img id="practice-img2" alt="AI-generated photo of four hikers posing on a rocky mountain summit at sunrise">
-      <div class="sp-stats"><span>${ico('star')} 2,347 favorites</span><span>412 comments · 89 shares</span></div>
-    </div>
-    <svg class="callout-svg" aria-hidden="true"></svg>
-    <button class="hotspot" data-h="0">1</button>
-    <button class="hotspot" data-h="1">2</button>
-    <button class="hotspot" data-h="2">3</button>
-    <div class="hotspot-pop" id="hotspot-pop2"></div>
-  </div>`,
-  mount(){
-    mountCallouts('hotspot-wrap2','hotspot-pop2','mountain',[
-      {x:6.5,y:17,side:'left',text:'<b>Two suns.</b> One sun sits low on the left, and a second one hides in the sky on the far right. A real photo has one sun. <b>SIFT → Stop:</b> impossible in real life? Don’t believe it yet.'},
-      {x:30,y:83,side:'left',text:'<b>A garbled sign.</b> Try to read the summit sign. When letters melt into nonsense, a computer made the picture. <b>SIFT → Trace:</b> look up the real summit sign.'},
-      {x:55,y:34,side:'top',text:'<b>Same face, four times.</b> All four hikers have almost the same face. AI reuses faces like stickers. <b>SIFT → Investigate:</b> is the account real and findable?'}
-    ]);
-  }}
+  <p class="lede">AI writing sounds very sure of itself, but it is often empty inside.</p>
+  <div class="learn-grid three">
+    ${WORD_CLUES.map((c,i)=>`<div class="lcard rise" style="--c:var(--light-purple);--tint:var(--tint-purple);animation-delay:${(.1+i*.15).toFixed(2)}s">
+      <div class="badge-ico">${ico(c.ico)}</div><h3>${i+1} · ${c.h}</h3><p>${c.p}</p></div>`).join('')}
+  </div>`}
 );
 
-/* ============================================================
-   PRINTABLE BUILDERS
-   ============================================================ */
-const CHECKS={
-  image:['Zoom in close: melted hands, smudged faces, scrambled letters','Check the light: do the shadows make sense?','Ask where it came from: a real person, a real place, a real camera?'],
-  text:['Look for real names: “experts say” with no names is a ghost source','Use what you know: does it even make sense?','Check another place: does a trusted site tell the same story?'],
-  sift:[['S','Stop','Don’t share or believe it yet. How does it make you feel?'],['I','Investigate','Who made this? Can you trust them?'],['F','Find it somewhere else','Does another trustworthy place tell the same story?'],['T','Trace','Follow it back to the original photo or story.']]
+/* the practice photo (AI-made): spots are % of the image */
+const PRACTICE={
+  text:'SUMMIT DAY!! 47 days of training and we finally made it above the clouds. Still can’t believe this view is real. No filter!',
+  alt:'Photo of four hikers posing on a rocky mountain summit at sunrise',
+  spots:[
+    {x:6.5,y:17,text:'<b>Two suns.</b> One sun sits low on the left, and a second glows on the far right. The real sky has one sun.'},
+    {x:30,y:83,text:'<b>A garbled sign.</b> Try to read the summit sign. When letters melt into nonsense, a computer probably made it.'},
+    {x:55,y:34,text:'<b>The same face, four times.</b> The hikers look almost alike. AI often repeats faces like stickers.'}
+  ]
 };
 
-/* One half-sheet Writing Card per example: a writing activity students do
-   alone or in a group while the card is on the board. Two per page; cut apart. */
-function caseCard(card,scaffolded){
+/* ============================================================
+   PRINTABLES
+   Simple, black-and-white friendly, built from the same data
+   as the slides so they always match.
+   ============================================================ */
+const PRINTS=[
+  {id:'print-plan',icon:'file',title:'Lesson Plan',desc:'One page: timing, what to say, discussion moves, research'},
+  {id:'print-checklist',icon:'star',title:'SIFT Poster',desc:'Big classroom anchor chart with the hand motions'},
+  {id:'print-bookmarks',icon:'bookmark',title:'SIFT Bookmarks',desc:'4 per page, one for each student to keep'},
+  {id:'print-evidence',icon:'edit',title:'Student Writing Cards',desc:'Half-sheets with sentence starters, 2 per page'},
+  {id:'print-exit',icon:'check',title:'Exit Tickets',desc:'4 per page, quick check at the end'},
+  {id:'print-answers',icon:'award',title:'Teacher Answer Key',desc:'All 10 answers, clues, and sources'}
+];
+const CHECKS={
+  image:PIC_CLUES.map(c=>c.h+': '+c.p),
+  text:WORD_CLUES.map(c=>c.h+': '+c.p.replace(/<[^>]*>/g,'')),
+  sift:SIFT_MOVES.map(m=>[m.L,m.name,m.say])
+};
+const PFOOT='<span class="edubug"></span> Authentic or AI? · An Edutopia Media Literacy Game';
+
+function caseCard(card){
   return `<div class="halfsheet">
     <div class="hs-top"><span class="t1">Card ${card.n}: Authentic or AI?</span><span class="t2"><span class="edubug"></span>Writing Card</span></div>
-    <div class="hs-name"><span>Name(s):</span><span class="short">Date:</span></div>
-    <div class="hs-row"><b>1 · My claim (circle one):</b><span class="circle"></span> Authentic: it really happened <span class="circle"></span> Made by AI</div>
-    <div class="hs-lbl">2 · My clues: what did you notice? Write in complete sentences.</div>
-    ${scaffolded?'<div class="hs-starter">Starters: “I think this is ______ because…” &nbsp;·&nbsp; “I noticed ______.”</div>':''}
-    <div class="hs-line"></div><div class="hs-line"></div><div class="hs-line"></div><div class="hs-line"></div>${scaffolded?'':'<div class="hs-line"></div>'}
-    <div class="hs-sift"><b>3 · My SIFT check: circle the move you would use:</b><br>
-      <span class="sbubble">S</span>Stop &nbsp; <span class="sbubble">I</span>Investigate the source &nbsp; <span class="sbubble">F</span>Find it somewhere else &nbsp; <span class="sbubble">T</span>Trace to the original</div>
-    ${scaffolded?'<div class="hs-starter">“To check this, I would ______.”</div>':''}
+    <div class="hs-name"><span>Name:</span><span class="short">Date:</span></div>
+    <div class="hs-row"><b>1 · I think it is (circle one):</b><span class="circle"></span> Authentic <span class="circle"></span> AI-Made</div>
+    <div class="hs-lbl">2 · My evidence. What did you notice?</div>
+    <div class="hs-starter">“I think it is ______ because I noticed ______.”</div>
+    <div class="hs-line"></div><div class="hs-line"></div><div class="hs-line"></div>
+    <div class="hs-sift"><b>3 · To check it, I would (circle one):</b>
+      <span class="sbubble">S</span>Stop <span class="sbubble">I</span>Investigate <span class="sbubble">F</span>Find it elsewhere <span class="sbubble">T</span>Trace it</div>
+    <div class="hs-starter">“To check this, I would ______.”</div>
     <div class="hs-line"></div><div class="hs-line"></div>
-    <div class="hs-foot"><b>Talk first, then write.</b> Point at the exact spot or words that gave it away. · Authentic or AI? · An Edutopia Media Literacy Game</div>
+    <div class="hs-lbl">4 · After the reveal: was I right? What clue did I miss?</div>
+    <div class="hs-line"></div><div class="hs-line"></div><div class="hs-line"></div>
   </div>`;
 }
-function caseCardPages(scaffolded){
-  let pages='';
-  for(let i=0;i<CARDS.length;i+=2){
-    pages+=`<div class="hs-page">${caseCard(CARDS[i],scaffolded)}
-      <div class="hs-cut">✂&nbsp; cut here: each writing card is half a sheet</div>
-      ${CARDS[i+1]?caseCard(CARDS[i+1],scaffolded):''}</div>`;
-  }
-  return pages;
-}
 function buildPrintables(){
-  document.getElementById('print-evidence').innerHTML=caseCardPages(true);
-  document.getElementById('print-evidence-open').innerHTML=caseCardPages(false);
+  const strip=h=>h.replace(/<[^>]*>/g,'');
 
+  /* LESSON PLAN */
+  document.getElementById('print-plan').innerHTML=`
+    <div class="p-header"><span class="p-title">Lesson Plan: Authentic or AI?</span><span class="p-brand">${PFOOT}</span></div>
+    <p class="pl-goal"><b>Goal:</b> Students can explain why a picture, article, or post might be AI-made, and use a SIFT move to check it before they believe or share it. &nbsp;<b>Time:</b> about 45 minutes, or split over two days. &nbsp;<b>Grades:</b> 3-8.</p>
+    <table class="pl-table">
+      <tr><th>Time</th><th>On screen</th><th>What you do</th></tr>
+      <tr><td>5 min</td><td>Title</td><td>Hook: “Have you ever seen something online that turned out to be fake?” Take 2-3 stories.</td></tr>
+      <tr><td>8 min</td><td>Learn 1-3</td><td>Teach SIFT. Say each move and <b>do the hand motion together</b>. Read the picture and word clues aloud.</td></tr>
+      <tr><td>5 min</td><td>Practice</td><td>Students point to anything that looks off. Reveal. Find each numbered ring together.</td></tr>
+      <tr><td>12 min</td><td>Cards 1-4</td><td><b>Solve together.</b> Each card teaches one SIFT move. Model your thinking out loud: “I notice… so I wonder…”</td></tr>
+      <tr><td>12 min</td><td>Cards 5-10</td><td>Students lead. Use the routine below. Optional: students fill in a Writing Card for one card.</td></tr>
+      <tr><td>3 min</td><td>Finish</td><td>Exit ticket. Do the four hand motions one more time.</td></tr>
+    </table>
+    <div class="pl-cols">
+      <div class="pl-box"><h3>The routine for every card</h3>
+        <ol><li><b>Think</b> (15 sec, quiet): look closely.</li>
+        <li><b>Pair</b> (1 min): “I think it’s ___ because I noticed ___.”</li>
+        <li><b>Vote</b>: hands up for Authentic, then AI-Made.</li>
+        <li><b>Reveal</b>: read the clues. Ask the <i>Talk about it</i> question.</li></ol></div>
+      <div class="pl-box"><h3>Discussion moves that work</h3>
+        <ul><li>“What did you notice that made you think that?”</li>
+        <li>“Who agrees? Who sees it differently? Why?”</li>
+        <li>“How could we <i>check</i> instead of guess?”</li>
+        <li>Praise good reasons, not right guesses. A careful “I’m not sure, I’d check” beats a lucky guess.</li></ul></div>
+      <div class="pl-box"><h3>Help them remember</h3>
+        <ul><li><b>Hand motions</b> for S-I-F-T (on the poster). Do them at the start and end of class.</li>
+        <li><b>The chant:</b> “Before you share it, SIFT it!”</li>
+        <li><b>Bookmarks</b> go home or in their reading book.</li>
+        <li><b>Revisit:</b> one card a day as a warm-up the following week.</li></ul></div>
+      <div class="pl-box"><h3>Big ideas to keep repeating</h3>
+        <ul><li><b>“Amazing” does not mean fake.</b> Cards 2, 4, 8, and 10 look unbelievable but are real.</li>
+        <li><b>Clues raise doubts. Checking settles it.</b> AI is improving fast. Even experts can’t always tell by looking.</li>
+        <li><b>Big feelings are a signal to Stop</b>, not to share.</li></ul></div>
+    </div>
+    <div class="pl-research"><b>The research behind it.</b>
+      <b>SIFT</b> is Mike Caulfield’s four-move method for checking online information (2019). It is built on <b>lateral reading</b>: professional fact-checkers judge a source by leaving it and seeing what other trusted sites say, instead of studying the page itself (Wineburg &amp; McGrew, 2019, <i>Teachers College Record</i>). Short lessons in lateral reading improved high school students’ online judgments (Wineburg et al., 2022, <i>Journal of Educational Psychology</i>), while many students struggle without them (Stanford History Education Group, 2016, 2019). People rate AI-made faces as real at about chance levels (Nightingale &amp; Farid, 2022, <i>PNAS</i>), so this lesson treats visual clues as a reason to check, not as proof. Think-Pair-Share and talking through reasons out loud help students build and remember their thinking.</div>`;
+
+  /* SIFT POSTER (anchor chart) */
   document.getElementById('print-checklist').innerHTML=`
-    <h2 class="poster-title">${ico('search')} The Clue Checklist</h2>
-    <p class="poster-sub"><span class="edubug"></span> Authentic or AI? · An Edutopia Media Literacy Game</p>
-    <div class="poster-cols">
-      <div class="poster-box full"><h3>Start with your SIFT moves</h3>
-        <div class="sift-print">${CHECKS.sift.map(s=>`<div><b>${s[0]}: ${s[1]}</b>${s[2]}</div>`).join('')}</div>
+    <div class="poster">
+      <div class="poster-top"><span class="edubug"></span> Authentic or AI?</div>
+      <h1 class="poster-h">Before you share it, SIFT it!</h1>
+      <div class="poster-sift">
+        ${SIFT_MOVES.map(m=>`<div class="ps-row"><div class="ps-L">${m.L}</div><div><div class="ps-name">${m.name}</div><div class="ps-say">${m.say}</div><div class="ps-hand">✋ ${m.hand}</div></div></div>`).join('')}
       </div>
-      <div class="poster-box"><h3>If it's a PICTURE, look for these:</h3><ul>${CHECKS.image.map(c=>`<li>${c}</li>`).join('')}</ul></div>
-      <div class="poster-box"><h3>If it's WRITING, listen for these:</h3><ul>${CHECKS.text.map(c=>`<li>${c}</li>`).join('')}</ul></div>
-      <div class="poster-box full" style="border-style:dashed">
-        <p style="font-size:10.5px"><b>Remember:</b> clues raise suspicion; evidence settles it. And "amazing" doesn't mean fake: some real things look impossible.</p>
+      <div class="poster-cols">
+        <div class="poster-box"><h3>Picture clues</h3><ul>${PIC_CLUES.map(c=>`<li><b>${c.h}.</b> ${c.p}</li>`).join('')}</ul></div>
+        <div class="poster-box"><h3>Word clues</h3><ul>${WORD_CLUES.map(c=>`<li><b>${c.h}.</b> ${c.p}</li>`).join('')}</ul></div>
       </div>
+      <div class="poster-remember">Clues make you suspicious. <b>Checking</b> tells you for sure. And remember: amazing does not mean fake!</div>
     </div>`;
 
-  const strip=h=>h.replace(/<[^>]*>/g,'');
+  /* BOOKMARKS: 4 across */
+  const bm=`<div class="bm">
+      <div class="bm-top"><span class="edubug"></span><div>Before you share it,</div><div class="bm-big">SIFT it!</div></div>
+      ${SIFT_MOVES.map(m=>`<div class="bm-row"><span class="bm-L">${m.L}</span><div><b>${m.name}</b><br><span>${m.hand}</span></div></div>`).join('')}
+      <div class="bm-clues"><b>Picture?</b> Zoom in. Check the light. Where did it come from?<br><b>Words?</b> Real names? Does it make sense? Who else says so?</div>
+      <div class="bm-name">Name: _______________</div>
+    </div>`;
+  document.getElementById('print-bookmarks').innerHTML=`<div class="bm-page">${bm+bm+bm+bm}</div>`;
+
+  /* WRITING CARDS: two half-sheets per page */
+  let pages='';
+  for(let i=0;i<CARDS.length;i+=2){
+    pages+=`<div class="hs-page">${caseCard(CARDS[i])}
+      <div class="hs-cut">✂&nbsp; cut here</div>
+      ${CARDS[i+1]?caseCard(CARDS[i+1]):''}</div>`;
+  }
+  document.getElementById('print-evidence').innerHTML=pages;
+
+  /* EXIT TICKETS: 4 per page */
+  const et=`<div class="et">
+      <div class="et-top"><b>Exit Ticket</b><span>${PFOOT}</span></div>
+      <div class="hs-name"><span>Name:</span><span class="short">Date:</span></div>
+      <div class="et-q"><b>1.</b> Write what each SIFT letter stands for.</div>
+      <div class="et-sift"><span>S ____________</span><span>I ____________</span><span>F ____________</span><span>T ____________</span></div>
+      <div class="et-q"><b>2.</b> Name one clue that a picture or story might be AI-made.</div>
+      <div class="hs-line"></div><div class="hs-line"></div>
+      <div class="et-q"><b>3.</b> You see something amazing online. What will you do <i>before</i> you share it?</div>
+      <div class="hs-line"></div><div class="hs-line"></div><div class="hs-line"></div>
+    </div>`;
+  document.getElementById('print-exit').innerHTML=`<div class="et-page">${et+et+et+et}</div>`;
+
+  /* ANSWER KEY */
   document.getElementById('print-answers').innerHTML=
-    `<div class="p-header"><span class="p-title">Teacher Answer Key</span><span class="p-brand"><span class="edubug"></span> Authentic or AI? · Edutopia</span></div>
-    <p style="font-size:10px;margin-bottom:8px">All 10 verdicts with clues and sources. Cards 1-4 are teaching cards (solve together; each teaches one SIFT move). Keep away from students.</p>`+
-    CARDS.map(c=>`<div class="ak-item">
-      <div class="ak-head">Card ${c.n} · ${TYPE_LABEL[c.type]}: “${strip(c.type==='image'?(c.alt||''):(c.content||c.postText||'')).slice(0,90)}${strip(c.type==='image'?(c.alt||''):(c.content||c.postText||'')).length>90?'…':''}”
-        <span class="ak-verdict">${c.answer==='authentic'?'AUTHENTIC':'AI-MADE'}</span>${c.teach?`<span class="ak-verdict">TEACHING CARD · SIFT: ${c.sift.letter} = ${c.sift.move}</span>`:''}</div>
+    `<div class="p-header"><span class="p-title">Teacher Answer Key</span><span class="p-brand">${PFOOT}</span></div>
+    <p style="font-size:10px;margin-bottom:8px">Cards 1-4 are solved together; each teaches one SIFT move. Keep away from students.</p>`+
+    CARDS.map(c=>{const t=strip(c.type==='image'?(c.alt||''):(c.content||c.postText||''));return `<div class="ak-item">
+      <div class="ak-head">Card ${c.n} · ${TYPE_LABEL[c.type]}: “${t.slice(0,90)}${t.length>90?'…':''}”
+        <span class="ak-verdict">${c.answer==='authentic'?'AUTHENTIC':'AI-MADE'}</span>${c.teach?`<span class="ak-verdict">TEACHES ${c.sift.letter} = ${c.sift.move}</span>`:''}</div>
       <div><b>Clues:</b> ${c.clues.map(strip).join(' • ')}</div>
-      <div><b>Verify:</b> ${strip(c.verify)} ${c.source?'<b>Source:</b> '+strip(c.source):''}</div>
-    </div>`).join('');
+      <div><b>Check it:</b> ${strip(c.verify)} ${c.source?'<b>Source:</b> '+strip(c.source):''}</div>
+      <div><b>Talk about it:</b> ${strip(c.discuss)}</div>
+    </div>`;}).join('');
 }
 
 boot();
 
-/* Deep-link / testing hooks: #view=grid · #view=training:4 · #view=card:10:reveal · #view=wrapup */
+/* Deep-link / testing hooks: #s=5 · #s=5:1 (slide 5, revealed) · #print=print-plan */
 (function(){
   const h=location.hash;
-  const p=h.match(/print=([a-z-]+)/); if(p){document.body.className='print-'+p[1];}
-  const m=h.match(/view=([a-z]+)(?::(\d+))?(?::([a-z]+))?/); if(!m)return;
-  if(m[1]==='training'){state.trainingIdx=(+m[2]||1)-1;renderTraining();show('screen-training');}
-  else if(m[1]==='grid'){renderGrid();show('screen-grid');}
-  else if(m[1]==='card'){const c=CARDS[(+m[2]||1)-1];openCard(c);if(m[3]){state.phase=m[3]==='vote'?'reveal':m[3];renderPhase();}}
-  else if(m[1]==='wrapup'){showWrapup();}
+  const p=h.match(/print=([a-z-]+)/); if(p){document.body.dataset.print=p[1];document.body.classList.add('printing');}
+  const m=h.match(/s=(\d+)(?::(\d))?/); if(m){state.i=Math.min(+m[1],SLIDES.length-1);state.step=+(m[2]||0);render('none');}
 })();
 </script>
 
@@ -1733,7 +1468,7 @@ function applyFonts(){
 function excluded(el){
   const t=el.tagName;
   if(t==='SCRIPT'||t==='STYLE'||t==='IMG'||t==='INPUT'||t==='SELECT'||t==='TEXTAREA')return true;
-  if(el.id==='card-num'||el.id==='card-type-badge')return true;
+  if(el.closest('#map,#nav'))return true;
   return !!el.closest('svg,#ed-bar,#loupe');
 }
 function hasDirectText(el){
@@ -1915,9 +1650,7 @@ async function init(){
     entries.forEach(([p,v])=>{ try{ setPath(p,v); addIdx(v,p); }catch(err){} });
     buildPrintables();
     /* a deep-linked screen may have rendered before the edits arrived */
-    const act=document.querySelector('.screen.active');
-    if(act&&act.id==='screen-card'&&state.current)renderPhase();
-    else if(act&&act.id==='screen-training')renderTraining();
+    render('none');
   }
   applyFonts();
   process(document.body);
