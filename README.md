@@ -14,7 +14,7 @@ The flow is one straight line:
 
 | Part | What happens |
 |---|---|
-| Learn (3 slides) | SIFT with hand motions, 3 picture clues, 3 word clues |
+| Learn (3 slides) | SIFT, 3 picture clues, 3 word clues |
 | Practice | One AI photo. Students point at what looks off, then numbered rings show the clues |
 | Cards 1-4 | Solved together; each teaches one SIFT move |
 | Cards 5-10 | Students lead. Each card: **Think, Pair, Vote**, then **Reveal** |
@@ -26,8 +26,8 @@ Every slide fits the screen (text eases down automatically on small projectors).
 
 ## Printables (Menu → Printables, or the button on the title slide)
 
-- **Lesson Plan**: one page with timing, the card routine, discussion moves, memory aids, and the research
-- **SIFT Poster**: anchor chart with a hand motion for each letter
+- **Lesson Plan**: one page with timing, the card routine, discussion moves, memory tips, and the research
+- **SIFT Poster**: classroom anchor chart
 - **SIFT Bookmarks**: 4 per page
 - **Student Writing Cards**: one half-sheet per card with sentence starters
 - **Exit Tickets**: 4 per page

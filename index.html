@@ -411,8 +411,6 @@ mark.tell{background:linear-gradient(transparent 52%, rgba(255,188,13,.8) 52%);p
 /* ============================================================
    PRINTABLES: hidden on screen, shown via body.print-*
    ============================================================ */
-.lcard .hand{margin-top:8px;font-size:clamp(14px,1.9vh,17px);font-weight:600;color:var(--space-blue);display:flex;gap:7px;align-items:center;}
-.lcard .hand .ico{color:var(--tangerine);}
 .truth{display:flex;gap:12px;align-items:flex-start;margin-top:clamp(14px,2.4vh,24px);background:var(--tint-sun);border-radius:14px;padding:14px 20px;font-size:clamp(16px,2.2vh,20px);line-height:1.45;color:var(--dark-grey);max-width:1100px;}
 .truth .ico{width:24px;height:24px;color:var(--tangerine);margin-top:2px;}
 .stem{font-size:15px;color:var(--light-grey);text-align:center;margin-top:4px;}
@@ -456,7 +454,6 @@ mark.tell{background:linear-gradient(transparent 52%, rgba(255,188,13,.8) 52%);p
   .ps-L{flex:0 0 auto;width:72px;height:72px;border-radius:14px;background:#000;color:#fff;font-family:var(--font-slab);font-weight:700;font-size:50px;display:flex;align-items:center;justify-content:center;-webkit-print-color-adjust:exact;print-color-adjust:exact;}
   .ps-name{font-family:var(--font-slab);font-weight:700;font-size:22px;}
   .ps-say{font-size:13.5px;line-height:1.35;}
-  .ps-hand{font-size:12.5px;font-weight:700;margin-top:3px;}
   .poster-cols{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:12px;}
   .poster-box{border:2px solid #000;border-radius:12px;padding:8px 12px;}
   .poster-box h3{font-family:var(--font-slab);font-size:17px;margin-bottom:4px;}
@@ -1248,13 +1245,13 @@ CARDS.push(
 
 /* ============================================================
    THE LESSON SLIDES (before the cards)
-   Kept to three: SIFT with hand motions, picture clues, word clues.
+   Kept to three: SIFT, picture clues, word clues.
    ============================================================ */
 const SIFT_MOVES=[
-  {L:'S',name:'Stop',say:'Don’t share it. Don’t believe it yet. Notice how it makes you feel.',hand:'Hold up your hand like a stop sign.'},
-  {L:'I',name:'Investigate the source',say:'Who made this? Look them up. Are they real? Can you trust them?',hand:'Circle your fingers into a magnifying glass.'},
-  {L:'F',name:'Find it somewhere else',say:'Do other trustworthy places tell the same story?',hand:'Point away, to somewhere else.'},
-  {L:'T',name:'Trace to the original',say:'Follow it back to where it started: the first photo, the real study.',hand:'Draw a line back over your shoulder.'}
+  {L:'S',name:'Stop',say:'Don’t share it. Don’t believe it yet. Notice how it makes you feel.',short:'Don’t share it yet.'},
+  {L:'I',name:'Investigate the source',say:'Who made this? Look them up. Are they real? Can you trust them?',short:'Who made this?'},
+  {L:'F',name:'Find it somewhere else',say:'Do other trustworthy places tell the same story?',short:'Who else says so?'},
+  {L:'T',name:'Trace to the original',say:'Follow it back to where it started: the first photo, the real study.',short:'Where did it start?'}
 ];
 const PIC_CLUES=[
   {ico:'search',h:'Zoom in close',p:'Hands, faces, fur, and letters often come out melted, smudged, or scrambled.'},
@@ -1270,11 +1267,11 @@ LEARN.push(
 { html:`
   <span class="eyebrow teach">Learn · 1 of 3</span>
   <h2>Before you share it, <span style="color:var(--teal)">SIFT</span> it</h2>
-  <p class="lede">Fact-checkers use four moves. Say each one and do the hand motion together.</p>
+  <p class="lede">Fact-checkers use four moves to check anything they see online.</p>
   <div class="learn-grid four">
     ${SIFT_MOVES.map((m,i)=>`<div class="lcard rise" style="--c:${SIFT_COLORS[m.L]};animation-delay:${(.1+i*.15).toFixed(2)}s">
       <div class="letter">${m.L}</div>
-      <div><h3>${m.name}</h3><p>${m.say}</p><p class="hand">${ico('hand')} ${m.hand}</p></div></div>`).join('')}
+      <div><h3>${m.name}</h3><p>${m.say}</p></div></div>`).join('')}
   </div>`},
 
 { html:`
@@ -1315,7 +1312,7 @@ const PRACTICE={
    ============================================================ */
 const PRINTS=[
   {id:'print-plan',icon:'file',title:'Lesson Plan',desc:'One page: timing, what to say, discussion moves, research'},
-  {id:'print-checklist',icon:'star',title:'SIFT Poster',desc:'Big classroom anchor chart with the hand motions'},
+  {id:'print-checklist',icon:'star',title:'SIFT Poster',desc:'Big classroom anchor chart'},
   {id:'print-bookmarks',icon:'bookmark',title:'SIFT Bookmarks',desc:'4 per page, one for each student to keep'},
   {id:'print-evidence',icon:'edit',title:'Student Writing Cards',desc:'Half-sheets with sentence starters, 2 per page'},
   {id:'print-exit',icon:'check',title:'Exit Tickets',desc:'4 per page, quick check at the end'},
@@ -1354,11 +1351,11 @@ function buildPrintables(){
     <table class="pl-table">
       <tr><th>Time</th><th>On screen</th><th>What you do</th></tr>
       <tr><td>5 min</td><td>Title</td><td>Hook: “Have you ever seen something online that turned out to be fake?” Take 2-3 stories.</td></tr>
-      <tr><td>8 min</td><td>Learn 1-3</td><td>Teach SIFT. Say each move and <b>do the hand motion together</b>. Read the picture and word clues aloud.</td></tr>
+      <tr><td>8 min</td><td>Learn 1-3</td><td>Teach SIFT. Read each move aloud and have the class <b>say the four moves back</b>. Read the picture and word clues aloud.</td></tr>
       <tr><td>5 min</td><td>Practice</td><td>Students point to anything that looks off. Reveal. Find each numbered ring together.</td></tr>
       <tr><td>12 min</td><td>Cards 1-4</td><td><b>Solve together.</b> Each card teaches one SIFT move. Model your thinking out loud: “I notice… so I wonder…”</td></tr>
       <tr><td>12 min</td><td>Cards 5-10</td><td>Students lead. Use the routine below. Optional: students fill in a Writing Card for one card.</td></tr>
-      <tr><td>3 min</td><td>Finish</td><td>Exit ticket. Do the four hand motions one more time.</td></tr>
+      <tr><td>3 min</td><td>Finish</td><td>Exit ticket. Have the class name the four SIFT moves from memory.</td></tr>
     </table>
     <div class="pl-cols">
       <div class="pl-box"><h3>The routine for every card</h3>
@@ -1372,7 +1369,7 @@ function buildPrintables(){
         <li>“How could we <i>check</i> instead of guess?”</li>
         <li>Praise good reasons, not right guesses. A careful “I’m not sure, I’d check” beats a lucky guess.</li></ul></div>
       <div class="pl-box"><h3>Help them remember</h3>
-        <ul><li><b>Hand motions</b> for S-I-F-T (on the poster). Do them at the start and end of class.</li>
+        <ul><li><b>Say it back:</b> the class names the four SIFT moves at the start and end of class.</li>
         <li><b>The chant:</b> “Before you share it, SIFT it!”</li>
         <li><b>Bookmarks</b> go home or in their reading book.</li>
         <li><b>Revisit:</b> one card a day as a warm-up the following week.</li></ul></div>
@@ -1390,7 +1387,7 @@ function buildPrintables(){
       <div class="poster-top"><span class="edubug"></span> Authentic or AI?</div>
       <h1 class="poster-h">Before you share it, SIFT it!</h1>
       <div class="poster-sift">
-        ${SIFT_MOVES.map(m=>`<div class="ps-row"><div class="ps-L">${m.L}</div><div><div class="ps-name">${m.name}</div><div class="ps-say">${m.say}</div><div class="ps-hand">✋ ${m.hand}</div></div></div>`).join('')}
+        ${SIFT_MOVES.map(m=>`<div class="ps-row"><div class="ps-L">${m.L}</div><div><div class="ps-name">${m.name}</div><div class="ps-say">${m.say}</div></div></div>`).join('')}
       </div>
       <div class="poster-cols">
         <div class="poster-box"><h3>Picture clues</h3><ul>${PIC_CLUES.map(c=>`<li><b>${c.h}.</b> ${c.p}</li>`).join('')}</ul></div>
@@ -1402,7 +1399,7 @@ function buildPrintables(){
   /* BOOKMARKS: 4 across */
   const bm=`<div class="bm">
       <div class="bm-top"><span class="edubug"></span><div>Before you share it,</div><div class="bm-big">SIFT it!</div></div>
-      ${SIFT_MOVES.map(m=>`<div class="bm-row"><span class="bm-L">${m.L}</span><div><b>${m.name}</b><br><span>${m.hand}</span></div></div>`).join('')}
+      ${SIFT_MOVES.map(m=>`<div class="bm-row"><span class="bm-L">${m.L}</span><div><b>${m.name}</b><br><span>${m.short}</span></div></div>`).join('')}
       <div class="bm-clues"><b>Picture?</b> Zoom in. Check the light. Where did it come from?<br><b>Words?</b> Real names? Does it make sense? Who else says so?</div>
       <div class="bm-name">Name: _______________</div>
     </div>`;
